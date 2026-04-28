@@ -1,0 +1,14 @@
+{
+  "name": "SOR7ED",
+  "short_name": "SOR7ED",
+  "description": "Templates, not inspiration. Tools for neurodivergent minds, delivered via WhatsApp.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#FFC107",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
