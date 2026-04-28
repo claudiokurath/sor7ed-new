@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className="border-b-2 border-white">
+    <header className="fixed top-0 left-0 w-full z-50 bg-black border-b-2 border-white">
       <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
         <Link href="/" className="display text-3xl text-white" aria-label="SOR7ED home">
           SOR<span style={{ color: '#ffc107' }}>7</span>ED

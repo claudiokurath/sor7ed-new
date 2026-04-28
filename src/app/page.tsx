@@ -17,7 +17,7 @@ export default async function HomePage() {
         description="Practical templates and micro-tools for neurodivergent adults. Delivered via WhatsApp."
       />
 
-      <section className="border-b-2 border-white">
+      <section className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative">
         <div className="max-w-6xl mx-auto px-5 py-24">
           <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
           <h1 className="text-6xl md:text-8xl leading-[0.9] max-w-5xl">
@@ -42,7 +42,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="border-b-2 border-white">
+      <section className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative">
         <div className="max-w-6xl mx-auto px-5 py-20">
           <p className="kicker">How it works</p>
           <h2 className="text-5xl md:text-6xl mb-10">Three steps. That is it.</h2>
@@ -74,7 +74,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="border-b-2 border-white">
+      <section className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative">
         <div className="max-w-6xl mx-auto px-5 py-20">
           <p className="kicker">The 7 Branches</p>
           <h2 className="text-5xl md:text-6xl mb-3">Built around real life.</h2>
@@ -87,7 +87,7 @@ export default async function HomePage() {
       </section>
 
       {featuredTool && (
-        <section className="border-b-2 border-white">
+        <section className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative">
           <div className="max-w-6xl mx-auto px-5 py-20 grid gap-10 md:grid-cols-2 items-start">
             <div>
               <p className="kicker">Featured tool</p>
@@ -120,7 +120,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      <section className="border-b-2 border-white">
+      <section className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative">
         <div className="max-w-6xl mx-auto px-5 py-20">
           <div className="flex flex-wrap items-end justify-between gap-3 mb-8">
             <div>
@@ -146,7 +146,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section>
+      <section className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative">
         <div className="max-w-6xl mx-auto px-5 py-20 grid gap-10 md:grid-cols-2">
           <div>
             <p className="kicker">Important</p>
@@ -168,7 +168,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section style={{ background: '#ffc107', color: '#000000' }}>
+      <section
+        className="h-dvh snap-start flex flex-col justify-center relative"
+        style={{ background: '#ffc107', color: '#000000' }}
+      >
         <div className="max-w-6xl mx-auto px-5 py-16 flex flex-wrap items-center justify-between gap-6">
           <div>
             <p className="display text-sm" style={{ letterSpacing: '0.18em' }}>
