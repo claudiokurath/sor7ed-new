@@ -17,7 +17,14 @@ export default async function HomePage() {
         description="Practical templates and micro-tools for neurodivergent adults. Delivered via WhatsApp."
       />
 
-      <section className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative">
+      <section 
+        className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
+        style={{
+          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%), url("/hero-bg.png")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
         <div className="max-w-6xl mx-auto px-5 py-24">
           <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
           <h1 className="text-6xl md:text-8xl leading-[0.9] max-w-5xl">
