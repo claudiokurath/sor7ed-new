@@ -17,15 +17,15 @@ export default async function HomePage() {
         description="Practical templates and micro-tools for neurodivergent adults. Delivered via WhatsApp."
       />
 
-      <section 
+      <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%), url("/hero-bg.png")',
+          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%), url("/bg-1.jpg")',
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-6xl mx-auto px-5 py-24">
+        <div className="max-w-6xl mx-auto px-5 py-24 relative z-10">
           <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
           <h1 className="text-6xl md:text-8xl leading-[0.9] max-w-5xl">
             Your brain is not broken. <br />
@@ -49,8 +49,15 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative">
-        <div className="max-w-6xl mx-auto px-5 py-20">
+      <section
+        className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
+        style={{
+          backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%), url("/bg-2.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="max-w-6xl mx-auto px-5 py-20 relative z-10">
           <p className="kicker">How it works</p>
           <h2 className="text-5xl md:text-6xl mb-10">Three steps. That is it.</h2>
           <div className="grid gap-6 md:grid-cols-3">
@@ -81,8 +88,15 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative">
-        <div className="max-w-6xl mx-auto px-5 py-20">
+      <section
+        className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
+        style={{
+          backgroundImage: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%), url("/bg-3.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="max-w-6xl mx-auto px-5 py-20 relative z-10">
           <p className="kicker">The 7 Branches</p>
           <h2 className="text-5xl md:text-6xl mb-3">Built around real life.</h2>
           <p className="text-base max-w-2xl mb-10">
@@ -94,8 +108,15 @@ export default async function HomePage() {
       </section>
 
       {featuredTool && (
-        <section className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative">
-          <div className="max-w-6xl mx-auto px-5 py-20 grid gap-10 md:grid-cols-2 items-start">
+        <section
+          className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
+          style={{
+            backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%), url("/bg-4.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="max-w-6xl mx-auto px-5 py-20 grid gap-10 md:grid-cols-2 items-start relative z-10">
             <div>
               <p className="kicker">Featured tool</p>
               <h2 className="text-5xl md:text-6xl mb-4">{featuredTool.name}</h2>
@@ -110,7 +131,7 @@ export default async function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="border-2 border-[#ffc107] p-6">
+            <div className="border-2 border-[#ffc107] p-6 bg-black/60 backdrop-blur-sm">
               <p className="kicker">Teaser + unlock flow</p>
               <p className="mono text-sm mt-3 opacity-80">
                 {`>`} You: {featuredTool.keyword}
@@ -127,8 +148,15 @@ export default async function HomePage() {
         </section>
       )}
 
-      <section className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative">
-        <div className="max-w-6xl mx-auto px-5 py-20">
+      <section
+        className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
+        style={{
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%), url("/bg-5.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="max-w-6xl mx-auto px-5 py-20 relative z-10">
           <div className="flex flex-wrap items-end justify-between gap-3 mb-8">
             <div>
               <p className="kicker">From the blog</p>
@@ -140,7 +168,7 @@ export default async function HomePage() {
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {recent.map((article) => (
-              <Link key={article.slug} href={`/blog/${article.slug}`} className="dark-card block">
+              <Link key={article.slug} href={`/blog/${article.slug}`} className="dark-card block bg-black/40 backdrop-blur-sm">
                 <p className="kicker">
                   {article.branch} · {article.readMinutes} min
                 </p>
@@ -153,8 +181,15 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative">
-        <div className="max-w-6xl mx-auto px-5 py-20 grid gap-10 md:grid-cols-2">
+      <section
+        className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
+        style={{
+          backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 100%), url("/bg-1.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="max-w-6xl mx-auto px-5 py-20 grid gap-10 md:grid-cols-2 relative z-10">
           <div>
             <p className="kicker">Important</p>
             <h2 className="text-5xl">Safety, consent, plain language.</h2>
@@ -163,7 +198,7 @@ export default async function HomePage() {
               Data is collected only with explicit GDPR consent. Text STOP to leave at any time.
             </p>
           </div>
-          <div className="border-2 border-white p-6">
+          <div className="border-2 border-white p-6 bg-black/60 backdrop-blur-sm">
             <ul className="space-y-3 text-sm">
               <li>✕ Not therapy or medical advice</li>
               <li>✕ Not a crisis line — call 999 or text SHOUT to 85258</li>
@@ -176,10 +211,15 @@ export default async function HomePage() {
       </section>
 
       <section
-        className="h-dvh snap-start flex flex-col justify-center relative"
-        style={{ background: '#ffc107', color: '#000000' }}
+        className="h-dvh snap-start flex flex-col justify-center relative overflow-hidden"
+        style={{
+          backgroundImage: 'linear-gradient(to right, rgba(255, 193, 7, 0.9), rgba(255, 193, 7, 0.8)), url("/bg-2.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          color: '#000000',
+        }}
       >
-        <div className="max-w-6xl mx-auto px-5 py-16 flex flex-wrap items-center justify-between gap-6">
+        <div className="max-w-6xl mx-auto px-5 py-16 flex flex-wrap items-center justify-between gap-6 relative z-10">
           <div>
             <p className="display text-sm" style={{ letterSpacing: '0.18em' }}>
               READY TO GET SORTED
