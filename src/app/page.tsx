@@ -17,12 +17,6 @@ export default async function HomePage() {
         description="Practical templates and micro-tools for neurodivergent adults. Delivered via WhatsApp."
       />
 
-      <style jsx global>{`
-        .text-glow {
-          text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,1);
-        }
-      `}</style>
-
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
