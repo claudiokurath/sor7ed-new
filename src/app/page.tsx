@@ -78,7 +78,7 @@ export default async function HomePage() {
                 d: 'A structured template lands in WhatsApp. Take one action.',
               },
             ].map((step) => (
-              <div key={step.n} className="dark-card">
+              <div key={step.n} className="dark-card bg-black/60 backdrop-blur-sm">
                 <p className="display text-5xl text-[#ffc107]">{step.n}</p>
                 <p className="display text-2xl mt-2">{step.t}</p>
                 <p className="text-sm mt-2">{step.d}</p>
@@ -168,7 +168,7 @@ export default async function HomePage() {
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {recent.map((article) => (
-              <Link key={article.slug} href={`/blog/${article.slug}`} className="dark-card block bg-black/40 backdrop-blur-sm">
+              <Link key={article.slug} href={`/blog/${article.slug}`} className="dark-card block bg-black/60 backdrop-blur-sm">
                 <p className="kicker">
                   {article.branch} · {article.readMinutes} min
                 </p>
@@ -184,7 +184,7 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 100%), url("/bg-1.jpg")',
+          backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 100%), url("/bg-6.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -213,7 +213,7 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to right, rgba(255, 193, 7, 0.9), rgba(255, 193, 7, 0.8)), url("/bg-2.jpg")',
+          backgroundImage: 'linear-gradient(to right, rgba(255, 193, 7, 0.95), rgba(255, 193, 7, 0.85)), url("/bg-2.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: '#000000',
