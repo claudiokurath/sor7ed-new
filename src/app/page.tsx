@@ -20,7 +20,7 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 70%), url("/bg-1.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 70%), url("/bg-0.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -51,7 +51,7 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 70%), url("/bg-2.jpg")',
+          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 70%), url("/bg-1.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -94,7 +94,7 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 70%), url("/bg-3.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 70%), url("/bg-2.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -116,7 +116,7 @@ export default async function HomePage() {
         <section
           className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
           style={{
-            backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0) 70%), url("/bg-4.jpg")',
+            backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0) 70%), url("/bg-3.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -150,7 +150,7 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 70%), url("/bg-5.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 70%), url("/bg-4.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -184,7 +184,7 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0) 70%), url("/bg-6.jpg")',
+          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0) 70%), url("/bg-5.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -212,7 +212,7 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to left, rgba(255, 193, 7, 0.95), rgba(255, 193, 7, 0.85)), url("/bg-2.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(255, 193, 7, 0.95), rgba(255, 193, 7, 0.85)), url("/bg-6.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: '#000000',
