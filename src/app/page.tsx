@@ -26,7 +26,7 @@ export default async function HomePage() {
         }}
       >
         <div className="max-w-6xl mx-auto px-5 py-24 relative z-10 w-full flex justify-end">
-          <div className="max-w-2xl text-right">
+          <div className="max-w-2xl text-left">
             <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
             <h1 className="text-6xl md:text-8xl leading-[0.9]">
               Your brain is not broken. <br />
@@ -36,7 +36,7 @@ export default async function HomePage() {
               SOR7ED delivers practical templates and micro-tools for ADHD, autism, dyslexia, and
               related needs — straight to your WhatsApp. No app. No fluff. No inspiration.
             </p>
-            <div className="mt-10 flex flex-wrap gap-3 justify-end">
+            <div className="mt-10 flex flex-wrap gap-3 justify-start">
               <Link href="/signup" className="btn-yellow">
                 Join free
               </Link>
@@ -100,7 +100,7 @@ export default async function HomePage() {
         }}
       >
         <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-          <div className="max-w-3xl text-right flex flex-col items-end">
+          <div className="max-w-3xl text-left flex flex-col items-start">
             <p className="kicker">The 7 Branches</p>
             <h2 className="text-5xl md:text-6xl mb-3">Built around real life.</h2>
             <p className="text-base max-w-xl mb-10">
@@ -126,7 +126,7 @@ export default async function HomePage() {
               <p className="kicker">Featured tool</p>
               <h2 className="text-5xl md:text-6xl mb-4">{featuredTool.name}</h2>
               <p className="text-base mb-6 opacity-90">{featuredTool.tagline}</p>
-              <div className="flex flex-wrap gap-3 mb-8">
+              <div className="flex flex-wrap gap-3 mb-8 justify-start">
                 <Link href={`/tools/${featuredTool.slug}`} className="btn-yellow">
                   Try interactive preview
                 </Link>
@@ -156,8 +156,8 @@ export default async function HomePage() {
         }}
       >
         <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-          <div className="max-w-4xl text-right">
-            <div className="flex flex-wrap items-end justify-end gap-3 mb-8">
+          <div className="max-w-4xl text-left">
+            <div className="flex flex-wrap items-start justify-start gap-3 mb-8">
               <div>
                 <p className="kicker">From the blog</p>
                 <h2 className="text-5xl md:text-6xl">Recent reads.</h2>
@@ -168,7 +168,7 @@ export default async function HomePage() {
             </div>
             <div className="grid gap-4 md:grid-cols-3">
               {recent.map((article) => (
-                <Link key={article.slug} href={`/blog/${article.slug}`} className="block border-r-2 border-[#ffc107] pr-4 py-2 hover:bg-white/5 transition">
+                <Link key={article.slug} href={`/blog/${article.slug}`} className="block border-l-2 border-[#ffc107] pl-4 py-2 hover:bg-white/5 transition">
                   <p className="kicker text-xs">
                     {article.branch} · {article.readMinutes} min
                   </p>
@@ -219,7 +219,7 @@ export default async function HomePage() {
         }}
       >
         <div className="max-w-6xl mx-auto px-5 py-16 flex flex-wrap items-center justify-between gap-6 relative z-10">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl text-left">
             <p className="display text-sm" style={{ letterSpacing: '0.18em' }}>
               READY TO GET SORTED
             </p>
