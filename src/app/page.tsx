@@ -25,14 +25,14 @@ export default async function HomePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-6xl mx-auto px-5 py-24 relative z-10 w-full flex justify-start">
-          <div className="max-w-2xl text-left text-glow">
+        <div className="max-w-7xl mx-auto px-12 md:px-24 relative z-10 w-full flex justify-start">
+          <div className="max-w-2xl text-left">
             <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
             <h1 className="text-6xl md:text-8xl leading-[0.9]">
               Your brain is not broken. <br />
               <span style={{ color: '#ffc107' }}>Your tools are.</span>
             </h1>
-            <p className="text-lg md:text-xl mt-8 font-medium">
+            <p className="text-lg md:text-xl mt-8">
               SOR7ED delivers practical templates and micro-tools for ADHD, autism, dyslexia, and
               related needs — straight to your WhatsApp. No app. No fluff. No inspiration.
             </p>
@@ -56,8 +56,8 @@ export default async function HomePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-          <div className="max-w-2xl text-left text-glow">
+        <div className="max-w-7xl mx-auto px-12 md:px-24 relative z-10 w-full flex justify-end">
+          <div className="max-w-2xl text-left">
             <p className="kicker">How it works</p>
             <h2 className="text-5xl md:text-6xl mb-10">Three steps. That is it.</h2>
             <div className="space-y-8 w-full">
@@ -82,7 +82,7 @@ export default async function HomePage() {
                   <p className="display text-5xl text-[#ffc107] leading-none">{step.n}</p>
                   <div>
                     <p className="display text-2xl">{step.t}</p>
-                    <p className="text-base font-medium opacity-90 mt-1">{step.d}</p>
+                    <p className="text-base opacity-80 mt-1">{step.d}</p>
                   </div>
                 </div>
               ))}
@@ -99,11 +99,11 @@ export default async function HomePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-          <div className="max-w-3xl text-left flex flex-col items-start text-glow">
+        <div className="max-w-7xl mx-auto px-12 md:px-24 relative z-10 w-full flex justify-end">
+          <div className="max-w-3xl text-left flex flex-col items-start">
             <p className="kicker">The 7 Branches</p>
             <h2 className="text-5xl md:text-6xl mb-3">Built around real life.</h2>
-            <p className="text-base max-w-xl mb-10 font-medium">
+            <p className="text-base max-w-xl mb-10">
               Every tool and article on SOR7ED maps to one of seven life areas — so when you are
               stuck, you can find the right help fast.
             </p>
@@ -121,11 +121,11 @@ export default async function HomePage() {
             backgroundPosition: 'center',
           }}
         >
-          <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-            <div className="max-w-2xl text-left text-glow">
+          <div className="max-w-7xl mx-auto px-12 md:px-24 relative z-10 w-full flex justify-end">
+            <div className="max-w-2xl text-left">
               <p className="kicker">Featured tool</p>
               <h2 className="text-5xl md:text-6xl mb-4">{featuredTool.name}</h2>
-              <p className="text-lg mb-6 font-medium opacity-95">{featuredTool.tagline}</p>
+              <p className="text-lg mb-6 opacity-90">{featuredTool.tagline}</p>
               <div className="flex flex-wrap gap-3 mb-8 justify-start">
                 <Link href={`/tools/${featuredTool.slug}`} className="btn-yellow">
                   Try interactive preview
@@ -134,11 +134,11 @@ export default async function HomePage() {
                   All tools
                 </Link>
               </div>
-              <div className="border-t border-white/40 pt-6">
-                <p className="mono text-sm font-bold">
+              <div className="border-t border-white/20 pt-6">
+                <p className="mono text-sm opacity-80">
                   {`>`} You: {featuredTool.keyword}
                 </p>
-                <p className="mono text-sm mt-2 font-bold">
+                <p className="mono text-sm mt-2">
                   {`>`} SOR7ED: Sign up to unlock the full plan…
                 </p>
               </div>
@@ -155,8 +155,8 @@ export default async function HomePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-          <div className="max-w-4xl text-left text-glow">
+        <div className="max-w-7xl mx-auto px-12 md:px-24 relative z-10 w-full flex justify-end">
+          <div className="max-w-4xl text-left">
             <div className="flex flex-wrap items-end justify-start gap-4 mb-8">
               <div>
                 <p className="kicker">From the blog</p>
@@ -173,7 +173,7 @@ export default async function HomePage() {
                     {article.branch} · {article.readMinutes} min
                   </p>
                   <p className="display text-2xl mt-1">{article.title}</p>
-                  <p className="text-sm mt-3 font-medium opacity-95 line-clamp-2">{article.tldr}</p>
+                  <p className="text-sm mt-3 opacity-80 line-clamp-2">{article.tldr}</p>
                 </Link>
               ))}
             </div>
@@ -189,12 +189,12 @@ export default async function HomePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-          <div className="max-w-2xl text-left text-glow">
+        <div className="max-w-7xl mx-auto px-12 md:px-24 relative z-10 w-full flex justify-end">
+          <div className="max-w-2xl text-left">
             <p className="kicker">Important</p>
             <h2 className="text-5xl md:text-6xl mb-6">Safety & Consent.</h2>
-            <div className="mt-6 space-y-6 text-base font-medium">
-              <p className="opacity-95 leading-relaxed">
+            <div className="mt-6 space-y-6 text-base">
+              <p className="opacity-90 leading-relaxed">
                 SOR7ED is not therapy or medical advice. It is not a crisis service.
                 Data is collected only with explicit GDPR consent.
               </p>
@@ -217,8 +217,8 @@ export default async function HomePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-6xl mx-auto px-5 py-16 flex flex-wrap items-center justify-between gap-10 relative z-10">
-          <div className="max-w-2xl text-left text-glow">
+        <div className="max-w-7xl mx-auto px-12 md:px-24 flex flex-col justify-center relative z-10 w-full flex justify-start">
+          <div className="max-w-2xl text-left">
             <p className="display text-sm" style={{ letterSpacing: '0.18em' }}>
               READY TO GET SORTED
             </p>
@@ -226,13 +226,15 @@ export default async function HomePage() {
               Practical tools. <br />
               Straight to your WhatsApp.
             </p>
+            <div className="mt-10">
+              <Link
+                href="/signup"
+                className="inline-block border-4 border-black px-10 py-5 display text-3xl uppercase bg-[#ffc107] text-black hover:bg-black hover:text-[#ffc107] transition-all"
+              >
+                Create free account
+              </Link>
+            </div>
           </div>
-          <Link
-            href="/signup"
-            className="border-4 border-black px-10 py-5 display text-3xl uppercase hover:bg-black hover:text-[#ffc107] transition-all bg-[#ffc107] text-black"
-          >
-            Create free account
-          </Link>
         </div>
       </section>
     </>
