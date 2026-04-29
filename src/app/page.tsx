@@ -20,13 +20,13 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 70%), url("/bg-0.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%), url("/bg-0.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
         <div className="max-w-6xl mx-auto px-5 py-24 relative z-10 w-full flex justify-end">
-          <div className="max-w-2xl text-left">
+          <div className="max-w-2xl text-left bg-black/40 backdrop-blur-md p-8 md:p-12 border border-white/10 shadow-2xl">
             <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
             <h1 className="text-6xl md:text-8xl leading-[0.9]">
               Your brain is not broken. <br />
@@ -51,16 +51,16 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 70%), url("/bg-1.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%), url("/bg-1.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-start">
-          <div className="max-w-2xl text-left">
+        <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
+          <div className="max-w-2xl text-left bg-black/40 backdrop-blur-md p-8 md:p-12 border border-white/10 shadow-2xl">
             <p className="kicker">How it works</p>
             <h2 className="text-5xl md:text-6xl mb-10">Three steps. That is it.</h2>
-            <div className="space-y-6 w-full max-w-md">
+            <div className="space-y-8 w-full">
               {[
                 {
                   n: '01',
@@ -78,11 +78,11 @@ export default async function HomePage() {
                   d: 'A structured template lands in WhatsApp. Take one action.',
                 },
               ].map((step) => (
-                <div key={step.n} className="flex gap-4 items-start text-left">
-                  <p className="display text-4xl text-[#ffc107] leading-none">{step.n}</p>
+                <div key={step.n} className="flex gap-6 items-start text-left">
+                  <p className="display text-5xl text-[#ffc107] leading-none">{step.n}</p>
                   <div>
-                    <p className="display text-xl">{step.t}</p>
-                    <p className="text-sm opacity-80">{step.d}</p>
+                    <p className="display text-2xl">{step.t}</p>
+                    <p className="text-base opacity-80 mt-1">{step.d}</p>
                   </div>
                 </div>
               ))}
@@ -94,13 +94,13 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 70%), url("/bg-2.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%), url("/bg-2.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
         <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-          <div className="max-w-3xl text-left flex flex-col items-start">
+          <div className="max-w-3xl text-left bg-black/40 backdrop-blur-md p-8 md:p-12 border border-white/10 shadow-2xl flex flex-col items-start">
             <p className="kicker">The 7 Branches</p>
             <h2 className="text-5xl md:text-6xl mb-3">Built around real life.</h2>
             <p className="text-base max-w-xl mb-10">
@@ -116,16 +116,16 @@ export default async function HomePage() {
         <section
           className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
           style={{
-            backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0) 70%), url("/bg-3.jpg")',
+            backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%), url("/bg-3.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         >
-          <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-start">
-            <div className="max-w-xl text-left">
+          <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
+            <div className="max-w-2xl text-left bg-black/40 backdrop-blur-md p-8 md:p-12 border border-white/10 shadow-2xl">
               <p className="kicker">Featured tool</p>
               <h2 className="text-5xl md:text-6xl mb-4">{featuredTool.name}</h2>
-              <p className="text-base mb-6 opacity-90">{featuredTool.tagline}</p>
+              <p className="text-lg mb-6 opacity-90">{featuredTool.tagline}</p>
               <div className="flex flex-wrap gap-3 mb-8 justify-start">
                 <Link href={`/tools/${featuredTool.slug}`} className="btn-yellow">
                   Try interactive preview
@@ -150,14 +150,14 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0) 70%), url("/bg-4.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%), url("/bg-4.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
         <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-          <div className="max-w-4xl text-left">
-            <div className="flex flex-wrap items-start justify-start gap-3 mb-8">
+          <div className="max-w-4xl text-left bg-black/40 backdrop-blur-md p-8 md:p-12 border border-white/10 shadow-2xl">
+            <div className="flex flex-wrap items-end justify-start gap-4 mb-8">
               <div>
                 <p className="kicker">From the blog</p>
                 <h2 className="text-5xl md:text-6xl">Recent reads.</h2>
@@ -166,14 +166,14 @@ export default async function HomePage() {
                 All articles
               </Link>
             </div>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-3">
               {recent.map((article) => (
-                <Link key={article.slug} href={`/blog/${article.slug}`} className="block border-l-2 border-[#ffc107] pl-4 py-2 hover:bg-white/5 transition">
+                <Link key={article.slug} href={`/blog/${article.slug}`} className="block border-l-2 border-[#ffc107] pl-4 py-2 hover:bg-white/10 transition">
                   <p className="kicker text-xs">
                     {article.branch} · {article.readMinutes} min
                   </p>
-                  <p className="display text-xl mt-1">{article.title}</p>
-                  <p className="text-xs mt-2 opacity-70 line-clamp-2">{article.tldr}</p>
+                  <p className="display text-2xl mt-1">{article.title}</p>
+                  <p className="text-sm mt-3 opacity-80 line-clamp-2">{article.tldr}</p>
                 </Link>
               ))}
             </div>
@@ -184,25 +184,25 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0) 70%), url("/bg-5.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%), url("/bg-5.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-start">
-          <div className="max-w-xl text-left">
+        <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
+          <div className="max-w-2xl text-left bg-black/40 backdrop-blur-md p-8 md:p-12 border border-white/10 shadow-2xl">
             <p className="kicker">Important</p>
-            <h2 className="text-5xl">Safety & Consent.</h2>
-            <div className="mt-6 space-y-4 text-sm">
-              <p className="opacity-80">
+            <h2 className="text-5xl md:text-6xl mb-6">Safety & Consent.</h2>
+            <div className="mt-6 space-y-6 text-base">
+              <p className="opacity-90 leading-relaxed">
                 SOR7ED is not therapy or medical advice. It is not a crisis service.
                 Data is collected only with explicit GDPR consent.
               </p>
-              <ul className="space-y-1">
-                <li>✕ Not a crisis line — call 999 or text SHOUT to 85258</li>
-                <li>✓ GDPR/PECR compliant. No pre-ticked boxes</li>
-                <li>✓ Text STOP any time to unsubscribe</li>
-                <li>✓ End-to-end encrypted WhatsApp delivery</li>
+              <ul className="space-y-3">
+                <li className="flex gap-2">✕ <span>Not a crisis line — call 999 or text SHOUT to 85258</span></li>
+                <li className="flex gap-2">✓ <span>GDPR/PECR compliant. No pre-ticked boxes</span></li>
+                <li className="flex gap-2">✓ <span>Text STOP any time to unsubscribe</span></li>
+                <li className="flex gap-2">✓ <span>End-to-end encrypted WhatsApp delivery</span></li>
               </ul>
             </div>
           </div>
@@ -218,18 +218,19 @@ export default async function HomePage() {
           color: '#000000',
         }}
       >
-        <div className="max-w-6xl mx-auto px-5 py-16 flex flex-wrap items-center justify-between gap-6 relative z-10">
+        <div className="max-w-6xl mx-auto px-5 py-16 flex flex-wrap items-center justify-between gap-10 relative z-10">
           <div className="max-w-2xl text-left">
             <p className="display text-sm" style={{ letterSpacing: '0.18em' }}>
               READY TO GET SORTED
             </p>
-            <p className="display text-5xl md:text-6xl mt-1">
-              Practical tools. Straight to your WhatsApp.
+            <p className="display text-5xl md:text-7xl mt-1 leading-tight">
+              Practical tools. <br />
+              Straight to your WhatsApp.
             </p>
           </div>
           <Link
             href="/signup"
-            className="border-2 border-black px-8 py-4 display text-2xl uppercase hover:bg-black hover:text-[#ffc107] transition"
+            className="border-4 border-black px-10 py-5 display text-3xl uppercase hover:bg-black hover:text-[#ffc107] transition-all"
           >
             Create free account
           </Link>
