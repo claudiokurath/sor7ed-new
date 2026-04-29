@@ -20,13 +20,13 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%), url("/bg-0.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0) 80%), url("/bg-0.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
         <div className="max-w-6xl mx-auto px-5 py-24 relative z-10 w-full flex justify-end">
-          <div className="max-w-2xl text-left bg-black/40 backdrop-blur-md p-8 md:p-12 border border-white/10 shadow-2xl">
+          <div className="max-w-2xl text-left">
             <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
             <h1 className="text-6xl md:text-8xl leading-[0.9]">
               Your brain is not broken. <br />
@@ -51,13 +51,13 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%), url("/bg-1.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0) 80%), url("/bg-1.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
         <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-          <div className="max-w-2xl text-left bg-black/40 backdrop-blur-md p-8 md:p-12 border border-white/10 shadow-2xl">
+          <div className="max-w-2xl text-left">
             <p className="kicker">How it works</p>
             <h2 className="text-5xl md:text-6xl mb-10">Three steps. That is it.</h2>
             <div className="space-y-8 w-full">
@@ -94,13 +94,13 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%), url("/bg-2.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0) 80%), url("/bg-2.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
         <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-          <div className="max-w-3xl text-left bg-black/40 backdrop-blur-md p-8 md:p-12 border border-white/10 shadow-2xl flex flex-col items-start">
+          <div className="max-w-3xl text-left flex flex-col items-start">
             <p className="kicker">The 7 Branches</p>
             <h2 className="text-5xl md:text-6xl mb-3">Built around real life.</h2>
             <p className="text-base max-w-xl mb-10">
@@ -116,13 +116,13 @@ export default async function HomePage() {
         <section
           className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
           style={{
-            backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%), url("/bg-3.jpg")',
+            backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0) 80%), url("/bg-3.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         >
           <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-            <div className="max-w-2xl text-left bg-black/40 backdrop-blur-md p-8 md:p-12 border border-white/10 shadow-2xl">
+            <div className="max-w-2xl text-left">
               <p className="kicker">Featured tool</p>
               <h2 className="text-5xl md:text-6xl mb-4">{featuredTool.name}</h2>
               <p className="text-lg mb-6 opacity-90">{featuredTool.tagline}</p>
@@ -150,13 +150,13 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%), url("/bg-4.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0) 80%), url("/bg-4.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
         <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-          <div className="max-w-4xl text-left bg-black/40 backdrop-blur-md p-8 md:p-12 border border-white/10 shadow-2xl">
+          <div className="max-w-4xl text-left">
             <div className="flex flex-wrap items-end justify-start gap-4 mb-8">
               <div>
                 <p className="kicker">From the blog</p>
@@ -184,13 +184,13 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%), url("/bg-5.jpg")',
+          backgroundImage: 'linear-gradient(to left, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0) 80%), url("/bg-5.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
         <div className="max-w-6xl mx-auto px-5 py-20 relative z-10 w-full flex justify-end">
-          <div className="max-w-2xl text-left bg-black/40 backdrop-blur-md p-8 md:p-12 border border-white/10 shadow-2xl">
+          <div className="max-w-2xl text-left">
             <p className="kicker">Important</p>
             <h2 className="text-5xl md:text-6xl mb-6">Safety & Consent.</h2>
             <div className="mt-6 space-y-6 text-base">
