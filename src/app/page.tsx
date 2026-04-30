@@ -11,7 +11,7 @@ export default async function HomePage() {
   const recent = articles.slice(0, 3);
 
   return (
-    <>
+    <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
       <SEOJsonLd
         title="SOR7ED — Templates, not inspiration"
         description="Practical templates and micro-tools for neurodivergent adults. Delivered via WhatsApp."
@@ -192,6 +192,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

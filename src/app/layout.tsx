@@ -76,7 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <Header />
-        <main id="main" className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
+        <main id="main" className="h-screen overflow-y-auto">
           {children}
           <Footer />
         </main>
