@@ -100,6 +100,14 @@ export default async function BlogPostPage({
       </section>
 
       <article className="max-w-3xl mx-auto px-5 py-16">
+        {article.coverImage && (
+          <img
+            src={article.coverImage}
+            alt={article.title}
+            className="w-full mb-10 object-cover max-h-[420px]"
+          />
+        )}
+
         <div className="border-l-4 border-[#ffc107] pl-4 mb-10">
           <p className="kicker">TL;DR</p>
           <p className="text-base mt-1">{article.tldr}</p>
