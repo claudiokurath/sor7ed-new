@@ -25,8 +25,8 @@ export default async function HomePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-7xl mx-auto px-12 md:px-24 relative z-10 w-full flex justify-start">
-          <div className="max-w-2xl text-left">
+        <div className="w-full px-10 md:px-20 relative z-10 flex justify-start">
+          <div className="max-w-lg text-left">
             <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
             <h1 className="text-6xl md:text-8xl leading-[0.9]">
               Your brain is not broken. <br />
@@ -51,13 +51,13 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'url("/bg-1.jpg")',
+          backgroundImage: 'url("/bg-1.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-7xl mx-auto px-12 md:px-24 relative z-10 w-full flex justify-end">
-          <div className="max-w-2xl text-left">
+        <div className="w-full px-10 md:px-20 relative z-10 flex justify-end">
+          <div className="max-w-lg text-left">
             <p className="kicker">How it works</p>
             <h2 className="text-5xl md:text-6xl mb-10">Three steps. That is it.</h2>
             <div className="space-y-8 w-full">
@@ -94,20 +94,28 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'url("/bg-2.jpg")',
+          backgroundImage: 'url("/bg-2.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-7xl mx-auto px-12 md:px-24 relative z-10 w-full flex justify-end">
-          <div className="max-w-3xl text-left flex flex-col items-start">
+        <div className="w-full px-10 md:px-20 relative z-10 flex justify-end">
+          <div className="max-w-4xl text-left flex flex-col items-start">
             <p className="kicker">The 7 Branches</p>
-            <h2 className="text-5xl md:text-6xl mb-3">Built around real life.</h2>
-            <p className="text-base max-w-xl mb-10">
-              Every tool and article on SOR7ED maps to one of seven life areas — so when you are
-              stuck, you can find the right help fast.
-            </p>
-            <BranchGrid />
+            <h2 className="text-4xl md:text-5xl mb-6">The SOR7ED Life: A Framework for Neurodivergent Flourishing</h2>
+            
+            <div className="grid md:grid-cols-2 gap-10 items-start">
+              <div className="space-y-4 text-sm md:text-base leading-relaxed opacity-90">
+                <p>Living with a brain that processes the world differently often feels like trying to navigate a high-speed highway with a manual gearbox—it’s powerful, but it requires a specific kind of internal scaffolding to keep from stalling. The SOR7ED pillars represent a holistic approach to building that scaffolding, moving away from "fixing" symptoms and toward mastering your unique mechanics.</p>
+                <p>At the foundation lies the biological baseline: <strong>FEEL GOOD</strong>. Without regulated sleep, stable energy, and basic health routines, the "hardware" of the brain remains in a state of constant depletion. Once that baseline is stabilized, we can address the momentum engine—<strong>KEEP GOING</strong>. This pillar focuses on the mechanics of executive function, providing the tools to break through the paralysis of starting and the fog of staying on task.</p>
+                <p>As we move from internal regulation to external management, <strong>PLAN AHEAD</strong> and <strong>SPEND SMART</strong> act as essential guardrails. By utilizing proactive planning and time management, we reduce the exhausting "firefighting" mode of reactive living. Similarly, financial systems help mitigate the "ADHD tax," turning money from a source of chronic stress into a managed resource.</p>
+                <p>Growth, however, isn't just about management; it’s about connection and evolution. <strong>BE CONNECTED</strong> ensures that we aren't navigating this path alone, focusing on relationships and communication styles that honor our needs. This leads into the vital work of <strong>BE YOURSELF</strong>—the practice of radical authenticity and unmasking. It is about setting boundaries and practicing self-advocacy so that our lives actually fit our brains, rather than forcing our brains to fit a world that isn't built for them.</p>
+                <p>Finally, we <strong>LEVEL UP</strong>. With systems in place and identity secured, we can focus on the long game: learning new skills and evolving our careers. Through these seven pillars, we don't just survive the chaos; we build a sustainable, high-functioning life that belongs entirely to us.</p>
+              </div>
+              <div>
+                <BranchGrid />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -116,13 +124,13 @@ export default async function HomePage() {
         <section
           className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
           style={{
-            backgroundImage: 'url("/bg-3.jpg")',
+            backgroundImage: 'url("/bg-3.png")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         >
-          <div className="max-w-7xl mx-auto px-12 md:px-24 relative z-10 w-full flex justify-end">
-            <div className="max-w-2xl text-left">
+          <div className="w-full px-10 md:px-20 relative z-10 flex justify-end">
+            <div className="max-w-lg text-left">
               <p className="kicker">Featured tool</p>
               <h2 className="text-5xl md:text-6xl mb-4">{featuredTool.name}</h2>
               <p className="text-lg mb-6 opacity-90">{featuredTool.tagline}</p>
@@ -150,13 +158,13 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'url("/bg-4.jpg")',
+          backgroundImage: 'url("/bg-4.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-7xl mx-auto px-12 md:px-24 relative z-10 w-full flex justify-end">
-          <div className="max-w-4xl text-left">
+        <div className="w-full px-10 md:px-20 relative z-10 flex justify-end">
+          <div className="max-w-3xl text-left">
             <div className="flex flex-wrap items-end justify-start gap-4 mb-8">
               <div>
                 <p className="kicker">From the blog</p>
@@ -184,13 +192,13 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'url("/bg-5.jpg")',
+          backgroundImage: 'url("/bg-5.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-7xl mx-auto px-12 md:px-24 relative z-10 w-full flex justify-end">
-          <div className="max-w-2xl text-left">
+        <div className="w-full px-10 md:px-20 relative z-10 flex justify-end">
+          <div className="max-w-lg text-left">
             <p className="kicker">Important</p>
             <h2 className="text-5xl md:text-6xl mb-6">Safety & Consent.</h2>
             <div className="mt-6 space-y-6 text-base">
@@ -217,8 +225,8 @@ export default async function HomePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="max-w-7xl mx-auto px-12 md:px-24 flex flex-col justify-center relative z-10 w-full flex justify-start">
-          <div className="max-w-2xl text-left">
+        <div className="w-full px-10 md:px-20 relative z-10 flex justify-start">
+          <div className="max-w-lg text-left">
             <p className="display text-sm" style={{ letterSpacing: '0.18em' }}>
               READY TO GET SORTED
             </p>
