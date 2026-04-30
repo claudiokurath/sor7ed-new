@@ -56,7 +56,7 @@ export default async function HomePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="w-full px-10 md:px-20 relative z-10 flex justify-end">
+        <div className="w-full px-10 md:px-20 relative z-10 flex justify-start">
           <div className="max-w-lg text-left">
             <p className="kicker">How it works</p>
             <h2 className="text-5xl md:text-6xl mb-10">Three steps. That is it.</h2>
@@ -99,8 +99,8 @@ export default async function HomePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="w-full px-10 md:px-20 relative z-10 flex justify-end">
-          <div className="max-w-4xl text-left flex flex-col items-start">
+        <div className="w-full px-10 md:px-20 relative z-10 flex justify-start">
+          <div className="max-w-3xl text-left flex flex-col items-start">
             <p className="kicker">The 7 Branches</p>
             <h2 className="text-4xl md:text-5xl mb-6">The SOR7ED Life: A Framework for Neurodivergent Flourishing</h2>
             
@@ -129,7 +129,7 @@ export default async function HomePage() {
             backgroundPosition: 'center',
           }}
         >
-          <div className="w-full px-10 md:px-20 relative z-10 flex justify-end">
+          <div className="w-full px-10 md:px-20 relative z-10 flex justify-start">
             <div className="max-w-lg text-left">
               <p className="kicker">Featured tool</p>
               <h2 className="text-5xl md:text-6xl mb-4">{featuredTool.name}</h2>
@@ -197,7 +197,7 @@ export default async function HomePage() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="w-full px-10 md:px-20 relative z-10 flex justify-end">
+        <div className="w-full px-10 md:px-20 relative z-10 flex justify-start">
           <div className="max-w-lg text-left">
             <p className="kicker">Important</p>
             <h2 className="text-5xl md:text-6xl mb-6">Safety & Consent.</h2>
