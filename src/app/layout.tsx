@@ -63,6 +63,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Roboto:wght@300;400&display=swap"
           rel="stylesheet"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=OpenDyslexic&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body>
         <a

@@ -2,14 +2,16 @@ import { BRANCHES } from '@/data/branches';
 
 export default function BranchGrid() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <ul className="space-y-5">
       {BRANCHES.map((b) => (
-        <article key={b.slug} className="branch-card">
-          <div className="text-3xl mb-2" aria-hidden>{b.emoji}</div>
-          <p className="display text-2xl mb-1">{b.name}</p>
-          <p className="text-sm">{b.focus}</p>
-        </article>
+        <li key={b.slug} className="flex gap-4 items-baseline">
+          <span aria-hidden className="text-xl shrink-0">{b.emoji}</span>
+          <div>
+            <p className="display text-2xl text-[#ffc107] leading-none">{b.name}</p>
+            <p className="text-sm opacity-60 mt-1">{b.focus}</p>
+          </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

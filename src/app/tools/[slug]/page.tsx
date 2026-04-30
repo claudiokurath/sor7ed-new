@@ -74,14 +74,6 @@ export default async function ToolDetailPage({
       </section>
 
       <article className="max-w-4xl mx-auto px-5 py-16">
-        {tool.coverImage && (
-          <img
-            src={tool.coverImage}
-            alt={tool.name}
-            className="w-full border-2 border-white mb-10 object-cover max-h-[420px]"
-          />
-        )}
-
         {isInteractiveFlagship && (
           <ExecutiveFunctionTriage signupHref={signupHref} initiallyUnlocked={unlocked} />
         )}

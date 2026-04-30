@@ -100,14 +100,6 @@ export default async function BlogPostPage({
       </section>
 
       <article className="max-w-3xl mx-auto px-5 py-16">
-        {article.coverImage && (
-          <img
-            src={article.coverImage}
-            alt={article.title}
-            className="w-full border-2 border-white mb-10 object-cover max-h-[420px]"
-          />
-        )}
-
         <div className="border-l-4 border-[#ffc107] pl-4 mb-10">
           <p className="kicker">TL;DR</p>
           <p className="text-base mt-1">{article.tldr}</p>
@@ -116,17 +108,9 @@ export default async function BlogPostPage({
         {body.length ? (
           body.map((block, index) => renderBlock(block, index))
         ) : (
-          <>
-            <p className="text-base mb-6">
-              Article body is rendered from Notion in production. If the page body is empty, this
-              fallback view still keeps the article live using its structured properties.
-            </p>
-            <p className="text-base mb-6">
-              The point of this article: most generic productivity advice fails neurodivergent
-              brains because it assumes capacities that are not reliably available. A structured
-              template removes the planning load.
-            </p>
-          </>
+          <p className="text-base opacity-60">
+            This article is being prepared. Check back soon.
+          </p>
         )}
 
         <WhatsappCTA keyword={article.keyword} />

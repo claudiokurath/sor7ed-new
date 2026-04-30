@@ -28,7 +28,7 @@ export default function SEOJsonLd({
           publisher: {
             '@type': 'Organization',
             name: 'SOR7ED',
-            logo: { '@type': 'ImageObject', url: 'https://sor7ed.com/logo.png' },
+            logo: { '@type': 'ImageObject', url: 'https://sor7ed.com/logo-white.png' },
           },
         }
       : {
