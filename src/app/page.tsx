@@ -124,7 +124,7 @@ export default async function HomePage() {
         <section
           className="h-dvh snap-start border-b-2 border-white flex flex-col justify-center relative overflow-hidden"
           style={{
-            backgroundImage: 'url("/bg-3.png")',
+            backgroundImage: 'url("/bg-30.png")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -220,7 +220,7 @@ export default async function HomePage() {
       <section
         className="h-dvh snap-start flex flex-col justify-center relative overflow-hidden"
         style={{
-          backgroundImage: 'url("/bg-6.jpg")',
+          backgroundImage: 'url("/bg-6.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
