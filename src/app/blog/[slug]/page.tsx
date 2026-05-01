@@ -108,11 +108,6 @@ export default async function BlogPostPage({
           />
         )}
 
-        <div className="border-l-4 border-[#ffc107] pl-4 mb-10">
-          <p className="kicker">TL;DR</p>
-          <p className="text-base mt-1">{article.tldr}</p>
-        </div>
-
         {body.length ? (
           body.map((block, index) => renderBlock(block, index))
         ) : (
