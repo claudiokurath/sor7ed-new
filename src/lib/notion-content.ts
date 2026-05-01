@@ -198,8 +198,8 @@ function mapToolPage(page: any): Tool | null {
 function mapArticlePage(page: any): Article | null {
   const props = page?.properties || {};
   const title = titleFrom(props, ['Title', 'Name']);
-  const slugSource = textFrom(props, ['Slug']) || title;
-  const slug = slugify(slugSource);
+  // Use slug directly from Notion — do NOT slugify, it's already set correctly
+  const slug = textFrom(props, ['Slug']) || slugify(title);
   const statusRaw = selectFrom(props, ['Status']);
 
   if (!title || !slug || isHiddenByStatus(statusRaw)) return null;
@@ -207,17 +207,27 @@ function mapArticlePage(page: any): Article | null {
   const publishedAt =
     dateFrom(props, ['Published At', 'Publish Date', 'Date']) || new Date().toISOString().slice(0, 10);
 
+  // Read Time is stored as text e.g. "7 min read" — parse out the number
+  const readTimeText = textFrom(props, ['Read Time', 'Read minutes', 'Read Minutes', 'Minutes']);
+  const readMinutesFromText = readTimeText ? parseInt(readTimeText) : 0;
+  const readMinutes = Number.isFinite(readMinutesFromText) && readMinutesFromText > 0
+    ? readMinutesFromText
+    : numberFrom(props, ['Read Time', 'Read minutes', 'Read Minutes', 'Minutes'], 4);
+
   return {
     slug,
     title,
     branch: textFrom(props, ['Branch', 'Category']) || 'Keep Going',
     tldr:
-      textFrom(props, ['TL;DR', 'Summary', 'Tagline']) ||
+      textFrom(props, ['TL;DR', 'TLDR', 'Summary', 'Tagline']) ||
       'A practical article from SOR7ED with a clear next step.',
+    excerpt: textFrom(props, ['Excerpt', 'Description']) || undefined,
     publishedAt,
     keyword: (textFrom(props, ['WhatsApp Trigger', 'Keyword']) || 'MENU').toUpperCase(),
-    readMinutes: numberFrom(props, ['Read minutes', 'Read Minutes', 'Minutes'], 4),
-    coverImage: fileUrlFromPage(page, props, ['Cover']),
+    readMinutes,
+    // Cover Image is the property name in this DB
+    coverImage: fileUrlFromPage(page, props, ['Cover Image', 'Cover']) ||
+      page?.cover?.external?.url || page?.cover?.file?.url || undefined,
     sourcePageId: getPageId(page),
   };
 }
