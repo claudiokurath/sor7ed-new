@@ -16,6 +16,7 @@ export type Article = {
   title: string;
   branch: string;
   tldr: string;
+  excerpt?: string;
   publishedAt: string;
   keyword: string;
   readMinutes: number;
