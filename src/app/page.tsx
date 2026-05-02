@@ -128,17 +128,13 @@ export default async function HomePage() {
 
       <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
         <img src="/images/bg_section_reads.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.18, pointerEvents: 'none' }} />
-        <div className="w-full px-10 md:px-20" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="flex flex-wrap items-end justify-start gap-4 mb-10">
-            <div>
-              <p className="kicker mb-2">From the blog</p>
-              <h2 className="text-5xl md:text-6xl">Recent reads.</h2>
-            </div>
-            <Link href="/blog" className="btn-outline !text-base">
-              All articles
-            </Link>
-          </div>
-          <div className="grid gap-8 md:grid-cols-3">
+        <div className="w-full px-10 md:px-20 max-w-2xl" style={{ position: 'relative', zIndex: 1 }}>
+          <p className="kicker mb-3">From the blog</p>
+          <h2 className="text-5xl md:text-6xl mb-4">Recent reads.</h2>
+          <Link href="/blog" className="btn-outline !text-base mb-10 inline-block">
+            All articles
+          </Link>
+          <div className="flex flex-col gap-7">
             {recent.map((article) => (
               <Link
                 key={article.slug}
