@@ -175,8 +175,8 @@ export default async function HomePage() {
       </section>
 
       <section className="h-dvh snap-start flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/bg_section_tools.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', opacity: 0.2, pointerEvents: 'none' }} />
-        <div className="w-full px-10 md:px-20 flex justify-start" style={{ position: 'relative', zIndex: 1 }}>
+        <img src="/images/bg_section_tools2.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.25, pointerEvents: 'none' }} />
+        <div className="w-full px-10 md:px-20 flex justify-end" style={{ position: 'relative', zIndex: 1 }}>
           <div className="max-w-2xl text-left">
             <p className="display text-sm" style={{ letterSpacing: '0.18em' }}>
               READY TO GET SORTED
