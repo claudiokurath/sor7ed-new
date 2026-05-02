@@ -43,8 +43,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center">
-        <div className="w-full px-10 md:px-20 flex justify-start">
+      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
+        <img src="/images/bg_section_steps.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.22, pointerEvents: 'none' }} />
+        <div className="w-full px-10 md:px-20 flex justify-start" style={{ position: 'relative', zIndex: 1 }}>
           <div className="max-w-lg text-left">
             <p className="kicker mb-4">How it works</p>
             <h2 className="text-5xl md:text-6xl mb-12">Three steps. That is it.</h2>
