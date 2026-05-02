@@ -126,8 +126,9 @@ export default async function HomePage() {
         </section>
       )}
 
-      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center">
-        <div className="w-full px-10 md:px-20">
+      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
+        <img src="/images/bg_section_reads.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.18, pointerEvents: 'none' }} />
+        <div className="w-full px-10 md:px-20" style={{ position: 'relative', zIndex: 1 }}>
           <div className="flex flex-wrap items-end justify-start gap-4 mb-10">
             <div>
               <p className="kicker mb-2">From the blog</p>
