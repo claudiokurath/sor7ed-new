@@ -83,17 +83,9 @@ export default async function HomePage() {
       <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
         <img src="/images/bg_section_three.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.18, pointerEvents: 'none' }} />
         <div className="w-full px-10 md:px-20" style={{ position: 'relative', zIndex: 1 }}>
-          <p className="kicker mb-4">The 7 Branches</p>
-          <h2 className="text-4xl md:text-5xl mb-10">The SOR7ED Life: A Framework for Neurodivergent Flourishing</h2>
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div className="space-y-4 text-sm md:text-base leading-relaxed opacity-80">
-              <p>Living with a brain that processes the world differently often feels like trying to navigate a high-speed highway with a manual gearbox — it's powerful, but it requires a specific kind of internal scaffolding to keep from stalling.</p>
-              <p>At the foundation lies the biological baseline: <strong>FEEL GOOD</strong>. Once that's stabilised, we address the momentum engine — <strong>KEEP GOING</strong>. Then <strong>PLAN AHEAD</strong> and <strong>SPEND SMART</strong> act as guardrails. <strong>BE CONNECTED</strong> and <strong>BE YOURSELF</strong> bring authenticity. Finally, we <strong>LEVEL UP</strong>.</p>
-            </div>
-            <div>
-              <BranchGrid />
-            </div>
-          </div>
+          <p className="kicker mb-4">7 Branches</p>
+          <h2 className="text-4xl md:text-6xl mb-10">7 areas.<br />One framework.</h2>
+          <BranchGrid />
         </div>
       </section>
 
