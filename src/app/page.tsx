@@ -17,8 +17,10 @@ export default async function HomePage() {
         description="Practical templates and micro-tools for neurodivergent adults. Delivered via WhatsApp."
       />
 
-      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center">
-        <div className="w-full px-10 md:px-20 flex justify-start">
+      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/bg-5.png)', backgroundSize: 'cover', backgroundPosition: 'right center', opacity: 0.4 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.95) 45%, rgba(0,0,0,0.2) 100%)' }} />
+        <div className="w-full px-10 md:px-20 flex justify-start" style={{ position: 'relative' }}>
           <div className="max-w-2xl text-left">
             <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
             <h1 className="text-6xl md:text-8xl leading-[0.9]">
