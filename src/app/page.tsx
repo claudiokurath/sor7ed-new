@@ -81,7 +81,7 @@ export default async function HomePage() {
       </section>
 
       <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/bg_section_three.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.18, pointerEvents: 'none' }} />
+        <img src="/images/bg_section_three_v2.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.35, pointerEvents: 'none' }} />
         <div className="w-full px-6 md:px-20" style={{ position: 'relative', zIndex: 1 }}>
           <p className="kicker mb-3">7 Branches</p>
           <h2 className="text-3xl md:text-6xl mb-6">7 areas.<br />One framework.</h2>
