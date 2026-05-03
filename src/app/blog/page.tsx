@@ -42,12 +42,22 @@ export default async function BlogPage() {
       <section>
         <div className="max-w-6xl mx-auto px-5 py-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {articles.map((article) => (
-            <Link key={article.slug} href={`/blog/${article.slug}`} className="dark-card block">
+            <Link key={article.slug} href={`/blog/${article.slug}`} className="dark-card block group overflow-hidden">
+              {article.coverImage && (
+                <div className="w-full aspect-[16/9] overflow-hidden mb-4 -mx-6 -mt-6" style={{ width: 'calc(100% + 3rem)' }}>
+                  <img
+                    src={article.coverImage}
+                    alt=""
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', transition: 'transform 0.4s ease' }}
+                    className="group-hover:scale-105"
+                  />
+                </div>
+              )}
               <p className="kicker">
                 {article.branch} · {article.readMinutes} min
               </p>
               <p className="display text-3xl mt-2">{article.title}</p>
-              <p className="text-sm mt-3">{article.tldr}</p>
+              <p className="text-sm mt-3 opacity-70">{article.tldr}</p>
               <p className="text-sm mt-4 text-[#ffc107]">Read →</p>
             </Link>
           ))}
