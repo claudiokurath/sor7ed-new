@@ -119,8 +119,8 @@ export default async function HomePage() {
       )}
 
       <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/bg_section_reads.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.45, pointerEvents: 'none' }} />
-        <div className="w-full px-6 md:px-20 md:max-w-2xl md:ml-auto" style={{ position: 'relative', zIndex: 1 }}>
+        <img src="/images/bg_section_reads.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.45, pointerEvents: 'none' }} />
+        <div className="w-full px-6 md:px-20 md:max-w-2xl" style={{ position: 'relative', zIndex: 1 }}>
           <p className="kicker mb-3">From the blog</p>
           <h2 className="text-5xl md:text-8xl mb-4">Recent reads.</h2>
           <Link href="/blog" className="btn-outline !text-base mb-10 inline-block">
