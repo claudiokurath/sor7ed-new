@@ -7,7 +7,7 @@ export const metadata = {
   description: 'Practical reads on executive function, time blindness, RSD, shutdown, and more.',
 };
 
-export const revalidate = 60;
+export const revalidate = 60; // notion env vars added
 
 export default async function BlogPage() {
   const articles = await getArticles();
