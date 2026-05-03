@@ -29,9 +29,9 @@ export default async function ToolsPage() {
         slug="tools"
       />
       <section className="border-b-2 border-white">
-        <div className="max-w-6xl mx-auto px-5 py-20">
+        <div className="max-w-6xl mx-auto px-5 py-12 md:py-20">
           <p className="kicker">Tools</p>
-          <h1 className="text-6xl md:text-7xl">Templates that do the thinking with you.</h1>
+          <h1 className="text-4xl md:text-7xl">Templates that do the thinking with you.</h1>
           <p className="text-base mt-4 max-w-2xl">
             Every tool maps to one of the 7 Branches. Start with the on-page interaction, then sign
             up to unlock the full result. The first flagship flow is Executive Function Triage.
