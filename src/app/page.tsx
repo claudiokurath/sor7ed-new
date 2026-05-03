@@ -18,7 +18,7 @@ export default async function HomePage() {
       />
 
       <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/bg_section_one.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.4, pointerEvents: 'none' }} />
+        <img src="/images/bg_section_one.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.55, pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.95) 45%, rgba(0,0,0,0.2) 100%)' }} />
         <div className="w-full px-6 md:px-20 flex justify-start" style={{ position: 'relative' }}>
           <div className="max-w-2xl text-left">
@@ -44,7 +44,7 @@ export default async function HomePage() {
       </section>
 
       <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/bg_section_steps.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.22, pointerEvents: 'none' }} />
+        <img src="/images/bg_section_steps.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.45, pointerEvents: 'none' }} />
         <div className="w-full px-6 md:px-20 flex justify-start" style={{ position: 'relative', zIndex: 1 }}>
           <div className="max-w-lg text-left w-full">
             <p className="kicker mb-4">How it works</p>
@@ -81,7 +81,7 @@ export default async function HomePage() {
       </section>
 
       <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/bg_section_three_v2.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.35, pointerEvents: 'none' }} />
+        <img src="/images/bg_section_three_v2.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.55, pointerEvents: 'none' }} />
         <div className="w-full px-6 md:px-20" style={{ position: 'relative', zIndex: 1 }}>
           <p className="kicker mb-3">7 Branches</p>
           <h2 className="text-3xl md:text-6xl mb-6">7 areas.<br />One framework.</h2>
@@ -91,7 +91,7 @@ export default async function HomePage() {
 
       {featuredTool && (
         <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/bg-1.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.2, pointerEvents: 'none' }} />
+        <img src="/images/bg-1.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.4, pointerEvents: 'none' }} />
           <div className="w-full px-6 md:px-20 flex justify-start" style={{ position: 'relative', zIndex: 1 }}>
             <div className="max-w-lg text-left w-full">
               <p className="kicker mb-4">Featured tool</p>
@@ -119,7 +119,7 @@ export default async function HomePage() {
       )}
 
       <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/bg_section_reads.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.18, pointerEvents: 'none' }} />
+        <img src="/images/bg_section_reads.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.45, pointerEvents: 'none' }} />
         <div className="w-full px-6 md:px-20 md:max-w-2xl md:ml-auto" style={{ position: 'relative', zIndex: 1 }}>
           <p className="kicker mb-3">From the blog</p>
           <h2 className="text-3xl md:text-6xl mb-4">Recent reads.</h2>
@@ -145,7 +145,7 @@ export default async function HomePage() {
       </section>
 
       <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/bg_section_safety.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.2, pointerEvents: 'none' }} />
+        <img src="/images/bg_section_safety.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.4, pointerEvents: 'none' }} />
         <div className="w-full px-6 md:px-20 flex justify-start" style={{ position: 'relative', zIndex: 1 }}>
           <div className="max-w-lg text-left w-full">
             <p className="kicker mb-4">Important</p>
@@ -167,7 +167,7 @@ export default async function HomePage() {
       </section>
 
       <section className="h-dvh snap-start flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/bg_section_tools2.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.25, pointerEvents: 'none' }} />
+        <img src="/images/bg_section_tools2.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.45, pointerEvents: 'none' }} />
         <div className="w-full px-6 md:px-20 flex justify-start md:justify-end" style={{ position: 'relative', zIndex: 1 }}>
           <div className="max-w-2xl text-left">
             <p className="display text-sm" style={{ letterSpacing: '0.18em' }}>
