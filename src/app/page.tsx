@@ -23,7 +23,7 @@ export default async function HomePage() {
         <div className="w-full px-6 md:px-20 flex justify-start" style={{ position: 'relative' }}>
           <div className="max-w-2xl text-left">
             <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
-            <h1 className="text-4xl md:text-8xl leading-[0.9]">
+            <h1 className="text-5xl md:text-9xl leading-[0.9]">
               Your brain is not broken. <br />
               <span style={{ color: '#ffc107' }}>Your tools are.</span>
             </h1>
@@ -48,7 +48,7 @@ export default async function HomePage() {
         <div className="w-full px-6 md:px-20 flex justify-start" style={{ position: 'relative', zIndex: 1 }}>
           <div className="max-w-lg text-left w-full">
             <p className="kicker mb-4">How it works</p>
-            <h2 className="text-3xl md:text-6xl mb-8">Three steps. That is it.</h2>
+            <h2 className="text-5xl md:text-8xl mb-8">Three steps. That is it.</h2>
             <div className="space-y-6 md:space-y-10 w-full">
               {[
                 {
@@ -84,7 +84,7 @@ export default async function HomePage() {
         <img src="/images/bg_section_three_v2.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.55, pointerEvents: 'none' }} />
         <div className="w-full px-6 md:px-20" style={{ position: 'relative', zIndex: 1 }}>
           <p className="kicker mb-3">7 Branches</p>
-          <h2 className="text-3xl md:text-6xl mb-6">7 areas.<br />One framework.</h2>
+          <h2 className="text-5xl md:text-8xl mb-6">7 areas.<br />One framework.</h2>
           <BranchGrid />
         </div>
       </section>
@@ -95,7 +95,7 @@ export default async function HomePage() {
           <div className="w-full px-6 md:px-20 flex justify-start" style={{ position: 'relative', zIndex: 1 }}>
             <div className="max-w-lg text-left w-full">
               <p className="kicker mb-4">Featured tool</p>
-              <h2 className="text-3xl md:text-6xl mb-4">{featuredTool.name}</h2>
+              <h2 className="text-5xl md:text-8xl mb-4">{featuredTool.name}</h2>
               <p className="text-base mb-6 opacity-80 leading-relaxed">{featuredTool.tagline}</p>
               <div className="flex flex-wrap gap-3 mb-10 justify-start">
                 <Link href={`/tools/${featuredTool.slug}`} className="btn-yellow">
@@ -122,7 +122,7 @@ export default async function HomePage() {
         <img src="/images/bg_section_reads.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.45, pointerEvents: 'none' }} />
         <div className="w-full px-6 md:px-20 md:max-w-2xl md:ml-auto" style={{ position: 'relative', zIndex: 1 }}>
           <p className="kicker mb-3">From the blog</p>
-          <h2 className="text-3xl md:text-6xl mb-4">Recent reads.</h2>
+          <h2 className="text-5xl md:text-8xl mb-4">Recent reads.</h2>
           <Link href="/blog" className="btn-outline !text-base mb-10 inline-block">
             All articles
           </Link>
@@ -149,7 +149,7 @@ export default async function HomePage() {
         <div className="w-full px-6 md:px-20 flex justify-start" style={{ position: 'relative', zIndex: 1 }}>
           <div className="max-w-lg text-left w-full">
             <p className="kicker mb-4">Important</p>
-            <h2 className="text-3xl md:text-6xl mb-6">Safety &amp; Consent.</h2>
+            <h2 className="text-5xl md:text-8xl mb-6">Safety &amp; Consent.</h2>
             <div className="space-y-5 text-base">
               <p className="opacity-70 leading-relaxed">
                 SOR7ED is not therapy or medical advice. It is not a crisis service.
@@ -173,7 +173,7 @@ export default async function HomePage() {
             <p className="display text-sm" style={{ letterSpacing: '0.18em' }}>
               READY TO GET SORTED
             </p>
-            <p className="display text-3xl md:text-7xl mt-2 leading-tight">
+            <p className="display text-5xl md:text-9xl mt-2 leading-tight">
               Practical tools. <br />
               Straight to your WhatsApp.
             </p>
