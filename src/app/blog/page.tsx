@@ -29,9 +29,9 @@ export default async function BlogPage() {
         slug="blog"
       />
       <section className="border-b-2 border-white">
-        <div className="max-w-6xl mx-auto px-5 py-20">
+        <div className="max-w-6xl mx-auto px-5 py-12 md:py-20">
           <p className="kicker">Blog</p>
-          <h1 className="text-6xl md:text-7xl">Plain words. Real situations.</h1>
+          <h1 className="text-4xl md:text-7xl">Plain words. Real situations.</h1>
           <p className="text-base mt-4 max-w-2xl">
             Three reads a week. Every article ends with a WhatsApp keyword that delivers a
             template you can actually use.
