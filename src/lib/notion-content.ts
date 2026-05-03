@@ -136,7 +136,7 @@ function sortByDateDesc<T extends { publishedAt?: string }>(items: T[]): T[] {
   });
 }
 
-async function queryAllPages(databaseId: string): Promise<any[]> {
+async function queryAllPages(databaseId: string, publishedOnly = false): Promise<any[]> {
   const notion = createClient();
   if (!notion) return [];
 
@@ -148,6 +148,12 @@ async function queryAllPages(databaseId: string): Promise<any[]> {
       database_id: databaseId,
       page_size: 100,
       start_cursor: cursor,
+      ...(publishedOnly ? {
+        filter: {
+          property: 'Status',
+          status: { equals: 'Published' },
+        }
+      } : {}),
     });
 
     pages.push(...response.results);
@@ -320,7 +326,7 @@ export async function getArticles(): Promise<Article[]> {
   if (!ARTICLES_DB_ID || !NOTION_SECRET) return sortByDateDesc(fallbackArticles());
 
   try {
-    const pages = await queryAllPages(ARTICLES_DB_ID);
+    const pages = await queryAllPages(ARTICLES_DB_ID, true);
     const articles = pages.map(mapArticlePage).filter(Boolean) as Article[];
 
     if (!articles.length) return sortByDateDesc(fallbackArticles());
