@@ -3,7 +3,7 @@ import BranchGrid from '@/components/BranchGrid';
 import SEOJsonLd from '@/components/SEOHead';
 import { getArticles, getTools } from '@/lib/notion-content';
 
-export const revalidate = 60;
+export const revalidate = 60; // vercel linked to sor7ed-new
 
 export default async function HomePage() {
   const [tools, articles] = await Promise.all([getTools(), getArticles()]);
