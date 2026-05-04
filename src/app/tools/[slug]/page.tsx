@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ExecutiveFunctionTriage from '@/components/tools/ExecutiveFunctionTriage';
+import DifficultMessage from '@/components/tools/DifficultMessage';
+import DecisionClarity from '@/components/tools/DecisionClarity';
 import WhatsappCTA from '@/components/WhatsappCTA';
 import SEOJsonLd from '@/components/SEOHead';
 import { TOOLS } from '@/data/tools';
@@ -19,6 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return { title: tool.name, description: tool.tagline };
 }
 
+const INTERACTIVE_SLUGS = ['executive-function-triage', 'difficult-message', 'decision-clarity'];
+
 export default async function ToolDetailPage({
   params,
   searchParams,
@@ -33,13 +37,12 @@ export default async function ToolDetailPage({
 
   const unlocked = resolved.unlocked === '1';
   const signupHref = `/signup?next=${encodeURIComponent(`/tools/${tool.slug}?unlocked=1`)}`;
-  const isInteractive = tool.slug === 'executive-function-triage';
+  const isInteractive = INTERACTIVE_SLUGS.includes(tool.slug);
 
   return (
     <>
       <SEOJsonLd title={tool.name} description={tool.tagline} slug={`tools/${tool.slug}`} type="article" />
 
-      {/* Header */}
       <section className="border-b-2 border-white">
         <div className="max-w-4xl mx-auto px-5 py-20">
           <p className="kicker mb-4">
@@ -60,27 +63,28 @@ export default async function ToolDetailPage({
       </section>
 
       <article className="max-w-4xl mx-auto px-5 py-16">
-
-        {/* Cover image */}
         {tool.coverImage && (
           <img src={tool.coverImage} alt={tool.name} className="w-full mb-10 object-cover max-h-[420px]" />
         )}
 
-        {/* Interactive tool — Executive Function Triage */}
-        {isInteractive && (
+        {tool.slug === 'executive-function-triage' && (
           <ExecutiveFunctionTriage signupHref={signupHref} initiallyUnlocked={unlocked} />
         )}
+        {tool.slug === 'difficult-message' && (
+          <DifficultMessage signupHref={signupHref} initiallyUnlocked={unlocked} />
+        )}
+        {tool.slug === 'decision-clarity' && (
+          <DecisionClarity signupHref={signupHref} initiallyUnlocked={unlocked} />
+        )}
 
-        {/* Coming soon placeholder */}
         {tool.status === 'coming-soon' && !isInteractive && (
           <div className="border-2 border-white/20 p-6 mb-10 text-center">
             <p className="display text-2xl mb-2">Coming soon.</p>
-            <p className="text-sm opacity-60">This tool is in development. Sign up to be notified when it goes live.</p>
-            <Link href="/signup" className="btn-yellow inline-block mt-4">Join the waitlist</Link>
+            <p className="text-sm opacity-60 mb-4">This tool is in development. Sign up to be notified when it goes live.</p>
+            <Link href="/signup" className="btn-yellow inline-block">Join the waitlist</Link>
           </div>
         )}
 
-        {/* Tool info */}
         <h2 className="text-4xl mb-3">What it does</h2>
         <p className="text-base mb-10 opacity-80">{tool.description}</p>
 
@@ -91,17 +95,10 @@ export default async function ToolDetailPage({
           </>
         )}
 
-        {tool.template && (
-          <>
-            <h2 className="text-4xl mb-3">Template preview</h2>
-            <p className="mono text-sm border-2 border-[#ffc107] p-4 mb-10 whitespace-pre-wrap">{tool.template}</p>
-          </>
-        )}
-
         <h2 className="text-4xl mb-3">Who it is for</h2>
         <ul className="space-y-2 text-sm mb-10 opacity-80">
           <li>▸ Adults with ADHD, autism, dyslexia, and related needs</li>
-          <li>▸ People stuck mid-task with no idea why</li>
+          <li>▸ People stuck mid-task, mid-decision, or mid-conversation</li>
           <li>▸ Anyone who wants structure, not advice</li>
         </ul>
 
