@@ -17,9 +17,9 @@ export default async function HomePage() {
         description="Practical templates and micro-tools for neurodivergent adults. Delivered via WhatsApp."
       />
 
-      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/hero-circuit-wide.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.75,  pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(0,0,10,0.50) 40%, rgba(0,0,0,0.05) 100%)' }} />
+      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" >
+        
+        
         <div className="w-full px-10 md:px-20 flex justify-start" style={{ position: 'relative' }}>
           <div className="max-w-2xl text-left">
             <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
@@ -43,9 +43,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/section-3.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.75,  pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.1) 100%)' }} />
+      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" >
+        
+        
         <div className="w-full px-10 md:px-20 flex justify-start" style={{ position: 'relative' }}>
           <div className="max-w-lg text-left">
             <p className="kicker mb-4">How it works</p>
