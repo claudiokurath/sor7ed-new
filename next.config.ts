@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: '**.notion.so' },
       { protocol: 'https', hostname: 'prod-files-secure.s3.us-west-2.amazonaws.com' },
       { protocol: 'https', hostname: 's3.us-west-2.amazonaws.com' },
+      { protocol: 'https', hostname: 'cdn.midjourney.com' },
+      { protocol: 'https', hostname: '**.supabase.co' },
+      { protocol: 'https', hostname: 'raw.githubusercontent.com' },
     ],
   },
 };
