@@ -1,26 +1,22 @@
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
-const DEFAULT_PATHS = ['/', '/tools', '/blog'];
+const DEFAULT_PATHS = ['/tools', '/blog', '/'];
+const SECRET = process.env.NOTION_REVALIDATE_SECRET;
 
-export async function POST(request: NextRequest) {
-  const expectedSecret = process.env.NOTION_REVALIDATE_SECRET;
+export async function POST(req: NextRequest) {
+  let body: any;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ ok: false, error: 'Invalid JSON' }, { status: 400 });
+  }
 
-  if (!expectedSecret) {
-    return NextResponse.json(
-      { ok: false, error: 'NOTION_REVALIDATE_SECRET is not configured' },
-      { status: 500 },
-    );
+  if (SECRET && body?.secret !== SECRET) {
+    return NextResponse.json({ ok: false, error: 'Invalid secret' }, { status: 401 });
   }
 
   try {
-    const body = await request.json();
-    const secret = typeof body?.secret === 'string' ? body.secret : '';
-
-    if (secret !== expectedSecret) {
-      return NextResponse.json({ ok: false, error: 'Invalid secret' }, { status: 401 });
-    }
-
     const requestedPaths: string[] = Array.isArray(body?.paths)
       ? body.paths.filter((value: unknown): value is string => typeof value === 'string')
       : typeof body?.path === 'string'
