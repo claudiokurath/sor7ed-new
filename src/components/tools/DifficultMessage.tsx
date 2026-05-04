@@ -3,216 +3,157 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const SCENARIOS = [
-  { id: 'boundary', label: 'Setting a boundary', icon: '🛑' },
-  { id: 'apology', label: 'Apologising', icon: '🤍' },
-  { id: 'followup', label: 'Following up on something ignored', icon: '📬' },
-  { id: 'pushback', label: 'Pushing back on something unfair', icon: '⚡' },
-  { id: 'checkin', label: 'Checking in after a falling out', icon: '🌱' },
+  { id: 'boundary',   label: 'Setting a boundary',        emoji: '🛑' },
+  { id: 'apology',    label: 'Apologising for something',  emoji: '🙏' },
+  { id: 'followup',   label: 'Following up / chasing',     emoji: '📬' },
+  { id: 'pushback',   label: 'Pushing back / disagreeing', emoji: '✋' },
+  { id: 'checkin',    label: 'Checking in on someone',     emoji: '💛' },
 ];
 
 const TONES = [
-  { id: 'warm', label: 'Warm', desc: 'Kind, gentle, relationship-first' },
-  { id: 'firm', label: 'Firm', desc: 'Clear, direct, no room for doubt' },
-  { id: 'neutral', label: 'Neutral', desc: 'Factual, professional, low-emotion' },
+  { id: 'warm',    label: 'Warm & kind' },
+  { id: 'firm',    label: 'Firm & direct' },
+  { id: 'neutral', label: 'Neutral & professional' },
 ];
 
 const AUDIENCES = [
-  { id: 'partner', label: 'Partner / Spouse' },
-  { id: 'friend', label: 'Friend' },
-  { id: 'family', label: 'Family member' },
+  { id: 'partner',   label: 'Partner / spouse' },
+  { id: 'friend',    label: 'Friend' },
+  { id: 'family',    label: 'Family member' },
   { id: 'colleague', label: 'Colleague' },
-  { id: 'manager', label: 'Manager / Boss' },
-  { id: 'stranger', label: 'Service / Stranger' },
+  { id: 'manager',   label: 'Manager / boss' },
+  { id: 'service',   label: 'Company / service' },
 ];
 
-const DRAFTS: Record<string, Record<string, Record<string, { long: string; short: string }>>> = {
-  boundary: {
-    warm: {
-      partner: {
-        long: "Hey — I've been sitting with something and wanted to bring it up while it's still manageable. When [situation] happens, I end up feeling [impact], which I know isn't what you want. I'd love if we could try [alternative]. I'm not going anywhere — I just want us to work better together.",
-        short: "Can we talk? Something's been affecting me and I want to sort it before it gets bigger.",
-      },
-      friend: {
-        long: "I value our friendship a lot, which is why I want to be honest about something. When [thing happens], I find it hard to [show up / be present / engage]. I need [boundary]. I hope that's okay — I'm not going anywhere, just need us to adjust slightly.",
-        short: "Hey — I need to be honest about something small before it becomes a big thing. Can we talk?",
-      },
-      colleague: {
-        long: "I wanted to flag something I've noticed, not as a complaint, more as a heads up. When [situation], it makes it harder for me to [deliver / focus / collaborate]. Going forward I'd find it helpful if [boundary]. Happy to chat about it if useful.",
-        short: "Quick one — can we find 5 mins? Want to mention something before it becomes an issue.",
-      },
-      manager: {
-        long: "I wanted to raise something I've been thinking about. When [situation] happens, it impacts [my output / wellbeing / ability to do X]. I'd like to propose [alternative or limit]. I want to flag it now rather than let it build — happy to discuss if helpful.",
-        short: "Can we grab 10 mins this week? Want to flag something proactively.",
-      },
-      family: {
-        long: "I love you and this is coming from that place. When [thing] happens, it affects me more than I usually let on. I need [boundary] to feel okay. I hope we can respect that without it being a big deal.",
-        short: "Can we chat? Something's been affecting me and I'd rather say it than not.",
-      },
-      stranger: {
-        long: "Hi — I just wanted to mention that [situation] has been causing me [impact]. I'm not trying to make this difficult, I'd just appreciate [boundary/resolution] if that's possible.",
-        short: "Hi — I need to raise something. [Issue]. Could we sort this?",
-      },
-    },
-    firm: {
-      partner: {
-        long: "I need to be direct: [specific behaviour] isn't working for me and it needs to stop. I'm not saying this to hurt you, I'm saying it because it's affecting my wellbeing. Going forward, [clear boundary]. That's where I stand.",
-        short: "[Behaviour] needs to stop. That's my boundary. I'd like to talk about it but it's not negotiable.",
-      },
-      friend: {
-        long: "I need to say this clearly because I've let it go too many times: [behaviour] isn't okay with me. I want to keep this friendship, and that's exactly why I'm saying this. [Boundary]. That's what I need.",
-        short: "I've let something slide too many times. [Behaviour] doesn't work for me. Can we talk?",
-      },
-      colleague: {
-        long: "I want to raise this directly: [situation] isn't something I can keep absorbing. Going forward, [boundary/limit]. I'd prefer to handle this without escalating, but I wanted to be clear.",
-        short: "[Situation] needs to change. Can we sort this now rather than later?",
-      },
-      manager: {
-        long: "I want to raise something directly and professionally. [Situation] is affecting my ability to [perform / maintain boundaries / operate sustainably]. I need [clear boundary or outcome]. I'd like to resolve this without escalation if possible.",
-        short: "I need to raise [issue] formally. Can we meet this week?",
-      },
-      family: {
-        long: "[Behaviour] is not something I'm willing to continue accepting. I love you, but this is a firm boundary. I won't keep engaging with [situation]. I hope we can respect that.",
-        short: "[Behaviour] needs to stop. That's not flexible. I hope we can move past it.",
-      },
-      stranger: {
-        long: "This isn't acceptable. [Situation] needs to be resolved. I'd like [clear outcome] and if that isn't possible I'll need to escalate.",
-        short: "This needs sorting. [Issue]. What can you do to fix this?",
-      },
-    },
-    neutral: {
-      partner: {
-        long: "I want to flag something without making it bigger than it needs to be. [Situation] has been affecting me. Going forward, I'd like us to try [alternative]. Just wanted to name it.",
-        short: "Can we talk briefly? Want to mention something.",
-      },
-      friend: {
-        long: "Wanted to mention something — [situation] has been affecting me a bit. No big deal, just worth naming. I'd appreciate [boundary] going forward if possible.",
-        short: "Small thing — can I mention something? Nothing dramatic.",
-      },
-      colleague: {
-        long: "Flagging something for awareness: [situation] has had an impact on [work / output / workflow]. Going forward it would help if [boundary]. Happy to discuss if useful.",
-        short: "Quick flag: [issue]. Happy to chat if helpful.",
-      },
-      manager: {
-        long: "Flagging for your awareness: [situation] is affecting [work / output / sustainability]. I'd like to discuss [solution or boundary]. Available to talk when convenient.",
-        short: "Can we find time this week? Want to flag something.",
-      },
-      family: {
-        long: "Just wanted to name something: [situation] affects me and I'd prefer [outcome] going forward. Not trying to make it a big thing, just wanted to say it.",
-        short: "Can I mention something quickly? Not a big deal, just want to name it.",
-      },
-      stranger: {
-        long: "I wanted to flag [situation]. I'd appreciate [resolution]. Please let me know how you can help.",
-        short: "[Issue]. Can you advise on how to resolve this?",
-      },
-    },
-  },
-  apology: {
-    warm: {
-      partner: { long: "I've been thinking about what happened and I want to say sorry properly. I [what you did] and I can see how that affected you. You deserved better from me. I'm not making excuses — I just want you to know I understand and I'm working on it.", short: "I'm sorry. Properly. Can we talk?" },
-      friend: { long: "I owe you an apology. [What happened] wasn't okay and I knew it even when I did it. I'm sorry I let you down. You mean a lot to me and I don't want this to sit between us.", short: "I owe you an apology. Can I say it properly?" },
-      colleague: { long: "I want to apologise for [what happened]. It wasn't professional and it wasn't fair to you. I'm sorry — and I'll make sure it doesn't happen again.", short: "I want to apologise for [incident]. Can we talk briefly?" },
-      manager: { long: "I want to apologise for [situation]. It fell short of the standard I want to hold myself to. I'm sorry for the impact it had and I'm [what you're doing to address it].", short: "I want to apologise for [incident]. Can we speak briefly?" },
-      family: { long: "I'm sorry. [What you did] was wrong and I knew it. I love you and I hate that I hurt you. I'm not asking you to pretend it's fine — I just want you to know I mean it.", short: "I'm sorry. Can I say it properly?" },
-      stranger: { long: "I'd like to apologise for [what happened]. That wasn't okay and I regret it.", short: "I'm sorry for [incident]." },
-    },
-    firm: {
-      partner: { long: "I'm apologising because it's the right thing to do, not because I've been asked to. [What I did] was wrong. I take responsibility for it. I'm working on making sure it doesn't repeat.", short: "I was wrong. I'm sorry. I'm working on it." },
-      friend: { long: "I'm sorry. [What I did] wasn't fair and there's no good excuse for it. I own that.", short: "I was wrong. No excuses. I'm sorry." },
-      colleague: { long: "I'm apologising directly: [what happened] was my error. I take responsibility and I'm [corrective action].", short: "I was wrong on [issue]. I'm sorry and I'm fixing it." },
-      manager: { long: "I'm apologising directly for [situation]. It was my responsibility and I failed to meet it. I've [corrective action] to ensure it doesn't happen again.", short: "I take full responsibility for [issue]. I'm sorry." },
-      family: { long: "I'm sorry. Not because anyone asked me to say it — because I was wrong. [What I did] wasn't okay and I know it.", short: "I was wrong. I'm sorry." },
-      stranger: { long: "I apologise for [what happened]. It was wrong and I take responsibility.", short: "I'm sorry for [incident]. That was wrong of me." },
-    },
-    neutral: {
-      partner: { long: "I want to acknowledge what happened and apologise. [Situation] — I handled that badly and I'm sorry for the impact it had.", short: "I want to apologise for [situation]." },
-      friend: { long: "I owe you an apology for [situation]. It wasn't okay and I'm sorry.", short: "I'm sorry for [situation]." },
-      colleague: { long: "I'd like to apologise for [incident] and acknowledge the impact it may have had.", short: "Apologies for [incident]." },
-      manager: { long: "I'm writing to apologise for [situation] and to confirm I've [corrective action].", short: "Apologies for [situation]. I've [corrective action]." },
-      family: { long: "I want to apologise for [situation]. I handled it poorly and I'm sorry.", short: "I'm sorry about [situation]." },
-      stranger: { long: "I apologise for any inconvenience caused by [situation].", short: "Sorry for [situation]." },
-    },
-  },
-  followup: {
-    warm: {
-      partner: { long: "Hey — I mentioned [thing] a while ago and I haven't heard back. I'm not trying to nag, I just wanted to check in because it's still on my mind. Can we find a moment to talk about it?", short: "Hey — still thinking about [thing] I mentioned. Can we talk?" },
-      friend: { long: "I know life gets busy, but I wanted to follow up on [thing]. No pressure — I just didn't want to let it disappear into the void. Are you okay?", short: "Just checking in — did [thing] ever get resolved?" },
-      colleague: { long: "Following up on my message from [timeframe] re: [topic]. Happy to jump on a quick call if easier. Just want to make sure it doesn't fall through the gaps.", short: "Following up on [topic] — any update?" },
-      manager: { long: "Wanted to follow up on [topic] from [timeframe]. No rush, but I wanted to check in before [deadline or next step]. Happy to discuss when convenient.", short: "Following up on [topic]. Can we find 5 mins?" },
-      family: { long: "Hey — I haven't forgotten about [thing] we talked about. Just checking in. How are you doing with it?", short: "Still thinking about [thing] — wanted to check in." },
-      stranger: { long: "Following up on my previous message regarding [issue]. I'd appreciate an update when possible.", short: "Following up re: [issue]. Any update?" },
-    },
-    firm: {
-      partner: { long: "[Thing] is still unresolved and I need us to address it. Can we make time this week?", short: "We still need to talk about [thing]. This week?" },
-      friend: { long: "[Thing] hasn't been resolved and it's still affecting me. I need to know where we stand.", short: "[Thing] is still on my mind. Can we talk?" },
-      colleague: { long: "I'm following up on [topic] for the third time. I need a response by [date] to move forward.", short: "Need a response on [topic] by [date]." },
-      manager: { long: "I'm following up on [topic] — this is now blocking [work / decision]. I need clarity by [date].", short: "[Topic] is blocking progress. Need a decision by [date]." },
-      family: { long: "[Thing] is still unresolved and it matters to me. Can we address it?", short: "Still need to talk about [thing]." },
-      stranger: { long: "This is my third follow-up regarding [issue]. If I don't hear back by [date] I'll need to escalate.", short: "Final follow-up on [issue] before I escalate." },
-    },
-    neutral: {
-      partner: { long: "Just following up on [thing] we discussed. Let me know when you have a moment.", short: "Following up on [thing]. When can we talk?" },
-      friend: { long: "Quick follow-up on [topic]. Still on my mind — any update?", short: "Any update on [topic]?" },
-      colleague: { long: "Following up re: [topic]. Happy to discuss if helpful.", short: "Any update on [topic]?" },
-      manager: { long: "Following up re: [topic] from [date]. Please advise when convenient.", short: "Following up on [topic]." },
-      family: { long: "Just checking in on [thing]. No rush, just didn't want to forget.", short: "Checking in on [thing]." },
-      stranger: { long: "Following up on [issue]. Please advise.", short: "Update on [issue] please." },
-    },
-  },
-  pushback: {
-    warm: {
-      partner: { long: "I hear you, and I want to work through this together — but I need to push back on [specific thing]. From my side, [your perspective]. Can we find a middle ground?", short: "I want to find a solution but I need to push back on [thing]. Can we talk?" },
-      friend: { long: "I love you but I disagree here. [Your perspective]. I don't want this to become a fight — but I can't just go along with [thing].", short: "I hear you — but I need to push back on [thing]." },
-      colleague: { long: "I want to be collaborative here, but I have some concerns about [thing]. [Your reasoning]. Can we discuss before moving forward?", short: "Quick one — I want to flag a concern about [thing] before we proceed." },
-      manager: { long: "I want to flag some concerns about [thing] before we proceed. [Reasoning]. I'm not trying to block this — I just think it's worth discussing first.", short: "Can I raise a concern about [thing] before we commit?" },
-      family: { long: "I want to say this gently — I disagree about [thing]. [Your perspective]. I hope we can talk it through.", short: "I need to respectfully disagree about [thing]. Can we talk?" },
-      stranger: { long: "I appreciate your position but I have to respectfully push back. [Issue]. I'd like to discuss further.", short: "I need to push back on [thing]. Can we discuss?" },
-    },
-    firm: {
-      partner: { long: "I need to be honest — I don't agree with [decision/action]. [Your reasoning]. I need us to revisit this before it goes further.", short: "I don't agree with [thing]. We need to revisit this." },
-      friend: { long: "[Thing] isn't something I can support. [Your reasoning]. I'm saying that because I care, not to be difficult.", short: "I can't support [thing]. Here's why: [reason]." },
-      colleague: { long: "I have to push back on [thing]. [Reasoning]. I don't think we should proceed without addressing this.", short: "I'm not comfortable with [thing] as it stands. We need to talk." },
-      manager: { long: "I need to formally flag my concern about [thing]. [Reasoning]. I'd like this on record before we proceed.", short: "I need to raise a formal concern about [thing]." },
-      family: { long: "I disagree — clearly and firmly. [Your reasoning]. I'm not going to pretend otherwise.", short: "I disagree about [thing]. That's not going to change." },
-      stranger: { long: "I'm pushing back on [thing]. [Reasoning]. I'd like this resolved or escalated.", short: "I don't accept [thing]. I'd like to escalate if needed." },
-    },
-    neutral: {
-      partner: { long: "I wanted to flag a different perspective on [thing]. [Reasoning]. Worth discussing?", short: "Different view on [thing] — worth a chat?" },
-      friend: { long: "I see it differently on [thing]. [Perspective]. Just wanted to name it.", short: "I see [thing] differently. Can I say why?" },
-      colleague: { long: "I have a different view on [thing] that I'd like to flag. [Reasoning]. Happy to discuss.", short: "Flagging a concern on [thing]. Can we discuss?" },
-      manager: { long: "I'd like to raise an alternative view on [thing] for consideration. [Reasoning].", short: "Wanted to raise an alternative view on [thing]." },
-      family: { long: "I see this differently — [perspective]. Just wanted to say it.", short: "I see [thing] differently." },
-      stranger: { long: "I'd like to raise a concern about [thing]. [Reasoning].", short: "Concern re: [thing]." },
-    },
-  },
-  checkin: {
-    warm: {
-      partner: { long: "I've been thinking about us and I miss [connection/ease/you]. I know things have been hard. I'm not looking to relitigate everything — I just wanted to check in and see if there's space to reconnect.", short: "I miss us. Can we check in?" },
-      friend: { long: "I've been thinking about you. I know things got complicated between us and I'm not sure where we land — but I wanted to reach out and just say I'm here if you want to talk.", short: "Been thinking about you. Are we okay?" },
-      colleague: { long: "Wanted to check in after [situation]. I hope we're okay. I value working with you and didn't want anything to sit awkwardly.", short: "Quick check-in after [situation]. Hope we're good." },
-      manager: { long: "I wanted to check in after [situation]. I want to make sure we're aligned and that anything unresolved gets addressed.", short: "Wanted to check in after [situation]. Can we find 5 mins?" },
-      family: { long: "I've been thinking about you a lot. I know we haven't talked properly in a while. I just wanted to reach out — no agenda, just wanted to say I'm thinking of you.", short: "Been thinking of you. Hope you're okay. Can we talk?" },
-      stranger: { long: "Hi — I just wanted to follow up after [situation] and check that everything is okay from your end.", short: "Following up after [situation]. Hope all is okay." },
-    },
-    firm: {
-      partner: { long: "I need to know where we stand. [Situation] changed something and I can't keep going without addressing it. Can we talk properly?", short: "I need to know where we stand. Can we talk?" },
-      friend: { long: "I think we need to clear the air. [Situation] has been sitting between us and I'd rather deal with it than let it fester.", short: "We need to clear the air. Can we talk?" },
-      colleague: { long: "After [situation] I think it's important we get aligned. Can we find time to talk it through?", short: "We need to get aligned after [situation]. Can we talk?" },
-      manager: { long: "After [situation] I think we need to have a direct conversation to make sure we're on the same page.", short: "Can we debrief on [situation]? Want to make sure we're aligned." },
-      family: { long: "I think we need to talk — really talk. [Situation] has left things unresolved and I don't want to keep pretending otherwise.", short: "We need to talk about [situation]. Can we?" },
-      stranger: { long: "Following up on [situation] — I'd like to resolve anything that's outstanding.", short: "Can we resolve [situation] properly?" },
-    },
-    neutral: {
-      partner: { long: "Just checking in — wanted to see how you're doing and if things feel okay between us.", short: "Just checking in. You okay?" },
-      friend: { long: "Hey — just checking in. Hope you're okay.", short: "Hey. You okay?" },
-      colleague: { long: "Checking in after [situation]. Let me know if anything needs following up.", short: "Checking in post-[situation]. All good?" },
-      manager: { long: "Checking in after [situation]. Happy to discuss if anything needs clarifying.", short: "Checking in on [situation]. All okay?" },
-      family: { long: "Just checking in. Haven't heard from you in a while.", short: "Just checking in. You okay?" },
-      stranger: { long: "Following up to check that [situation] has been resolved.", short: "Is [situation] resolved?" },
-    },
-  },
+type Draft = { label: string; body: string; short: string };
+
+function generateDrafts(scenario: string, tone: string, audience: string, context: string): Draft[] {
+  const s = SCENARIO_COPY[scenario] || SCENARIO_COPY['boundary'];
+  const t = TONE_MOD[tone] || TONE_MOD['neutral'];
+  const a = AUDIENCE_MOD[audience] || AUDIENCE_MOD['colleague'];
+  const ctx = context.trim();
+
+  return s.drafts.map((draft, i) => ({
+    label: draft.label,
+    body: draft.body(t, a, ctx),
+    short: draft.short(t, a, ctx),
+  }));
+}
+
+const TONE_MOD: Record<string, { open: string; close: string; style: string }> = {
+  warm:    { open: "I hope you're doing well.",          close: "Thanks so much for understanding.",    style: "gentle and caring"    },
+  firm:    { open: "I want to be direct with you.",      close: "I appreciate your understanding.",     style: "clear and assertive"  },
+  neutral: { open: "I wanted to reach out about this.", close: "Thank you for your time.",              style: "calm and professional" },
 };
 
-const STORAGE_KEY = 'sor7ed_difficult_message';
+const AUDIENCE_MOD: Record<string, { salutation: string; register: string }> = {
+  partner:   { salutation: "Hey,",          register: "personal and honest"     },
+  friend:    { salutation: "Hey,",          register: "casual and warm"         },
+  family:    { salutation: "Hi,",           register: "caring and direct"       },
+  colleague: { salutation: "Hi,",           register: "professional and clear"  },
+  manager:   { salutation: "Hi [Name],",    register: "respectful and concise"  },
+  service:   { salutation: "To whom it may concern,", register: "formal and factual" },
+};
+
+const SCENARIO_COPY: Record<string, {
+  drafts: Array<{ label: string; body: (t: any, a: any, ctx: string) => string; short: (t: any, a: any, ctx: string) => string }>;
+}> = {
+  boundary: {
+    drafts: [
+      {
+        label: "Direct & clear",
+        body:  (t, a, ctx) => `${a.salutation}\n\n${t.open}\n\nI need to be honest about something that matters to me.${ctx ? ` ${ctx}.` : ''} Going forward, I'm not able to continue as things have been — I need [specific boundary here].\n\nThis isn't about blame. It's about what I need to function well.\n\n${t.close}`,
+        short: (t, a, ctx) => `${a.salutation} I need to set a boundary around [topic]${ctx ? ` — ${ctx}` : ''}. Can we talk?`,
+      },
+      {
+        label: "Soft but firm",
+        body:  (t, a, ctx) => `${a.salutation}\n\n${t.open}\n\nI've been thinking about how to say this in a way that's honest and respectful.${ctx ? ` ${ctx}.` : ''} I care about our relationship, and that's exactly why I need to ask for something different: [specific need].\n\nI'd love to talk through this together.\n\n${t.close}`,
+        short: (t, a, ctx) => `Can we chat? I want to talk about something that's been on my mind${ctx ? ` — ${ctx}` : ''}.`,
+      },
+      {
+        label: "Written record version",
+        body:  (t, a, ctx) => `${a.salutation}\n\nI'm writing this down so there's no ambiguity.${ctx ? ` ${ctx}.` : ''} My boundary is: [state it clearly]. I'm not open to negotiating on this right now, but I'm happy to discuss how we move forward within it.\n\n${t.close}`,
+        short: (t, a, ctx) => `Just to be clear: [boundary]. Not negotiable right now. Happy to discuss how we work with it.`,
+      },
+    ],
+  },
+  apology: {
+    drafts: [
+      {
+        label: "Full accountability",
+        body:  (t, a, ctx) => `${a.salutation}\n\n${t.open}\n\nI owe you an apology.${ctx ? ` ${ctx}.` : ''} I got it wrong — I [what happened], and that wasn't okay. I'm not going to make excuses. I'm genuinely sorry, and I want to do better.\n\nIf you're open to it, I'd like to [make it right / talk it through].\n\n${t.close}`,
+        short: (t, a, ctx) => `I'm sorry. I got it wrong${ctx ? ` — ${ctx}` : ''}. No excuses. I want to do better.`,
+      },
+      {
+        label: "Repair-focused",
+        body:  (t, a, ctx) => `${a.salutation}\n\n${t.open}\n\nI've been sitting with this and I know I need to reach out.${ctx ? ` ${ctx}.` : ''} I'm sorry for [what happened]. More than the apology, I want to understand the impact and figure out how to repair things between us.\n\nCan we talk?\n\n${t.close}`,
+        short: (t, a, ctx) => `I'm sorry${ctx ? ` for ${ctx}` : ''}. Can we talk about how to repair this?`,
+      },
+      {
+        label: "Simple & genuine",
+        body:  (t, a, ctx) => `${a.salutation}\n\nI just wanted to say I'm sorry.${ctx ? ` ${ctx}.` : ''} I know words only go so far — I'll show it through how I show up going forward.\n\n${t.close}`,
+        short: (t, a, ctx) => `I'm sorry${ctx ? ` — ${ctx}` : ''}. I'll do better.`,
+      },
+    ],
+  },
+  followup: {
+    drafts: [
+      {
+        label: "Polite nudge",
+        body:  (t, a, ctx) => `${a.salutation}\n\n${t.open}\n\nI just wanted to follow up on [topic]${ctx ? ` — ${ctx}` : ''}. I know things get busy — I'm just checking whether there's anything you need from me to move this forward.\n\n${t.close}`,
+        short: (t, a, ctx) => `Following up on [topic]${ctx ? ` — ${ctx}` : ''}. Anything needed from my end?`,
+      },
+      {
+        label: "Clear deadline",
+        body:  (t, a, ctx) => `${a.salutation}\n\n${t.open}\n\nI'm following up on [topic]${ctx ? ` — ${ctx}` : ''}. I need a response by [date/time] to keep things on track. If that's not possible, let me know and we can figure out next steps.\n\n${t.close}`,
+        short: (t, a, ctx) => `Quick chase on [topic]${ctx ? ` — ${ctx}` : ''}. Need to hear back by [date]. Thanks.`,
+      },
+      {
+        label: "Escalation-ready",
+        body:  (t, a, ctx) => `${a.salutation}\n\nThis is my [second/third] follow-up on [topic]${ctx ? ` — ${ctx}` : ''}. I haven't received a response yet and I need to resolve this urgently. Could you confirm receipt and let me know next steps?\n\n${t.close}`,
+        short: (t, a, ctx) => `This is a follow-up on [topic]${ctx ? ` — ${ctx}` : ''}. Need a response urgently.`,
+      },
+    ],
+  },
+  pushback: {
+    drafts: [
+      {
+        label: "Disagree & propose",
+        body:  (t, a, ctx) => `${a.salutation}\n\n${t.open}\n\nI want to be honest — I see this differently.${ctx ? ` ${ctx}.` : ''} My concern is [concern]. I'd suggest an alternative: [your proposal]. Happy to talk through it.\n\n${t.close}`,
+        short: (t, a, ctx) => `I see this differently${ctx ? ` — ${ctx}` : ''}. Can I suggest [alternative]?`,
+      },
+      {
+        label: "Questions first",
+        body:  (t, a, ctx) => `${a.salutation}\n\n${t.open}\n\nBefore I can agree, I have a few questions.${ctx ? ` ${ctx}.` : ''} [Question 1]. [Question 2]. I want to make sure I understand fully before moving forward.\n\n${t.close}`,
+        short: (t, a, ctx) => `Before I agree, can I ask a couple of questions${ctx ? ` — ${ctx}` : ''}?`,
+      },
+      {
+        label: "Hold the line",
+        body:  (t, a, ctx) => `${a.salutation}\n\n${t.open}\n\nI've considered this carefully${ctx ? ` — ${ctx}` : ''}, and I have to respectfully decline / disagree. My position is [position]. I'm open to hearing more, but I wanted to be transparent about where I stand.\n\n${t.close}`,
+        short: (t, a, ctx) => `I've thought about it and my position stands${ctx ? ` — ${ctx}` : ''}. Happy to discuss.`,
+      },
+    ],
+  },
+  checkin: {
+    drafts: [
+      {
+        label: "Simple & warm",
+        body:  (t, a, ctx) => `${a.salutation}\n\n${t.open}\n\nI've been thinking about you${ctx ? ` — ${ctx}` : ''} and just wanted to reach out. No pressure to respond with anything big — I just wanted you to know I'm here.\n\n${t.close}`,
+        short: (t, a, ctx) => `Hey — just thinking of you${ctx ? ` — ${ctx}` : ''}. Hope you're okay. 💛`,
+      },
+      {
+        label: "Offer specific help",
+        body:  (t, a, ctx) => `${a.salutation}\n\n${t.open}\n\nI've been thinking about you${ctx ? ` — ${ctx}` : ''}. If there's anything I can do — even just a call, a coffee, or someone to vent to — I'm here. You don't have to carry it alone.\n\n${t.close}`,
+        short: (t, a, ctx) => `Thinking of you${ctx ? ` — ${ctx}` : ''}. Here if you need anything — even just to talk.`,
+      },
+      {
+        label: "Light touch",
+        body:  (t, a, ctx) => `${a.salutation}\n\nJust a quick note${ctx ? ` — ${ctx}` : ''} — I'm thinking of you. No need to reply if you're not up to it. Just wanted you to know.\n\n${t.close}`,
+        short: (t, a, ctx) => `Just thinking of you${ctx ? ` — ${ctx}` : ''}. No need to reply. 🤍`,
+      },
+    ],
+  },
+};
 
 export default function DifficultMessage({
   signupHref,
@@ -221,137 +162,203 @@ export default function DifficultMessage({
   signupHref: string;
   initiallyUnlocked?: boolean;
 }) {
-  const [step, setStep] = useState<'scenario' | 'tone' | 'audience' | 'result'>('scenario');
+  const [step, setStep] = useState<'scenario' | 'tone' | 'audience' | 'context' | 'result'>('scenario');
   const [scenario, setScenario] = useState('');
   const [tone, setTone] = useState('');
   const [audience, setAudience] = useState('');
-  const [unlocked, setUnlocked] = useState(initiallyUnlocked);
+  const [context, setContext] = useState('');
+  const [drafts, setDrafts] = useState<Draft[]>([]);
+  const [copied, setCopied] = useState<number | null>(null);
+  const unlocked = initiallyUnlocked;
 
-  const drafts = scenario && tone && audience ? DRAFTS[scenario]?.[tone]?.[audience] : null;
+  function handleScenario(id: string) {
+    setScenario(id);
+    setStep('tone');
+  }
 
-  function restart() {
+  function handleTone(id: string) {
+    setTone(id);
+    setStep('audience');
+  }
+
+  function handleAudience(id: string) {
+    setAudience(id);
+    setStep('context');
+  }
+
+  function handleGenerate() {
+    const d = generateDrafts(scenario, tone, audience, context);
+    setDrafts(d);
+    setStep('result');
+  }
+
+  function handleRestart() {
     setStep('scenario');
     setScenario('');
     setTone('');
     setAudience('');
+    setContext('');
+    setDrafts([]);
+    setCopied(null);
   }
 
-  // ── RESULT ──────────────────────────────────────────────────────
-  if (step === 'result' && drafts) {
+  async function handleCopy(text: string, idx: number) {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(idx);
+      setTimeout(() => setCopied(null), 2000);
+    } catch {}
+  }
+
+  const progress = { scenario: 25, tone: 50, audience: 75, context: 90, result: 100 }[step] || 0;
+
+  // RESULT
+  if (step === 'result' && drafts.length > 0) {
     const scenarioLabel = SCENARIOS.find(s => s.id === scenario)?.label || '';
     const toneLabel = TONES.find(t => t.id === tone)?.label || '';
     const audienceLabel = AUDIENCES.find(a => a.id === audience)?.label || '';
 
     return (
       <div className="border-2 border-[#ffc107] p-6 md:p-8 mb-10">
-        <p className="kicker mb-2">Difficult Message</p>
-        <div className="flex flex-wrap gap-2 mb-6">
-          {[scenarioLabel, toneLabel, audienceLabel].map((l, i) => (
-            <span key={i} className="mono text-xs border border-white/20 px-2 py-0.5">{l}</span>
-          ))}
-        </div>
+        <p className="kicker mb-1">Difficult Message</p>
+        <h2 className="display text-3xl text-[#ffc107] mb-1">3 drafts ready.</h2>
+        <p className="text-xs opacity-50 mb-6 mono">{scenarioLabel} · {toneLabel} · {audienceLabel}</p>
 
-        {/* Teaser — short version always visible */}
+        {/* Teaser — always show first draft short version */}
         <div className="border border-white/20 p-4 mb-4">
-          <p className="kicker text-xs mb-2">Quick version — send this now</p>
-          <p className="text-base leading-relaxed italic">"{drafts.short}"</p>
+          <p className="kicker text-xs mb-2">Quick send version</p>
+          <p className="text-sm leading-relaxed opacity-80">{drafts[0].short}</p>
         </div>
 
         {!unlocked ? (
           <div className="mt-6">
-            <p className="text-sm opacity-70 mb-4">
-              The full message draft is ready — with placeholders you can fill in. Sign up to unlock it.
+            <p className="text-sm mb-4 opacity-70">
+              Your full result includes 3 tone-matched drafts — full messages ready to copy and send.
             </p>
             <Link href={signupHref} className="btn-yellow inline-block">
-              Unlock full draft →
+              Create free account to unlock all 3 →
             </Link>
-            <p className="text-xs opacity-40 mt-3">Free account. 30 seconds.</p>
+            <p className="text-xs opacity-40 mt-3">Takes 30 seconds.</p>
           </div>
         ) : (
-          <div className="mt-6">
-            <div className="border-l-4 border-[#ffc107] pl-4 mb-6">
-              <p className="kicker text-xs mb-2">Full message draft</p>
-              <p className="text-base leading-relaxed italic">"{drafts.long}"</p>
-              <p className="text-xs opacity-50 mt-3">Replace [brackets] with your specifics before sending.</p>
-            </div>
+          <div className="mt-6 space-y-6">
+            {drafts.map((draft, i) => (
+              <div key={i} className="border border-white/20 p-5">
+                <div className="flex items-center justify-between mb-3">
+                  <p className="kicker text-xs">{draft.label}</p>
+                  <button
+                    onClick={() => handleCopy(draft.body, i)}
+                    className="mono text-xs text-[#ffc107] hover:opacity-70 transition-opacity"
+                  >
+                    {copied === i ? '✓ Copied' : 'Copy →'}
+                  </button>
+                </div>
+                <pre className="text-sm whitespace-pre-wrap leading-relaxed opacity-80 font-sans">{draft.body}</pre>
+                <div className="mt-3 border-t border-white/10 pt-3">
+                  <p className="kicker text-xs mb-1">Short version</p>
+                  <p className="text-xs opacity-60">{draft.short}</p>
+                  <button
+                    onClick={() => handleCopy(draft.short, i + 100)}
+                    className="mono text-xs text-[#ffc107] hover:opacity-70 mt-1 transition-opacity"
+                  >
+                    {copied === i + 100 ? '✓ Copied' : 'Copy short →'}
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         )}
 
-        <button onClick={restart} className="mt-4 text-xs mono opacity-50 hover:opacity-100 transition-opacity">
+        <button onClick={handleRestart} className="mt-6 text-xs mono opacity-40 hover:opacity-100 transition-opacity">
           ↺ Start over
         </button>
       </div>
     );
   }
 
-  // ── SCENARIO ────────────────────────────────────────────────────
-  if (step === 'scenario') {
-    return (
-      <div className="border-2 border-white p-6 md:p-8 mb-10">
-        <p className="kicker mb-6">Difficult Message · Step 1 of 3</p>
-        <p className="display text-2xl md:text-3xl mb-8 leading-tight">What kind of message is this?</p>
-        <div className="grid gap-3">
-          {SCENARIOS.map(s => (
-            <button
-              key={s.id}
-              onClick={() => { setScenario(s.id); setStep('tone'); }}
-              className="flex items-center gap-4 border border-white/20 hover:border-[#ffc107] hover:text-[#ffc107] p-4 text-left transition-all"
-            >
-              <span className="text-2xl">{s.icon}</span>
-              <span className="display text-xl">{s.label}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  return (
+    <div className="border-2 border-white p-6 md:p-8 mb-10">
+      <p className="kicker mb-4">Difficult Message · {step === 'scenario' ? '1' : step === 'tone' ? '2' : step === 'audience' ? '3' : '4'} of 4</p>
 
-  // ── TONE ────────────────────────────────────────────────────────
-  if (step === 'tone') {
-    return (
-      <div className="border-2 border-white p-6 md:p-8 mb-10">
-        <p className="kicker mb-6">Difficult Message · Step 2 of 3</p>
-        <p className="display text-2xl md:text-3xl mb-8 leading-tight">What tone do you want?</p>
-        <div className="grid gap-3">
-          {TONES.map(t => (
-            <button
-              key={t.id}
-              onClick={() => { setTone(t.id); setStep('audience'); }}
-              className="flex items-start gap-4 border border-white/20 hover:border-[#ffc107] hover:text-[#ffc107] p-4 text-left transition-all"
-            >
-              <div>
-                <p className="display text-xl">{t.label}</p>
-                <p className="text-sm opacity-50 mt-1">{t.desc}</p>
-              </div>
-            </button>
-          ))}
-        </div>
-        <button onClick={() => setStep('scenario')} className="mt-4 text-xs mono opacity-40 hover:opacity-80 transition-opacity">← Back</button>
+      {/* Progress */}
+      <div className="h-1 bg-white/10 w-full mb-6">
+        <div className="h-1 bg-[#ffc107] transition-all duration-300" style={{ width: `${progress}%` }} />
       </div>
-    );
-  }
 
-  // ── AUDIENCE ─────────────────────────────────────────────────────
-  if (step === 'audience') {
-    return (
-      <div className="border-2 border-white p-6 md:p-8 mb-10">
-        <p className="kicker mb-6">Difficult Message · Step 3 of 3</p>
-        <p className="display text-2xl md:text-3xl mb-8 leading-tight">Who are you sending this to?</p>
-        <div className="grid grid-cols-2 gap-3">
-          {AUDIENCES.map(a => (
-            <button
-              key={a.id}
-              onClick={() => { setAudience(a.id); setStep('result'); }}
-              className="border border-white/20 hover:border-[#ffc107] hover:text-[#ffc107] p-4 text-left transition-all"
-            >
-              <p className="display text-lg">{a.label}</p>
-            </button>
-          ))}
-        </div>
-        <button onClick={() => setStep('tone')} className="mt-4 text-xs mono opacity-40 hover:opacity-80 transition-opacity">← Back</button>
-      </div>
-    );
-  }
+      {/* Step: Scenario */}
+      {step === 'scenario' && (
+        <>
+          <p className="display text-2xl md:text-3xl mb-6 leading-tight">What do you need to say?</p>
+          <div className="grid gap-3">
+            {SCENARIOS.map(s => (
+              <button
+                key={s.id}
+                onClick={() => handleScenario(s.id)}
+                className="text-left border border-white/20 px-4 py-3 hover:border-[#ffc107] hover:text-[#ffc107] transition-all flex items-center gap-3"
+              >
+                <span className="text-xl">{s.emoji}</span>
+                <span className="text-sm">{s.label}</span>
+              </button>
+            ))}
+          </div>
+        </>
+      )}
 
-  return null;
+      {/* Step: Tone */}
+      {step === 'tone' && (
+        <>
+          <p className="display text-2xl md:text-3xl mb-6 leading-tight">What tone fits?</p>
+          <div className="grid gap-3">
+            {TONES.map(t => (
+              <button
+                key={t.id}
+                onClick={() => handleTone(t.id)}
+                className="text-left border border-white/20 px-4 py-3 hover:border-[#ffc107] hover:text-[#ffc107] transition-all"
+              >
+                <span className="text-sm">{t.label}</span>
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* Step: Audience */}
+      {step === 'audience' && (
+        <>
+          <p className="display text-2xl md:text-3xl mb-6 leading-tight">Who are you messaging?</p>
+          <div className="grid grid-cols-2 gap-3">
+            {AUDIENCES.map(a => (
+              <button
+                key={a.id}
+                onClick={() => handleAudience(a.id)}
+                className="text-left border border-white/20 px-4 py-3 hover:border-[#ffc107] hover:text-[#ffc107] transition-all text-sm"
+              >
+                {a.label}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* Step: Context */}
+      {step === 'context' && (
+        <>
+          <p className="display text-2xl md:text-3xl mb-2 leading-tight">Any context? <span className="text-base font-normal opacity-50">(optional)</span></p>
+          <p className="text-sm opacity-60 mb-5">A sentence or two about the situation. The more specific, the better the drafts.</p>
+          <textarea
+            value={context}
+            onChange={e => setContext(e.target.value)}
+            placeholder="e.g. My flatmate keeps leaving dishes and I've mentioned it twice already..."
+            className="w-full bg-black text-white border-2 border-white/30 px-4 py-3 text-sm resize-none h-28 focus:border-[#ffc107] outline-none transition-colors"
+          />
+          <button onClick={handleGenerate} className="btn-yellow mt-4">
+            Generate my drafts →
+          </button>
+          <button onClick={handleGenerate} className="block mt-3 text-xs mono opacity-40 hover:opacity-70">
+            Skip context
+          </button>
+        </>
+      )}
+    </div>
+  );
 }
