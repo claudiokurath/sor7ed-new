@@ -18,7 +18,7 @@ export default async function HomePage() {
       />
 
       <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
-        <img src="/images/hero-circuit.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.4, pointerEvents: 'none' }} />
+        <img src="/images/hero-circuit-wide.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.4, pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(0,0,10,0.92) 40%, rgba(0,0,0,0.05) 100%)' }} />
         <div className="w-full px-10 md:px-20 flex justify-start" style={{ position: 'relative' }}>
           <div className="max-w-2xl text-left">
