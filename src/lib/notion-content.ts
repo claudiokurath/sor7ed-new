@@ -91,10 +91,16 @@ function dateFrom(props: Record<string, any>, names: string[], fallback = ''): s
 
 function fileUrlFromPage(page: any, props: Record<string, any>, names: string[]): string | undefined {
   const prop = getProperty(props, names);
-  const file = Array.isArray(prop?.files) ? prop.files[0] : undefined;
 
+  // URL type property (e.g. Cover Image stored as URL)
+  if (typeof prop?.url === 'string' && prop.url) return prop.url;
+
+  // Files type property
+  const file = Array.isArray(prop?.files) ? prop.files[0] : undefined;
   if (file?.external?.url) return file.external.url;
   if (file?.file?.url) return file.file.url;
+
+  // Page cover
   if (page?.cover?.external?.url) return page.cover.external.url;
   if (page?.cover?.file?.url) return page.cover.file.url;
 
