@@ -1,16 +1,38 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { createServerClient } from '@supabase/ssr';
 
-export async function GET(req: Request) {
-  const url = new URL(req.url);
-  const code = url.searchParams.get('code');
-  const next = url.searchParams.get('next') ?? '/member';
+export async function GET(req: NextRequest) {
+  const { searchParams, origin } = new URL(req.url);
+  const code = searchParams.get('code');
+  const next = searchParams.get('next') || '/member';
+
+  // Validate next path
+  const safePath = next.startsWith('/') && !next.startsWith('//') ? next : '/member';
 
   if (!code) {
-    return NextResponse.redirect(new URL('/signup?error=missing_code', req.url));
+    return NextResponse.redirect(new URL('/signup?error=no_code', origin));
   }
 
-  // Delegate session exchange to the browser-side client so the session
-  // is stored in localStorage where the browser Supabase client can read it.
-  const params = new URLSearchParams({ code, next });
-  return NextResponse.redirect(new URL(`/auth/complete?${params}`, req.url));
+  const res = NextResponse.redirect(new URL(safePath, origin));
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() { return req.cookies.getAll(); },
+        setAll(cookies) {
+          cookies.forEach(({ name, value, options }) => res.cookies.set(name, value, options));
+        },
+      },
+    }
+  );
+
+  const { error } = await supabase.auth.exchangeCodeForSession(code);
+  if (error) {
+    console.error('[auth/callback]', error.message);
+    return NextResponse.redirect(new URL('/signup?error=auth_failed', origin));
+  }
+
+  return res;
 }
