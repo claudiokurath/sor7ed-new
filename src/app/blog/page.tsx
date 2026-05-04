@@ -1,3 +1,4 @@
+SHA: 4202b28039186024bb11a1cbca81cf5608fef805
 import Link from 'next/link';
 import SEOJsonLd from '@/components/SEOHead';
 import { getArticles } from '@/lib/notion-content';
@@ -14,15 +15,6 @@ export default async function BlogPage() {
 
   return (
     <>
-      {/* HERO */}
-      <div style={{ position: 'relative', minHeight: '420px', display: 'flex', alignItems: 'center', overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-        <div style={{ position: 'absolute', inset: 0, }} />
-        
-        <div className="page-wrap" style={{ position: 'relative', paddingTop: '80px', paddingBottom: '80px', maxWidth: '600px' }}>
-          <h1 className="anton" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', lineHeight: 0.92, color: '#fff', marginBottom: '16px' }}>THE BLOG.</h1>
-          <p style={{ fontFamily: 'Roboto, sans-serif', fontWeight: 300, fontSize: '1.05rem', color: 'rgba(255,255,255,0.65)', maxWidth: '480px', lineHeight: 1.6 }}>Honest, practical reads on ADHD, autism, overwhelm, money, sex, substances, and everything in between.</p>
-        </div>
-      </div>
       <SEOJsonLd
         title="Blog"
         description="Practical reads on executive function, time blindness, RSD, shutdown, and more."
