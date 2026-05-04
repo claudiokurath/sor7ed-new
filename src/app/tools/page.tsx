@@ -38,14 +38,14 @@ export default async function ToolsPage() {
                 <Link key={tool.slug} href={`/tools/${tool.slug}`} className="dark-card block group">
                   <div className="flex items-center justify-between mb-3">
                     <p className="kicker text-xs">{tool.branch}</p>
-                    {tool.slug === 'executive-function-triage' && (
+                    {(tool.slug === 'executive-function-triage' || tool.slug === 'difficult-message') && (
                       <span className="mono text-xs border border-[#ffc107] text-[#ffc107] px-2 py-0.5">INTERACTIVE</span>
                     )}
                   </div>
                   <p className="display text-2xl md:text-3xl mb-2 group-hover:text-[#ffc107] transition-colors">{tool.name}</p>
                   <p className="text-sm opacity-70 mb-5 leading-relaxed">{tool.tagline}</p>
                   <p className="text-sm mono text-[#ffc107]">
-                    {tool.slug === 'executive-function-triage' ? 'Start triage →' : 'Open tool →'}
+                    {(tool.slug === 'executive-function-triage' || tool.slug === 'difficult-message') ? 'Start →' : 'Open tool →'}
                   </p>
                 </Link>
               ))}
