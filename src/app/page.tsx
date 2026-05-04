@@ -43,8 +43,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center">
-        <div className="w-full px-10 md:px-20 flex justify-start">
+      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center" style={{ position: 'relative', overflow: 'hidden' }}>
+        <img src="/images/section-3.png" alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.3, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.95) 45%, rgba(0,0,0,0.1) 100%)' }} />
+        <div className="w-full px-10 md:px-20 flex justify-start" style={{ position: 'relative' }}>
           <div className="max-w-lg text-left">
             <p className="kicker mb-4">How it works</p>
             <h2 className="text-5xl md:text-6xl mb-12">Three steps. That is it.</h2>
