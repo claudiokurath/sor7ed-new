@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ExecutiveFunctionTriage from '@/components/tools/ExecutiveFunctionTriage';
 import DifficultMessage from '@/components/tools/DifficultMessage';
+import DifficultMessage from '@/components/tools/DifficultMessage';
 import DecisionClarity from '@/components/tools/DecisionClarity';
 import WhatsappCTA from '@/components/WhatsappCTA';
 import SEOJsonLd from '@/components/SEOHead';
