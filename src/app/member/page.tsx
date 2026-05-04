@@ -1,56 +1,41 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { TOOLS } from '@/data/tools';
-import { browserClient } from '@/lib/supabase';
 
-export default function MemberAreaPage() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(true);
-  const [authed, setAuthed] = useState(false);
+export const metadata = {
+  title: 'Member Area — SOR7ED',
+};
 
-  useEffect(() => {
-    browserClient()
-      .auth.getSession()
-      .then(({ data: { session } }) => {
-        if (!session) {
-          router.replace('/signup');
-        } else {
-          setAuthed(true);
-          setLoading(false);
-        }
-      });
-  }, [router]);
-
-  if (loading) {
-    return (
-      <section className="max-w-6xl mx-auto px-5 py-20">
-        <p className="kicker">Loading…</p>
-      </section>
-    );
-  }
-
-  if (!authed) return null;
-
+export default function MemberPage() {
   return (
-    <section className="max-w-6xl mx-auto px-5 py-20">
-      <p className="kicker">Member area</p>
-      <h1 className="text-5xl mb-3">Welcome.</h1>
-      <p className="text-base mb-10 max-w-2xl opacity-80">
-        Interactive tools live here. Pick one to run it in the browser, or send the keyword to the
-        SOR7ED WhatsApp number.
+    <section className="max-w-4xl mx-auto px-5 py-20">
+      <p className="kicker mb-2">Member area</p>
+      <h1 className="text-5xl md:text-7xl leading-none mb-6">You're in.</h1>
+      <p className="text-base opacity-70 mb-10 max-w-xl">
+        Your account is active. Head to the tools to unlock your results, or browse the blog.
       </p>
-
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {TOOLS.filter((t) => t.status === 'live').map((t) => (
-          <Link key={t.slug} href={`/tools/${t.slug}`} className="dark-card block">
-            <p className="kicker">{t.branch}</p>
-            <p className="display text-3xl mt-2">{t.name}</p>
-            <p className="text-sm mt-2 opacity-70">{t.tagline}</p>
-            <p className="text-sm mt-4 text-[#ffc107]">Open →</p>
-          </Link>
-        ))}
+      <div className="grid gap-4 md:grid-cols-2">
+        <Link href="/tools/executive-function-triage?unlocked=1" className="dark-card block group">
+          <p className="kicker text-xs mb-2">Start here</p>
+          <p className="display text-2xl mb-2 group-hover:text-[#ffc107] transition-colors">Executive Function Triage</p>
+          <p className="text-sm opacity-60">Your triage result is ready to unlock.</p>
+          <p className="text-sm mt-4 mono text-[#ffc107]">View full result →</p>
+        </Link>
+        <Link href="/tools" className="dark-card block group">
+          <p className="kicker text-xs mb-2">Tools</p>
+          <p className="display text-2xl mb-2 group-hover:text-[#ffc107] transition-colors">The Toolkit</p>
+          <p className="text-sm opacity-60">All tools, all branches.</p>
+          <p className="text-sm mt-4 mono text-[#ffc107]">Browse tools →</p>
+        </Link>
+        <Link href="/blog" className="dark-card block group">
+          <p className="kicker text-xs mb-2">Blog</p>
+          <p className="display text-2xl mb-2 group-hover:text-[#ffc107] transition-colors">Recent reads</p>
+          <p className="text-sm opacity-60">Evidence-informed, ADHD-friendly articles.</p>
+          <p className="text-sm mt-4 mono text-[#ffc107]">Read the blog →</p>
+        </Link>
+        <div className="dark-card opacity-40">
+          <p className="kicker text-xs mb-2">Coming soon</p>
+          <p className="display text-2xl mb-2">Saved results</p>
+          <p className="text-sm opacity-60">Your tool outputs saved in one place.</p>
+        </div>
       </div>
     </section>
   );
