@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Header() {
   const [visible, setVisible] = useState(true);
@@ -26,8 +25,8 @@ export default function Header() {
       style={{ transform: visible ? 'translateY(0)' : 'translateY(-100%)', transition: 'transform 0.3s ease' }}
     >
       <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
-        <Link href="/" aria-label="SOR7ED home">
-          <Image src="/images/logo.png" alt="SOR7ED" width={140} height={40} style={{ objectFit: 'contain' }} priority />
+        <Link href="/" aria-label="SOR7ED home" className="display text-2xl text-white">
+          &nbsp;
         </Link>
         <nav className="hidden md:flex items-center gap-6 display text-xl">
           <Link href="/tools" className="hover:text-[#ffc107]">Tools</Link>
