@@ -16,7 +16,7 @@ export default async function BlogPage() {
     <>
       {/* HERO */}
       <div style={{ position: 'relative', minHeight: '420px', display: 'flex', alignItems: 'center', overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/bg-2.png)', backgroundSize: 'cover', backgroundPosition: 'center right', opacity: 0.35 }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/hero-tech-dreadlocks.png)', backgroundSize: 'cover', backgroundPosition: 'center right', opacity: 0.35 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.4) 100%)' }} />
         <div className="page-wrap" style={{ position: 'relative', paddingTop: '80px', paddingBottom: '80px', maxWidth: '600px' }}>
           <h1 className="anton" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', lineHeight: 0.92, color: '#fff', marginBottom: '16px' }}>THE BLOG.</h1>
