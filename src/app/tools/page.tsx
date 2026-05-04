@@ -19,8 +19,7 @@ export default async function ToolsPage() {
       <SEOJsonLd title="Tools" description="Interactive tools built for neurodivergent brains." slug="tools" />
 
       <section className="border-b-2 border-white">
-        <div className="max-w-6xl mx-auto px-5 py-20">
-          <p className="kicker mb-2">Tools</p>
+        <div className="page-wrap py-16 md:py-24">
           <h1 className="text-5xl md:text-8xl leading-none mb-4">The Toolkit.</h1>
           <p className="text-base max-w-xl opacity-70">
             Each tool starts with an interactive triage. You do the work on-page.
