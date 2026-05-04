@@ -231,6 +231,27 @@ export default function ExecutiveFunctionTriage({
           </>
         )}
 
+        {/* WhatsApp CTA */}
+        {unlocked && (
+          <div className="mt-8 border-2 border-[#ffc107] p-5">
+            <p className="kicker text-xs mb-2">Want the full protocol?</p>
+            <p className="display text-xl mb-1">
+              Send <span style={{ color: '#ffc107' }}>TRIAGE</span> on WhatsApp
+            </p>
+            <p className="text-sm opacity-60 mb-4">
+              Get your personalised step-by-step protocol for <strong>{primaryCopy?.label}</strong> delivered straight to WhatsApp.
+            </p>
+            <a
+              href={'https://wa.me/447360277713?text=TRIAGE'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-yellow inline-block"
+            >
+              Message us on WhatsApp →
+            </a>
+          </div>
+        )}
+
         <button onClick={handleRestart} className="mt-6 text-xs mono opacity-50 hover:opacity-100 transition-opacity">
           ↺ Retake triage
         </button>
