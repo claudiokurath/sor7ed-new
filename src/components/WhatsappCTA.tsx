@@ -4,7 +4,7 @@ type Props = { keyword: string };
 
 export default function WhatsappCTA({ keyword }: Props) {
   const k = keyword.toUpperCase();
-  const waUrl = `https://wa.me/447360277713?text=${encodeURIComponent(k)}`;
+  const waUrl = 'https://wa.me/447591922247?text=' + encodeURIComponent(k);
   return (
     <div className="border-2 border-[#ffc107] p-6 my-10">
       <p className="kicker mb-3">Sort this out for you?</p>
@@ -19,7 +19,7 @@ export default function WhatsappCTA({ keyword }: Props) {
         <a href={waUrl} target="_blank" rel="noopener noreferrer" className="btn-yellow">
           Message us on WhatsApp →
         </a>
-        <Link href="/signup" className="btn-yellow" style={{ background: 'transparent', border: '2px solid #ffc107', color: '#ffc107' }}>
+        <Link href="/signup" className="btn-outline">
           Create free account
         </Link>
       </div>
