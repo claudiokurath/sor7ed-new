@@ -1,3 +1,4 @@
+bf1b575c42b02521dcc31ba08f51e4263b05d51c
 /*
   Meta WhatsApp Business Cloud API — thin wrapper.
   Free tier: 1,000 service conversations per month, no monthly fee.
@@ -61,10 +62,7 @@ export function formatTemplateForWhatsApp(raw: string): string {
     // strip stray html tags
     .replace(/<\/?[a-z][a-z0-9]*[^>]*>/gi, '')
     // collapse 3+ newlines into 2
-    .replace(/
-{3,}/g, '
-
-')
+    .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
 
