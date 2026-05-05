@@ -242,7 +242,7 @@ export default function ExecutiveFunctionTriage({
               Get your personalised step-by-step protocol for <strong>{primaryCopy?.label}</strong> delivered straight to WhatsApp.
             </p>
             <a
-              href={'https://wa.me/447360277713?text=TRIAGE'}
+              href={'https://wa.me/447591922247?text=TRIAGE'}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-yellow inline-block"
