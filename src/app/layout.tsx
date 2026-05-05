@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import AccessibilityControls from '@/components/AccessibilityControls';
@@ -56,7 +57,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        {/* League Gothic (display) + Roboto Light (body) — locked typography */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -82,6 +82,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <AccessibilityControls />
         <CookieBanner />
+        <Script
+          id="facebook-sdk"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.fbAsyncInit = function() {
+                FB.init({
+                  appId: '1505395557599639',
+                  cookie: true,
+                  xfbml: true,
+                  version: 'v25.0'
+                });
+                FB.AppEvents.logPageView();
+              };
+              (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/en_US/sdk.js';
+                fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));
+            `
+          }}
+        />
       </body>
     </html>
   );
