@@ -1,122 +1,137 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { adminClient } from '@/lib/supabase';
 
 const VERIFY_TOKEN = process.env.META_WEBHOOK_VERIFY_TOKEN ?? 'sor7ed_meta_webhook_2026';
 const WHATSAPP_TOKEN = process.env.META_WHATSAPP_TOKEN!;
 const PHONE_NUMBER_ID = process.env.META_PHONE_NUMBER_ID!;
 
-const PROTOCOLS: Record<string, string> = {
-  TRIAGE: `*EXECUTIVE FUNCTION TRIAGE PROTOCOL*\n\nYou sent TRIAGE. Here's your reset:\n\n*Step 1 — Name the block*\nWrite one sentence: "I can't start because..."\n\n*Step 2 — Shrink the task*\nWhat is the tiniest possible first move? Not the task — the first physical action.\n\n*Step 3 — 2-minute timer*\nSet it. Do anything related to the task. Badly. Without pressure.\n\n*Step 4 — Remove one input*\nClose a tab. Silence a notification. One less thing.\n\n*Step 5 — Name your next anchor*\nWhat is the ONE thing that needs to happen today? Only one.\n\n---\nReply MENU to see all protocols.`,
-
-  WILLPOWER: `*WILLPOWER PROTOCOL*\n\nWillpower is a finite resource — and ADHD brains start with less of it.\n\n*The problem:* You're using willpower to compensate for missing executive function. That's the wrong tool.\n\n*Right now:*\n→ Stop trying to force it\n→ Remove the decision — automate, delegate, or eliminate the task\n→ Change the environment instead of fighting yourself\n→ Use the 2-minute rule: if it takes less than 2 mins, do it now\n\n*This week:*\n→ Identify 3 things you're using willpower for that a system could handle\n→ Build one of those systems today\n\nWillpower depletes. Systems don't.\n\n---\nReply MENU to see all protocols.`,
-
-  INITIATION: `*TASK INITIATION PROTOCOL*\n\nYour brain won't start. This is dopamine and activation — not laziness.\n\n*Do this now:*\n→ Open the thing. Don't do it. Just open it.\n→ Set a 2-minute timer\n→ Type or write one sentence about the task\n→ Stop when the timer ends\n\nStarting badly beats not starting.\n\n---\nReply MENU to see all protocols.`,
-
-  OVERWHELM: `*OVERWHELM RESET PROTOCOL*\n\nYour working context is saturated.\n\n*Do this now:*\n→ Stop trying to prioritise\n→ Write EVERYTHING in your head onto paper — get it out\n→ Pick the ONE task that makes everything else feel less urgent\n→ Do only that\n\nEmpty the buffer first. Sort after.\n\n---\nReply MENU to see all protocols.`,
-
-  BURNOUT: `*BURNOUT RECOVERY PROTOCOL*\n\nThis isn't tiredness. This is a neurological resource crash.\n\n*Right now:*\n→ Stop the output. Cancel one thing today.\n→ Remove stimulation — screens, news, noise\n→ Basic inputs only: sleep, food, daylight, movement\n\n*This week:*\n→ One task per day max\n→ No optimising. Just functioning.\n→ Talk to your GP if this has lasted weeks\n\nRecovery is measured in weeks, not days.\n\n---\nReply MENU to see all protocols.`,
-
-  SLEEP: `*SLEEP PROTOCOL*\n\nADHD disrupts sleep at multiple levels. Here's the fix:\n\n*Tonight:*\n→ Fixed wake time tomorrow — set it now\n→ Brain dump: write everything in your head onto paper\n→ Devices down 30 mins before bed (alarm, not willpower)\n→ Boring on purpose — rewatch something familiar\n\n*This week:*\n→ 10 mins outside within 30 mins of waking\n→ Review your medication timing with your GP\n\n---\nReply MENU to see all protocols.`,
-
-  MONEY: `*ADHD BUDGET PROTOCOL*\n\nThe ADHD tax is real. Here's how to stop paying it:\n\n*This week:*\n→ Open your bank app — highlight every recurring charge\n→ Cancel anything unused in 30 days\n→ Automate all bills via direct debit\n→ Create one account for bills only\n\n*Rule:*\nAny non-essential purchase over £30 — wait 48 hours. Most won't survive the wait.\n\n---\nReply MENU to see all protocols.`,
-
-  SHAME: `*SHAME SPIRAL INTERRUPT*\n\nShame doesn't motivate ADHD brains. It paralyses them.\n\n*Right now:*\n→ Name it: "I'm in the spiral"\n→ Separate you from the behaviour: you're not bad, you have ADHD\n→ The 2-minute engage: do 2 mins on the avoided thing — not to finish it, just to touch it\n→ Shrink it: what is the tiniest first step?\n\nShame is not a productivity tool.\n\n---\nReply MENU to see all protocols.`,
-
-  FEELINGS: `*EMOTIONAL REGULATION PROTOCOL*\n\nRSD hit? Emotions overwhelming? Here's your toolkit:\n\n*Right now:*\n→ Name it out loud: "This is RSD. This feeling is disproportionate."\n→ Delay the response — do not send the message for 20 mins\n→ Reality test: what's the actual evidence? 3 other explanations?\n\n*Physiological reset:*\n→ Inhale twice, long slow exhale (physiological sigh)\n→ Cold water on wrists\n→ 5 mins outside\n\n---\nReply MENU to see all protocols.`,
-
-  PLAN: `*PLAN AHEAD PROTOCOL*\n\n3 steps. That's it.\n\n*Step 1 — The 3-task rule*\nIdentify only 3 things that must happen today. Not 10. Three.\n\n*Step 2 — Time-box, don't to-do*\nAssign each task to a time slot. Lists are graveyards for intentions.\n\n*Step 3 — Start with the stupidest small step*\nNot "write the report" — "open the document."\n\n---\nReply MENU to see all protocols.`,
-
-  FOCUS: `*FOCUS PROTOCOL*\n\nNicotine helps ADHD focus — but there are safer ways to hit the same pathways.\n\n*Right now:*\n→ 20 mins aerobic exercise (this is the closest thing to a focus drug that's free)\n→ Cold water on your face\n→ Remove all notifications for the next hour\n→ One tab. One task. One timer.\n\n*This week:*\n→ Review your medication timing with your GP\n→ Try morning exercise before screens\n\n---\nReply MENU to see all protocols.`,
-
-  MOVE: `*MOVEMENT PROTOCOL*\n\nExercise is ADHD medication. 20 minutes of aerobic activity changes your brain chemistry for 2-4 hours.\n\n*Right now:*\n→ Put on shoes. Step outside. Walk fast for 10 minutes.\n→ That's it. That's the protocol.\n\n*This week:*\n→ Do it before you start work — not after\n→ Make it interesting: podcast, music, a route you like\n→ Track how you feel 1 hour after. That data is motivating.\n\nYou don't need a gym. You need 20 minutes and a heartbeat.\n\n---\nReply MENU to see all protocols.`,
-
-  SCREEN: `*SCREEN PROTOCOL*\n\nYou cannot out-discipline an algorithm. Build friction instead.\n\n*Right now:*\n→ Delete the worst app from your phone (not limit — delete)\n→ Move your phone charger outside the bedroom\n→ Set one specific thing to do instead of scrolling tonight\n\n*This week:*\n→ Social media via browser only — the extra step breaks the reflex\n→ 20-minute intentional use with a timer\n→ Ask: what am I avoiding? That's the real work.\n\n---\nReply MENU to see all protocols.`,
-
-  PATTERN: `*SELF-SABOTAGE INTERRUPT*\n\nSee the pattern. Name it. Pause before it lands.\n\n*Right now:*\n→ Name the urge: "I want to [quit/blow up/disappear] because..."\n→ Do not act on it for 24 hours\n→ Call it a review period, not a prohibition\n\n*This week:*\n→ List 3 times you've done this before\n→ What did the urge feel like beforehand? Name that feeling — it's your early warning signal\n\nThe pattern only breaks when you see it coming.\n\n---\nReply MENU to see all protocols.`,
-
-  CONNECT: `*CONNECTION PROTOCOL*\n\nNeurodivergent connection works differently. Stop trying to be good at small talk.\n\n*Right now:*\n→ Pick one person you've been meaning to message\n→ Send something — ugly, short, imperfect\n→ "Been thinking about you. How are you?" is enough\n\n*This week:*\n→ Find one context where depth is normal (interest group, online community)\n→ One relationship at a time — breadth is exhausting, depth is nourishing\n\n---\nReply MENU to see all protocols.`,
-
-  RELATE: `*RELATIONSHIP PROTOCOL*\n\nADHD affects intimacy in predictable ways. Naming them changes everything.\n\n*Right now:*\n→ Talk about the hyperfocus-withdrawal cycle — outside of a conflict moment\n→ Name one sensory preference without apology\n→ Create one repair ritual for after conflict\n\n*This week:*\n→ Build novelty into the relationship deliberately\n→ Consider couples therapy with an ADHD-informed therapist\n\nThe pattern isn't personal. It's neurological. And it's fixable.\n\n---\nReply MENU to see all protocols.`,
-
-  TALK: `*COMMUNICATION PROTOCOL*\n\nThe filter is slow. The mouth is fast. Here's the gap.\n\n*Right now:*\n→ One breath before speaking in any high-stakes conversation\n→ If it's important — write it first, say it second\n→ "I notice I want to say something. Is now a good time?" — use this\n\n*After a blurt:*\n→ "I said that badly — can I try again?" is a complete recovery sentence\n\nThe goal isn't silence. It's a pause long enough for the brain to catch up.\n\n---\nReply MENU to see all protocols.`,
-
-  MASK: `*UNMASKING PROTOCOL*\n\nThe performance is exhausting. Here's how to start taking it off — safely.\n\n*Right now:*\n→ Identify one context where you mask the heaviest\n→ Identify one safe space where you don't have to\n\n*This week:*\n→ Drop one trait in your safe space. Notice how it feels.\n→ Don't go zero to naked — selective unmasking is valid\n→ Let yourself grieve the years of performance. That's real.\n\nYou are not broken. You were performing for an audience that didn't deserve the show.\n\n---\nReply MENU to see all protocols.`,
-
-  NEWME: `*LATE DIAGNOSIS PROTOCOL*\n\nYou just got a new map. Here's how to use it.\n\n*Right now:*\n→ Let the emotions happen. Relief, grief, anger — all valid. Don't rush to "okay."\n→ Write one sentence: "This explains..."\n\n*This week:*\n→ Find a late-diagnosis community online — people who get it\n→ Book a medication assessment if you haven't\n→ Request workplace accommodations — you have the right now\n\nYou're not starting over. You're starting with better information.\n\n---\nReply MENU to see all protocols.`,
-
-  HOME: `*HOME RESET PROTOCOL*\n\nVisible storage. One-decision zones. Lower the bar.\n\n*Right now:*\n→ Set a 10-minute timer\n→ Reduce the worst 3 surfaces only\n→ Stop when the timer goes — not when it's "done"\n\n*This week:*\n→ Replace one closed storage with open storage\n→ Designate one spot per category of thing — everything goes there\n→ Body double for cleaning: call someone or put on a video\n\nFunctional is the target. Not tidy.\n\n---\nReply MENU to see all protocols.`,
-
-  TIME: `*TIME BLINDNESS PROTOCOL*\n\nYou can't fix the internal clock. You can install external ones everywhere.\n\n*Right now:*\n→ Set an alarm for your next transition — not just the event, the departure\n→ Add 50% to whatever you think something will take\n\n*This week:*\n→ Time your morning routine once — know exactly how long it takes\n→ Get a visual timer (Time Timer app or physical)\n→ Alarms for: wake up, leave, wrap up, wind down\n\nTime blindness isn't disrespect. It's a perception gap. External structure fills it.\n\n---\nReply MENU to see all protocols.`,
-
-  DOPAMINE: `*DOPAMINE MENU PROTOCOL*\n\nYour brain needs dopamine. Give it safer sources.\n\n*Right now:*\n→ Pick one from this list:\n   Cold water on face · 10 jumping jacks · Put on a song you love · Message someone you like · Step outside for 2 mins\n\n*Build your personal menu:*\n→ List 10 things that give you a genuine hit\n→ Include at least 3 that work in under 5 minutes\n→ When the urge hits — open the menu first\n\nYou're not fighting the need. You're redirecting it.\n\n---\nReply MENU to see all protocols.`,
-
-  CALM: `*SELF-MEDICATION PROTOCOL*\n\nIf you're using substances to cope — this isn't weakness. It's an undertreated brain finding its own pharmacy.\n\n*Right now:*\n→ Name what the substance is doing for you: focus? calm? sleep? connection?\n→ That tells you what your brain actually needs\n\n*This week:*\n→ Get assessed for ADHD if you haven't — this changes the calculation\n→ Harm reduction first — you don't have to quit to start improving\n→ Tell your GP the full picture: "I use X because it helps me Y"\n\nMedication isn't trading one drug for another. It's treating the root.\n\n---\nReply MENU to see all protocols.`,
-
-  SENSORY: `*SENSORY PROTOCOL*\n\nYour environment is consuming resources your brain needs for everything else.\n\n*Right now:*\n→ Identify the loudest sensory input in your current environment\n→ Remove or reduce it — headphones, dimmer light, move rooms\n→ Give yourself 10 minutes of low-input recovery\n\n*This week:*\n→ Do a sensory audit: what drains you fastest?\n→ Build a go-kit: headphones, sunglasses, comfort item\n→ Advocate: "I work better with X" is a complete professional request\n\n---\nReply MENU to see all protocols.`,
-
-  MEDS: `*MEDICATION PROTOCOL*\n\nMeds work. The crash is manageable. Here's the system.\n\n*Right now:*\n→ Eat before meds kick in — liquid calories if you have no appetite\n→ Set a "wrap up" alarm 1 hour before your expected comedown\n→ Water at 3pm\n\n*If you're crashing:*\n→ Label it: "This is dopamine dropping, not my life falling apart"\n→ No big decisions in the comedown window\n→ Low-stimulation evening on purpose\n\n*This week:*\n→ Review timing with your prescriber\n→ Never skip meds on hard days — that's when you need them most\n\n---\nReply MENU to see all protocols.`,
-
-  MENU: `*SOR7ED PROTOCOL MENU*\n\nReply with any keyword:\n\n🧠 TRIAGE — Executive function reset\n⚡ INITIATION — Can't start anything\n🌊 OVERWHELM — Everything feels urgent\n🔥 BURNOUT — Running on empty\n😴 SLEEP — Can't wind down or wake up\n💸 MONEY — ADHD tax and budget chaos\n🌀 SHAME — Guilt spiral eating your day\n❤️ FEELINGS — RSD and emotional overwhelm\n📅 PLAN — Paralysed by your task list\n💪 WILLPOWER — Building better systems\n🎯 FOCUS — Sharpen attention now\n🏃 MOVE — Exercise as brain fuel\n📱 SCREEN — Break the doom scroll\n🔄 PATTERN — Interrupt self-sabotage\n🤝 CONNECT — Build real connection\n💑 RELATE — ADHD and relationships\n💬 TALK — Verbal impulsivity help\n🎭 MASK — Safe unmasking steps\n🆕 NEWME — Late diagnosis guide\n🏠 HOME — ADHD clutter reset\n⏰ TIME — Time blindness fix\n⚡ DOPAMINE — Safer dopamine sources\n🍃 CALM — Self-medication support\n👂 SENSORY — Sensory overwhelm reset\n💊 MEDS — Medication crash protocol\n\n---\nsor7ed.com · No app. No spam. Just what works.`,
-};
-
-async function sendMessage(to: string, body: string) {
-  const res = await fetch(
-    `https://graph.facebook.com/v25.0/${PHONE_NUMBER_ID}/messages`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${WHATSAPP_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        messaging_product: 'whatsapp',
-        to,
-        type: 'text',
-        text: { body },
-      }),
-    }
-  );
-  return res.json();
+async function isRegisteredUser(number: string): Promise<boolean> {
+  try {
+    const supabase = adminClient();
+    const normalised = '+' + number.replace(/^\+/, '');
+    const { data, error } = await supabase
+      .from('users')
+      .select('id')
+      .or(`phone.eq.${normalised},whatsapp.eq.${normalised}`)
+      .limit(1);
+    if (error) { console.error('Supabase error:', error.message); return false; }
+    return (data?.length ?? 0) > 0;
+  } catch (e) {
+    console.error('isRegisteredUser failed:', e);
+    return false;
+  }
 }
 
+async function sendMessage(to: string, body: string) {
+  await fetch(`https://graph.facebook.com/v25.0/${PHONE_NUMBER_ID}/messages`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${WHATSAPP_TOKEN}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messaging_product: 'whatsapp', to, type: 'text', text: { body } }),
+  });
+}
+
+const PROTOCOLS: Record<string, string> = {
+  TRIAGE: `*EXECUTIVE FUNCTION TRIAGE*\n\nStep 1 — Name the block\nWrite: "I can't start because..."\n\nStep 2 — Shrink the task\nWhat is the tiniest first physical action?\n\nStep 3 — 2-minute timer\nDo anything related. Badly. No pressure.\n\nStep 4 — Remove one input\nClose a tab. Silence a notification.\n\nStep 5 — One anchor\nWhat is the ONE thing that must happen today?`,
+  WILLPOWER: `*WILLPOWER PROTOCOL*\n\nWillpower depletes. Systems don't.\n\n→ Stop forcing it\n→ Remove the decision entirely — automate, delegate, or eliminate\n→ Change your environment instead of fighting yourself\n→ Under 2 minutes? Do it right now.\n\nThis week: identify 3 things you're using willpower for that a system could handle. Build one.`,
+  INITIATION: `*TASK INITIATION PROTOCOL*\n\nThis is dopamine and activation — not laziness.\n\n→ Open the thing. Don't do it. Just open it.\n→ Set a 2-minute timer\n→ Write one sentence about the task\n→ Stop when the timer ends\n\nStarting badly beats not starting.`,
+  OVERWHELM: `*OVERWHELM RESET*\n\n→ Stop trying to prioritise\n→ Write EVERYTHING in your head onto paper\n→ Pick the ONE task that makes everything else feel less urgent\n→ Do only that\n\nEmpty the buffer first. Sort after.`,
+  BURNOUT: `*BURNOUT RECOVERY*\n\nRight now:\n→ Stop the output. Cancel one thing today.\n→ Remove stimulation — screens, news, noise\n→ Basic inputs only: sleep, food, daylight, movement\n\nThis week:\n→ One task per day max\n→ Talk to your GP if this has lasted weeks\n\nRecovery is measured in weeks, not days.`,
+  SLEEP: `*SLEEP PROTOCOL*\n\nTonight:\n→ Set your fixed wake time now\n→ Brain dump onto paper before bed\n→ Devices down 30 mins before sleep\n→ Boring on purpose — rewatch something familiar\n\nThis week:\n→ 10 mins outside within 30 mins of waking\n→ Review medication timing with your GP`,
+  MONEY: `*ADHD BUDGET PROTOCOL*\n\n→ Open your bank app — highlight every recurring charge\n→ Cancel anything unused in 30 days\n→ Automate all bills via direct debit\n→ One separate account for bills only\n→ Non-essential purchase over £30? Wait 48 hours first.`,
+  SHAME: `*SHAME SPIRAL INTERRUPT*\n\n→ Name it: "I'm in the spiral"\n→ Separate you from the behaviour\n→ 2-minute engage: touch the avoided thing — don't finish it\n→ Shrink it: what is the tiniest first step?\n\nShame is not a productivity tool. It's a brake.`,
+  FEELINGS: `*EMOTIONAL REGULATION*\n\nRight now:\n→ Name it: "This is RSD. This feeling is disproportionate."\n→ Delay your response — 20 minutes minimum\n→ Reality test: what are 3 other explanations?\n\nReset:\n→ Inhale twice, long slow exhale\n→ Cold water on your wrists\n→ 5 minutes outside`,
+  PLAN: `*PLAN AHEAD PROTOCOL*\n\nStep 1: 3 tasks only. Not 10. Three.\nStep 2: Assign each to a time slot — not a list.\nStep 3: Start with the stupidest smallest step.`,
+  FOCUS: `*FOCUS PROTOCOL*\n\n→ 20 mins aerobic exercise first\n→ Cold water on your face\n→ All notifications off for the next hour\n→ One tab. One task. One timer.\n\nExercise is the legal version of your ADHD medication.`,
+  MOVE: `*MOVEMENT PROTOCOL*\n\nPut on shoes. Step outside. Walk fast for 10 minutes.\n\nThat is the entire protocol.\n\nDo it before screens — not after. 20 minutes of aerobic activity gives you 2-4 hours of meaningfully better brain function.`,
+  SCREEN: `*SCREEN PROTOCOL*\n\n→ Delete the worst app from your phone (not limit — delete)\n→ Charger outside the bedroom tonight\n→ Decide one specific thing to do instead of scrolling\n\nYou cannot out-discipline an algorithm. Build structural friction instead.`,
+  PATTERN: `*SELF-SABOTAGE INTERRUPT*\n\n→ Name the urge: "I want to [quit/blow up/disappear] because..."\n→ Do not act on it for 24 hours\n→ Call it a review period, not a prohibition\n\nThe pattern only breaks when you see it coming.`,
+  CONNECT: `*CONNECTION PROTOCOL*\n\n→ Pick one person. The easiest one. No pressure.\n→ Send something small — "Hey, been in my head. How are you?"\n→ A reaction counts. A voice note counts.\n\nYou don't need a full social event. One message.`,
+  RELATE: `*RELATIONSHIP PROTOCOL*\n\n→ Talk about the hyperfocus-withdrawal cycle outside of conflict\n→ Name one sensory preference without apologising for it\n→ Create one repair ritual for after arguments\n\nThe pattern isn't personal. It's neurological. And it's fixable.`,
+  TALK: `*COMMUNICATION PROTOCOL*\n\n→ One breath before speaking in any high-stakes conversation\n→ Write it first, say it second for anything important\n→ "I notice I want to say something. Is now a good time?"\n\nPost-blurt: "I said that badly — can I try again?" is a complete recovery.`,
+  MASK: `*UNMASKING PROTOCOL*\n\n→ Identify one context where you mask the heaviest\n→ Find one safe space where you don't have to\n→ Drop one trait in your safe space this week\n\nYou're not broken. You were performing for an audience that didn't deserve the show.`,
+  NEWME: `*LATE DIAGNOSIS PROTOCOL*\n\n→ Let the emotions happen. Relief, grief, anger — all valid.\n→ Write: "This explains..."\n→ Find a late-diagnosis community — people who get it\n→ Book a medication assessment if you haven't\n\nYou're not starting over. You're starting with better information.`,
+  HOME: `*HOME RESET PROTOCOL*\n\n→ Set a 10-minute timer\n→ Reduce the worst 3 surfaces only\n→ Stop when the timer goes — not when it's "done"\n\nThis week:\n→ Replace one closed storage with open storage\n→ One spot per category — everything goes there\n\nFunctional is the target. Not tidy.`,
+  TIME: `*TIME BLINDNESS PROTOCOL*\n\n→ Set an alarm for your next transition — not just the event, the departure\n→ Add 50% to whatever you think something will take\n\nThis week:\n→ Time your morning routine once — know exactly how long it takes\n→ Alarms for: wake, leave, wrap up, wind down\n\nExternal clocks replace the internal one you don't have.`,
+  DOPAMINE: `*DOPAMINE MENU*\n\nPick one right now:\nCold water on face · 10 jumping jacks · One song you love · Message someone you like · Step outside for 2 minutes\n\nBuild your personal list:\n→ 10 sources of genuine reward\n→ At least 3 that work in under 5 minutes\n→ When the urge hits — list first.`,
+  CALM: `*SELF-MEDICATION PROTOCOL*\n\n→ Name what the substance is doing for you: focus? calm? connection?\n→ That tells you what your brain actually needs\n\nThis week:\n→ Get assessed for ADHD if you haven't\n→ Tell your GP: "I use X because it helps me Y"\n→ Harm reduction first — you don't have to quit to start improving`,
+  SENSORY: `*SENSORY PROTOCOL*\n\n→ Identify the loudest sensory input in your environment right now\n→ Remove or reduce it — headphones, dimmer light, move rooms\n→ 10 minutes of low-input recovery\n\nThis week:\n→ Build a go-kit: headphones, sunglasses, one comfort item\n→ "I work better with X" is a complete professional request`,
+  MEDS: `*MEDICATION PROTOCOL*\n\n→ Eat before meds kick in — liquid calories if needed\n→ Set a wrap-up alarm 1 hour before your comedown\n→ Water at 3pm\n\nIf you're crashing:\n→ "This is dopamine dropping, not my life falling apart"\n→ No big decisions in the comedown window\n→ Low-stimulation evening on purpose`,
+  ISOLATED: `*ISOLATION RESET*\n\n→ Write: "I've been isolating for approximately [x] days"\n→ Pick one person — the easiest one\n→ Send something small. A reaction counts.\n→ Move first — even 5 minutes outside\n\nYou don't have to feel ready. You just have to do it badly.`,
+  TIRED: `*SLEEP DEPRIVATION PROTOCOL*\n\n→ Accept impairment — plan for reduced capacity today\n→ Triage ruthlessly: what are the absolute non-negotiables?\n→ 10-20 minute nap if possible (set an alarm — not more)\n→ Caffeine in small doses throughout the day, not one large hit\n→ Ask for one specific thing from one specific person`,
+  ENERGY: `*ENERGY BUDGETING PROTOCOL*\n\n→ Morning audit: 1-10, what's your energy today?\n→ Plan to spend 60% of it — not 100%\n→ Batch tasks by energy cost: high-cost in your best window\n→ Rest before you need it, not after you've crashed\n→ Communicate your capacity: "I have limited energy today" is enough`,
+  JOBLOSS2: `*JOB LOSS — FIRST 72 HOURS*\n\n→ Get written confirmation of the dismissal or redundancy\n→ Claim Universal Credit or JSA today — not next week\n→ Check your redundancy entitlement (2+ years service)\n→ Contact HMRC — you may be owed a tax refund\n→ Pause non-essential direct debits\n→ Tell three people you trust`,
+  BREAKUP: `*BREAKUP ADMIN*\n\nMoney first:\n→ Joint accounts: notify the bank\n→ Joint credit cards: check the balance — you're both liable\n→ Direct debits: redirect each one\n\nHousing:\n→ Check whose name is on the tenancy\n→ Transfer utilities out of their name\n\nDigital:\n→ Change passwords on everything\n→ Remove shared location sharing`,
+  HEALTH: `*HEALTH ANXIETY PROTOCOL*\n\n→ 72-hour rule: wait 72 hours before Googling any symptom\n→ If it persists, book a GP — not forums\n→ One search maximum: NHS.uk only\n→ No reassurance from non-medical sources\n→ Book the appointment — the worry of not knowing is worse\n→ Ask your GP about CBT for health anxiety`,
+  INBOX: `*INBOX RESET*\n\nOne time only:\n→ Create folder: "Archive Pre-[today]"\n→ Select all old emails → move to archive\n→ Inbox is now empty\n→ Nothing is lost — everything is searchable\n\nNew system:\n→ Action needed: leave in inbox\n→ Read, no action: archive\n→ Not relevant: delete or unsubscribe`,
+  FEES: `*LATE FEES PROTOCOL*\n\n→ Open everything — all letters, all emails, today\n→ Triage: Red (legal consequences 7 days) / Orange (30 days) / Yellow (rest)\n→ Make minimum contact for Red and Orange today\n→ Set up autopay for everything possible\n→ Create a financial calendar with reminders 3 days before each payment`,
+  DEBT2: `*DEBT PROTOCOL*\n\n→ List every debt: who, how much, type\n→ Priority first: rent, council tax, utilities, court fines\n→ Call — don't write. Ask for a payment plan.\n→ "I'm in financial difficulty and would like to set up a payment plan" is enough\n→ Free help: StepChange (stepchange.org) or National Debtline`,
+  TOXIC: `*TOXIC WORKPLACE PROTOCOL*\n\n→ Start a private log today (personal email only)\n→ Record: date, what was said/done, who was present\n→ Save evidence: screenshot emails and messages\n→ Note patterns — repetition defines bullying legally\n→ Contact ACAS (acas.org.uk) for free advice\n→ If your health is affected: GP referral to occupational health`,
+  BENEFITS: `*BENEFITS CHECK*\n\n→ Check your entitlement: entitledto.co.uk or turn2us.org.uk\n→ PIP: call 0800 917 2222 to start a claim\n→ Access to Work: DWP grant for disabled people in work — often unclaimed\n→ Get help filling in forms: Citizens Advice\n→ A refusal is not the end — 68% of PIP decisions overturned at tribunal`,
+  RETURN: `*RETURN TO WORK PROTOCOL*\n\n→ Get a GP fit note saying "may be fit for work with adjustments"\n→ Come with a proposal: weeks 1-4, what hours, what adjustments\n→ Identify what caused the burnout — the phased return should address it\n→ Protect your recovery practices as you return\n→ Agree a relapse plan in writing before you go back`,
+  GRIEF: `*GRIEF ADMIN — ORDER OF OPERATIONS*\n\nWithin 5 days:\n→ Register the death (legally required)\n→ Order minimum 6 certified death certificates\n\nWithin 2 weeks:\n→ Tell the DWP immediately\n→ Notify the bank\n→ Use Tell Us Once: gov.uk/tell-us-once\n\nGive yourself permission to delegate the paperwork.`,
+  IMMIGRATION: `*IMMIGRATION CHECKLIST*\n\n→ Start early — processing times are unpredictable\n→ Read gov.uk first, not forums\n→ Document everything twice: original and certified copy\n→ Record every communication: date, time, name\n→ Get regulated help: OISC adviser or ILPA solicitor\n→ Never use unregulated "immigration consultants"`,
+  HOUSING: `*HOUSING CRISIS PROTOCOL*\n\n→ Contact your local council housing team today — not when evicted\n→ Don't ignore court documents — ever\n→ Contact Shelter: shelter.org.uk — free legal housing advice\n→ If HB stopped: call your council immediately\n→ Speak to your landlord directly — most prefer a payment plan to eviction`,
+  RECOVERY: `*RECOVERY LIFE STRUCTURE*\n\nDaily:\n→ Fixed wake time\n→ One recovery activity\n→ Movement\n→ Regular meals\n\nPriorities in early recovery:\n→ Housing stability first\n→ GP registration\n→ Benefits — claim what you're owed\n→ Employment waits until foundation is built`,
+  PARENT: `*SINGLE PARENT PROTOCOL*\n\nWeekly reset (Sunday, 20 mins):\n→ Check school calendar\n→ Pack Monday bags\n→ Plan meals roughly\n→ Review any forms due\n\nAsk for specific help — not general offers.\n"Can you collect on Thursdays?" is a complete sentence.`,
+  CARER: `*CARER PROTOCOL*\n\nMedication list: name, dose, frequency, prescribing GP. Copy with them, copy with you.\n\nYour rights:\n→ Carer's Assessment — request from your local council\n→ Carer's Allowance if 35+ hours/week\n→ Register as a carer with your GP\n→ Carers UK helpline: 0808 808 7777`,
+  TAX: `*SELF-ASSESSMENT PROTOCOL*\n\nGather first:\n→ Government Gateway login\n→ National Insurance number\n→ P60 or P45\n→ Bank statements for self-employed income\n→ Receipts for allowable expenses\n\nDeadline: 31 January online.\nLate filing = £100 penalty immediately.\nCan't pay? Arrange a payment plan with HMRC.`,
+  FOOD: `*FOOD AND MONEY PROTOCOL*\n\n£5 emergency base per person per week:\n→ Oats (500g)\n→ Eggs (12)\n→ Bread\n→ Tinned tomatoes (3)\n→ Pasta or rice (500g)\n\nResources:\n→ Trussell Trust foodbanks: trusselltrust.org\n→ OLIO app: free local food\n→ Community Fridge Network: communityfridgenetwork.org`,
+  EMAIL: `*EMAIL PROTOCOL*\n\n→ Open. Don't think. Type whatever you know.\n→ The three things: what they need to know / what you need / what happens next\n→ One read-through. Fix obvious errors only.\n→ Send. Not "save draft." Send.\n\nFor guilt emails: "I apologise for the delayed response — I've had a lot on." That's it. Send.`,
+};
+
+// ── GET — webhook verification ─────────────────────────────
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const mode = searchParams.get('hub.mode');
   const token = searchParams.get('hub.verify_token');
   const challenge = searchParams.get('hub.challenge');
-
   if (mode === 'subscribe' && token === VERIFY_TOKEN) {
     return new NextResponse(challenge, { status: 200 });
   }
   return new NextResponse('Forbidden', { status: 403 });
 }
 
+// ── POST — inbound messages ────────────────────────────────
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const entry = body?.entry?.[0];
-    const changes = entry?.changes?.[0];
-    const value = changes?.value;
-    const messages = value?.messages;
-
-    if (!messages?.length) {
-      return NextResponse.json({ status: 'no_messages' });
-    }
+    const messages = body?.entry?.[0]?.changes?.[0]?.value?.messages;
+    if (!messages?.length) return NextResponse.json({ status: 'no_messages' });
 
     for (const msg of messages) {
       if (msg.type !== 'text') continue;
 
       const from = msg.from;
-      const text = msg.text?.body?.trim().toUpperCase().replace(/[^A-Z]/g, '') ?? '';
+      const text = msg.text?.body?.trim().toUpperCase().replace(/[^A-Z0-9]/g, '') ?? '';
 
-      const protocol = PROTOCOLS[text] ?? `*SOR7ED*\n\nWe don't have a protocol for "${msg.text?.body?.trim()}" yet.\n\nReply *MENU* to see all available protocols.\n\n---\nsor7ed.com`;
+      // ── AUTH CHECK — must be registered ──────────────────
+      const registered = await isRegisteredUser(from);
 
-      await sendMessage(from, protocol);
-      console.log(`Meta WA: ${from} sent "${text}" → responded`);
+      if (!registered) {
+        await sendMessage(from,
+          `Hi! To receive SOR7ED protocols you need a free account first.\n\nSign up at:\nhttps://sor7ed.com/signup\n\nTakes 30 seconds. Then come back and send your keyword.`
+        );
+        console.log(`Unregistered user ${from} sent "${text}" — sent signup link`);
+        continue;
+      }
+
+      // ── REGISTERED — send protocol ────────────────────────
+      const protocol = PROTOCOLS[text];
+
+      if (protocol) {
+        await sendMessage(from, protocol);
+        console.log(`✅ ${from} → ${text}`);
+      } else {
+        // Unknown keyword — don't send menu, just a gentle nudge
+        await sendMessage(from,
+          `We don't have a protocol for "${msg.text?.body?.trim()}" yet.\n\nVisit sor7ed.com/blog to find your keyword, then send it here.`
+        );
+      }
     }
 
     return NextResponse.json({ status: 'ok' });
   } catch (err) {
-    console.error('Meta webhook error:', err);
+    console.error('Webhook error:', err);
     return NextResponse.json({ status: 'error' }, { status: 500 });
   }
 }
