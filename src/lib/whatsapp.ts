@@ -30,7 +30,7 @@ function authHeader(): Record<string, string> {
 
 /**
  * Send a plain text WhatsApp message.
- * `to` must be E.164 without the leading "+" (e.g. "447360277713").
+ * `to` must be E.164 without the leading "+" (e.g. "447591922247").
  */
 export async function sendWhatsappText(to: string, body: string): Promise<void> {
   const cleanTo = to.replace(/[^\d]/g, '');
@@ -61,7 +61,10 @@ export function formatTemplateForWhatsApp(raw: string): string {
     // strip stray html tags
     .replace(/<\/?[a-z][a-z0-9]*[^>]*>/gi, '')
     // collapse 3+ newlines into 2
-    .replace(/\n{3,}/g, '\n\n')
+    .replace(/
+{3,}/g, '
+
+')
     .trim();
 }
 
@@ -74,9 +77,10 @@ export function appendReferralNudge(keyword: string, body: string): string {
     '',
     '---',
     'Know someone who needs this?',
-    `Forward this message or send: wa.me/447360277713?text=${keyword.toUpperCase()}`,
+    `Forward this message or send: wa.me/447591922247?text=${keyword.toUpperCase()}`,
     'SOR7ED is free. No catch.',
-  ].join('\n');
+  ].join('
+');
   return `${body}${nudge}`;
 }
 
@@ -86,5 +90,7 @@ export function appendReferralNudge(keyword: string, body: string): string {
  * must auto-append this.
  */
 export function appendMedicalDisclaimer(body: string): string {
-  return `${body}\n\n— This is not medical or therapeutic advice. For emergencies call 999 or text SHOUT to 85258.`;
+  return `${body}
+
+— This is not medical or therapeutic advice. For emergencies call 999 or text SHOUT to 85258.`;
 }
