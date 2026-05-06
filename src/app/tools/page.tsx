@@ -1,103 +1,109 @@
-import Link from 'next/link';
-import SEOJsonLd from '@/components/SEOHead';
-import { getTools } from '@/lib/notion-content';
+'use client'
+import { useState, useMemo } from 'react'
+import Link from 'next/link'
 
-export const metadata = {
-  title: 'Tools — SOR7ED',
-  description: 'Interactive tools built for neurodivergent brains. No fluff. Just the fix.',
-};
+const tools = [
+  { id: 'executive-function-triage', emoji: '🧩', name: 'Executive Function Triage', desc: 'Sort overwhelming tasks into now, later, never', keyword: 'TRIAGE', category: 'Keep Going', difficulty: 'Easy' },
+  { id: 'dopamine-menu', emoji: '🎯', name: 'Dopamine Menu Generator', desc: 'Fix decision fatigue with a personalised activity menu', keyword: 'DOPAMINE', category: 'Keep Going', difficulty: 'Easy' },
+  { id: 'difficult-message', emoji: '💬', name: 'Difficult Message', desc: 'Write the message you've been avoiding', keyword: 'TALK', category: 'Be Connected', difficulty: 'Medium' },
+  { id: 'decision-clarity', emoji: '🔮', name: 'Decision Clarity', desc: 'Cut through decision paralysis fast', keyword: 'PATTERN', category: 'Keep Going', difficulty: 'Medium' },
+  { id: 'burnout-reset', emoji: '🔥', name: 'Burnout Reset', desc: 'Assess your burnout level and get a recovery plan', keyword: 'BURNOUT', category: 'Feel Good', difficulty: 'Medium' },
+  { id: 'sleep-reset', emoji: '😴', name: 'Sleep Reset', desc: 'Step-by-step protocol to fix your sleep', keyword: 'SLEEP', category: 'Feel Good', difficulty: 'Hard' },
+]
 
-export const revalidate = 60;
+const categories = ['All', 'Keep Going', 'Feel Good', 'Spend Smart', 'Be Connected']
 
-export default async function ToolsPage() {
-  const tools = await getTools();
-  const live = tools.filter((t) => t.status === 'live');
-  const soon = tools.filter((t) => t.status === 'coming-soon');
+export default function ToolsPage() {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [hoveredTool, setHoveredTool] = useState(null)
+
+  const filteredTools = useMemo(() => tools.filter(tool => {
+    const matchesSearch = tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          tool.desc.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          tool.keyword.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesCategory = selectedCategory === 'All' || tool.category === selectedCategory
+    return matchesSearch && matchesCategory
+  }), [searchTerm, selectedCategory])
 
   return (
-    <>
-      <SEOJsonLd title="Tools" description="Interactive tools built for neurodivergent brains." slug="tools" />
+    <div className="min-h-screen bg-black text-white">
 
-      {/* HEADER */}
-      <section style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingTop: '7rem', paddingBottom: '3rem' }}>
-        <div className="page-wrap">
-          <span className="accent-line" />
-          <h1 style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', lineHeight: 0.88, marginBottom: '1.25rem' }}>
-            The toolkit.<br /><span style={{ color: '#ffc107' }}>Use it.</span>
+      <div className="border-b border-white/10 py-16 px-6 pt-28">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-3 h-3 bg-[#FFC107] rounded-full animate-pulse" />
+            <span className="text-[#FFC107] text-sm font-bold uppercase tracking-widest">SOR7ED · Tool Library</span>
+          </div>
+          <h1 style={{ fontFamily: 'League Gothic, sans-serif' }} className="text-6xl md:text-8xl uppercase text-white mb-6">
+            The <span className="text-[#FFC107]">Arsenal.</span>
           </h1>
-          <p style={{ fontSize: '1rem', opacity: 0.55, maxWidth: '52ch', lineHeight: 1.7 }}>
-            Interactive tools that work on the page. Sign up to unlock your full result and get it delivered to WhatsApp.
+          <p className="text-white/60 text-xl max-w-3xl">
+            Practical tools for ADHD, autism, and dyslexia. Sign up free to unlock your full results on WhatsApp.
           </p>
         </div>
-      </section>
+      </div>
 
-      {/* LIVE TOOLS */}
-      {live.length > 0 && (
-        <section style={{ paddingTop: '3rem', paddingBottom: '2rem' }}>
-          <div className="page-wrap">
-            <span className="kicker" style={{ marginBottom: '1.5rem' }}>Live now</span>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1px', background: 'rgba(255,255,255,0.06)' }}>
-              {live.map((tool) => (
-                <Link
-                  key={tool.slug}
-                  href={'/tools/' + tool.slug}
-                  style={{ background: '#0a0a0a', padding: '2rem', display: 'block', transition: 'background 0.2s', position: 'relative', overflow: 'hidden' }}
-                  onMouseEnter={e => (e.currentTarget.style.background = '#131313')}
-                  onMouseLeave={e => (e.currentTarget.style.background = '#0a0a0a')}
-                >
-                  {/* Top accent line on hover via CSS */}
-                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: '#ffc107' }} />
-
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-                    <span className="branch-pill">{tool.branch}</span>
-                    <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.7rem', letterSpacing: '0.14em', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase' }}>
-                      Interactive
-                    </span>
-                  </div>
-
-                  <p style={{ fontFamily: 'League Gothic, sans-serif', fontSize: 'clamp(1.4rem, 2.5vw, 1.9rem)', textTransform: 'uppercase', lineHeight: 0.95, marginBottom: '0.85rem', letterSpacing: '0.02em' }}>
-                    {tool.name}
-                  </p>
-
-                  <p style={{ fontSize: '0.88rem', opacity: 0.5, lineHeight: 1.65, marginBottom: '1.5rem' }}>
-                    {tool.tagline}
-                  </p>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ display: 'block', width: '0.5rem', height: '0.5rem', borderRadius: '50%', background: '#ffc107' }} />
-                    <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.85rem', letterSpacing: '0.12em', color: '#ffc107', textTransform: 'uppercase' }}>
-                      Start tool →
-                    </span>
-                  </div>
-                </Link>
+      <div className="sticky top-16 z-40 bg-black/95 backdrop-blur border-b border-white/10 py-6 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex-1 relative">
+              <input type="text" placeholder="Search tools or keywords..."
+                value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full bg-white/5 border border-white/20 rounded-xl px-6 py-4 text-white placeholder-white/40 focus:border-[#FFC107] focus:outline-none transition-all" />
+              {searchTerm && (
+                <button onClick={() => setSearchTerm('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white">✕</button>
+              )}
+            </div>
+            <div className="flex gap-2 overflow-x-auto">
+              {categories.map(cat => (
+                <button key={cat} onClick={() => setSelectedCategory(cat)}
+                  className={`px-6 py-3 rounded-full text-sm font-bold whitespace-nowrap transition-all ${
+                    selectedCategory === cat ? 'bg-[#FFC107] text-black' : 'bg-white/5 text-white/60 hover:text-white border border-white/20'
+                  }`}>
+                  {cat}
+                </button>
               ))}
             </div>
           </div>
-        </section>
-      )}
+          <p className="text-white/40 text-sm mt-4">{filteredTools.length} tools available</p>
+        </div>
+      </div>
 
-      {/* COMING SOON */}
-      {soon.length > 0 && (
-        <section style={{ paddingTop: '2rem', paddingBottom: '5rem' }}>
-          <div className="page-wrap">
-            <span className="kicker" style={{ marginBottom: '1.5rem' }}>Coming soon</span>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1px', background: 'rgba(255,255,255,0.04)' }}>
-              {soon.map((tool) => (
-                <div key={tool.slug} style={{ background: '#0a0a0a', padding: '2rem', opacity: 0.45 }}>
-                  <span className="branch-pill" style={{ marginBottom: '1.25rem' }}>{tool.branch}</span>
-                  <p style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '1.6rem', textTransform: 'uppercase', lineHeight: 0.95, marginBottom: '0.75rem' }}>
-                    {tool.name}
-                  </p>
-                  <p style={{ fontSize: '0.88rem', lineHeight: 1.65, marginBottom: '1.25rem' }}>{tool.tagline}</p>
-                  <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.7rem', letterSpacing: '0.16em', border: '1px solid rgba(255,255,255,0.2)', padding: '0.2rem 0.6rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>
-                    Soon
-                  </span>
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredTools.map(tool => (
+            <div key={tool.id}
+              onMouseEnter={() => setHoveredTool(tool.id)}
+              onMouseLeave={() => setHoveredTool(null)}
+              className="group bg-black border-2 border-white/10 rounded-2xl p-6 hover:border-[#FFC107] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(255,193,7,0.15)] transition-all duration-300">
+              <div className="flex items-start justify-between mb-4">
+                <div className={`text-5xl transition-transform duration-300 ${hoveredTool === tool.id ? 'scale-110 rotate-12' : ''}`}>{tool.emoji}</div>
+                <div className="text-right">
+                  <span className="font-mono text-xs bg-[#FFC107]/10 text-[#FFC107] px-3 py-1 rounded-full border border-[#FFC107]/30">{tool.keyword}</span>
+                  <div className={`text-xs mt-2 px-2 py-1 rounded-full ${
+                    tool.difficulty === 'Easy' ? 'bg-green-500/20 text-green-400' :
+                    tool.difficulty === 'Medium' ? 'bg-yellow-500/20 text-yellow-400' :
+                    'bg-red-500/20 text-red-400'
+                  }`}>{tool.difficulty}</div>
                 </div>
-              ))}
+              </div>
+              <h3 className="font-bold text-white text-xl mb-2 group-hover:text-[#FFC107] transition-colors">{tool.name}</h3>
+              <p className="text-white/60 text-sm mb-6 leading-relaxed">{tool.desc}</p>
+              <div className="flex gap-3">
+                <Link href={`/tools/${tool.id}`}
+                  className="flex-1 bg-[#FFC107] text-black py-3 rounded-xl font-black text-sm uppercase text-center hover:scale-105 transition-all">
+                  Try It →
+                </Link>
+                <Link href={`/tools/${tool.id}`}
+                  className="border border-white/20 text-white/60 px-4 py-3 rounded-xl text-sm hover:border-white hover:text-white transition-all">
+                  Info
+                </Link>
+              </div>
             </div>
-          </div>
-        </section>
-      )}
-    </>
-  );
+          ))}
+        </div>
+      </div>
+    </div>
+  )
 }
