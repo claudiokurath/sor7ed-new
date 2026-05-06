@@ -25,7 +25,12 @@ export async function sendWhatsappText(to: string, body: string): Promise<void> 
   const res = await fetch(endpoint(), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...authHeader() },
-    body: JSON.stringify({ messaging_product: 'whatsapp', to: cleanTo, type: 'text', text: { preview_url: true, body } }),
+    body: JSON.stringify({
+      messaging_product: 'whatsapp',
+      to: cleanTo,
+      type: 'text',
+      text: { preview_url: true, body },
+    }),
   });
   if (!res.ok) {
     const errText = await res.text();
@@ -42,17 +47,16 @@ export function formatTemplateForWhatsApp(raw: string): string {
 }
 
 export function appendReferralNudge(keyword: string, body: string): string {
-  const nudge = '
-
----
-Know someone who needs this?
-Forward this or send: wa.me/447591922247?text=' + keyword.toUpperCase() + '
-SOR7ED is free. No catch.';
-  return body + nudge;
+  const lines = [
+    '',
+    '---',
+    'Know someone who needs this?',
+    `Forward this or send: wa.me/447591922247?text=${keyword.toUpperCase()}`,
+    'SOR7ED is free. No catch.',
+  ];
+  return body + lines.join('\n');
 }
 
 export function appendMedicalDisclaimer(body: string): string {
-  return body + '
-
-— This is not medical or therapeutic advice. For emergencies call 999 or text SHOUT to 85258.';
+  return body + '\n\n— This is not medical or therapeutic advice. For emergencies call 999 or text SHOUT to 85258.';
 }
