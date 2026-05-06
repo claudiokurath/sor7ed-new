@@ -16,7 +16,7 @@ const categories = ['All', 'Keep Going', 'Feel Good', 'Spend Smart', 'Be Connect
 export default function ToolsPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
-  const [hoveredTool, setHoveredTool] = useState(null)
+  const [hoveredTool, setHoveredTool] = useState<string | null>(null)
 
   const filteredTools = useMemo(() => tools.filter(tool => {
     const matchesSearch = tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
