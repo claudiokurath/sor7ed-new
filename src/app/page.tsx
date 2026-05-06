@@ -1,223 +1,149 @@
-import Link from 'next/link';
-import SEOJsonLd from '@/components/SEOHead';
-import { getArticles, getTools } from '@/lib/notion-content';
+'use client'
+import { useState } from 'react'
+import Link from 'next/link'
 
-export const revalidate = 60;
+const painPoints = [
+  { id: 'paralyzed', emoji: '🧠', text: "I can't start anything", keyword: 'TRIAGE', solution: "Sort your chaos into now, later, never", branch: 'Keep Going' },
+  { id: 'overwhelmed', emoji: '📋', text: "Everything is too much", keyword: 'OVERWHELM', solution: "Emergency protocol for when it all piles up", branch: 'Keep Going' },
+  { id: 'money', emoji: '💸', text: "Money keeps disappearing", keyword: 'MONEY', solution: "See the hidden cost of ADHD and stop the bleed", branch: 'Spend Smart' },
+  { id: 'rejection', emoji: '💬', text: "Someone is mad at me", keyword: 'FEELINGS', solution: "Scripts for when your brain screams they hate me", branch: 'Be Connected' },
+  { id: 'burnout', emoji: '🔥', text: "I'm completely exhausted", keyword: 'BURNOUT', solution: "Check your burnout level and get a recovery plan", branch: 'Feel Good' },
+  { id: 'focus', emoji: '😵', text: "My brain won't focus", keyword: 'FOCUS', solution: "Target the exact executive function that's struggling", branch: 'Keep Going' },
+]
 
-export default async function HomePage() {
-  const [tools, articles] = await Promise.all([getTools(), getArticles()]);
-  const featuredTool = tools.find((t) => t.status === 'live') ?? tools[0];
-  const recent = articles.slice(0, 3);
+export default function ActionHomepage() {
+  const [selectedPain, setSelectedPain] = useState(null)
+  const [showResult, setShowResult] = useState(false)
+  const selectedTool = painPoints.find(p => p.id === selectedPain)
+
+  const handlePainSelect = (painId) => {
+    if (selectedPain === painId) return
+    setShowResult(false)
+    setTimeout(() => { setSelectedPain(painId); setShowResult(true) }, 150)
+  }
 
   return (
-    <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
-      <SEOJsonLd
-        title="SOR7ED — Your brain isn't broken. Your tools are."
-        description="Practical tools and protocols for neurodivergent adults. Delivered via WhatsApp."
-      />
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
 
-      {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="h-dvh snap-start flex flex-col justify-center relative overflow-hidden" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        {/* Big ghost number */}
-        <span className="section-number">01</span>
+      {/* Floating Keywords Background */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-5">
+        {['TRIAGE', 'BURNOUT', 'DOPAMINE', 'FEELINGS', 'SLEEP', 'OVERWHELM'].map((kw, i) => (
+          <span key={kw} className="absolute text-6xl text-[#FFC107] font-black"
+            style={{ left: `${(i * 17) % 85}%`, top: `${(i * 23) % 70}%`, fontFamily: 'League Gothic, sans-serif', transform: `rotate(${(i % 2 === 0 ? -1 : 1) * (i * 5)}deg)` }}>
+            {kw}
+          </span>
+        ))}
+      </div>
 
-        <div className="page-wrap">
-          {/* Accent line */}
-          <span className="accent-line animate-fade-up" />
+      {/* Hero */}
+      <section className="relative min-h-screen flex flex-col justify-center px-6 pt-24">
+        <div className="relative z-10 max-w-6xl mx-auto w-full">
 
-          <h1 className="animate-fade-up-delay-1" style={{ fontSize: 'clamp(3.5rem, 9vw, 8rem)', maxWidth: '14ch' }}>
-            Your brain{' '}
-            <span style={{ color: '#ffc107' }}>isn't broken.</span>
-            <br />
-            Your tools are.
+          <div className="inline-flex items-center gap-3 bg-[#FFC107]/10 border border-[#FFC107]/30 rounded-full px-6 py-3 mb-8">
+            <div className="w-3 h-3 bg-[#FFC107] rounded-full animate-pulse" />
+            <span className="text-[#FFC107] font-bold text-sm uppercase tracking-widest">25+ Protocols Ready</span>
+          </div>
+
+          <h1 style={{ fontFamily: 'League Gothic, sans-serif' }} className="text-6xl md:text-[8rem] lg:text-[10rem] uppercase leading-[0.8] tracking-tighter mb-8">
+            <span className="text-white">WHAT</span>
+            <span className="text-[#FFC107] block">HURTS</span>
+            <span className="text-white block">TODAY?</span>
           </h1>
 
-          <p className="animate-fade-up-delay-2" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.2rem)', maxWidth: '52ch', opacity: 0.65, marginTop: '1.75rem', lineHeight: 1.7 }}>
-            SOR7ED is a WhatsApp-first platform delivering practical protocols, templates, and tools for ADHD, autism, dyslexia, and the chaos of being a human with a non-standard brain.
+          <p className="text-white/60 text-xl md:text-2xl mb-4 max-w-3xl">
+            Click the thing that's screaming loudest in your brain right now.
+          </p>
+          <p className="text-[#FFC107] font-bold text-lg mb-12">
+            We'll give you the exact protocol you need.
           </p>
 
-          <div className="animate-fade-up-delay-3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2.5rem' }}>
-            <Link href="/signup" className="btn-yellow">Get started free →</Link>
-            <Link href="/tools" className="btn-outline">Explore tools</Link>
-          </div>
-
-          {/* Stats row */}
-          <div className="animate-fade-up-delay-4" style={{ display: 'flex', gap: '3rem', marginTop: '4rem', flexWrap: 'wrap' }}>
-            <div className="stat-block">
-              <div className="stat-number">7</div>
-              <div className="stat-label">Life branches</div>
-            </div>
-            <div className="stat-block">
-              <div className="stat-number">25+</div>
-              <div className="stat-label">WhatsApp protocols</div>
-            </div>
-            <div className="stat-block">
-              <div className="stat-number">Free</div>
-              <div className="stat-label">To start</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom marquee strip */}
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, borderTop: '1px solid rgba(255,255,255,0.06)', padding: '0.75rem 0', overflow: 'hidden', background: 'rgba(255,193,7,0.04)' }}>
-          <div className="marquee-track" style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.8rem', letterSpacing: '0.2em', color: 'rgba(255,193,7,0.5)', textTransform: 'uppercase' }}>
-            {['TRIAGE', 'BURNOUT', 'SLEEP', 'MONEY', 'OVERWHELM', 'SHAME', 'FOCUS', 'MASK', 'PLAN', 'CONNECT', 'DOPAMINE', 'SENSORY', 'MEDS', 'TRIAGE', 'BURNOUT', 'SLEEP', 'MONEY', 'OVERWHELM', 'SHAME', 'FOCUS', 'MASK', 'PLAN', 'CONNECT', 'DOPAMINE', 'SENSORY', 'MEDS'].map((k, i) => (
-              <span key={i} style={{ marginRight: '3rem' }}>{k} ·</span>
+          {/* Pain point grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+            {painPoints.map((pain) => (
+              <button key={pain.id} onClick={() => handlePainSelect(pain.id)}
+                className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 hover:-translate-y-2 active:scale-95 text-left ${
+                  selectedPain === pain.id
+                    ? 'bg-[#FFC107] border-[#FFC107] text-black shadow-[0_20px_40px_rgba(255,193,7,0.3)]'
+                    : 'bg-black/40 border-white/20 text-white hover:border-[#FFC107]/60'
+                }`}>
+                <div className="text-4xl mb-3">{pain.emoji}</div>
+                <div className={`font-bold text-sm leading-tight ${selectedPain === pain.id ? 'text-black' : 'text-white'}`}>
+                  {pain.text}
+                </div>
+                <div className={`absolute -top-2 -right-2 px-2 py-1 rounded-full text-xs font-mono font-bold transition-all ${
+                  selectedPain === pain.id ? 'bg-black text-[#FFC107] opacity-100' : 'bg-[#FFC107]/20 text-[#FFC107] opacity-0 group-hover:opacity-100'
+                }`}>
+                  {pain.keyword}
+                </div>
+              </button>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ── HOW IT WORKS ─────────────────────────────────── */}
-      <section className="h-dvh snap-start flex flex-col justify-center relative overflow-hidden" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', background: '#0d0d0d' }}>
-        <span className="section-number">02</span>
-        <div className="page-wrap">
-          <span className="kicker" style={{ marginBottom: '1rem' }}>How it works</span>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginBottom: '3.5rem' }}>Three steps. That is it.</h2>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0', maxWidth: '900px' }}>
-            {[
-              { n: '01', t: 'Sign up', d: 'Create a free account. Two clicks. No credit card. Confirm your WhatsApp number.' },
-              { n: '02', t: 'Send a keyword', d: 'Text TRIAGE, BURNOUT, SLEEP — whatever you need right now — to our WhatsApp.' },
-              { n: '03', t: 'Get sorted', d: 'A structured, actionable protocol lands in your WhatsApp. No fluff. One thing to do.' },
-            ].map((step, i) => (
-              <div key={step.n} style={{ padding: '2rem', borderLeft: i === 0 ? '3px solid #ffc107' : '1px solid rgba(255,255,255,0.08)', borderTop: '1px solid rgba(255,255,255,0.08)', borderRight: i === 2 ? '1px solid rgba(255,255,255,0.08)' : 'none', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '3.5rem', color: 'rgba(255,193,7,0.25)', lineHeight: 1, marginBottom: '1rem' }}>{step.n}</div>
-                <div style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '1.5rem', textTransform: 'uppercase', letterSpacing: '0.02em', marginBottom: '0.75rem' }}>{step.t}</div>
-                <p style={{ fontSize: '0.9rem', opacity: 0.55, lineHeight: 1.7 }}>{step.d}</p>
+          {/* Result panel */}
+          {showResult && selectedTool && (
+            <div className="bg-gradient-to-r from-[#FFC107] to-yellow-400 rounded-3xl p-8 md:p-12 text-black animate-sor7ed-in">
+              <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
+                <div className="flex-1">
+                  <span className="text-black/60 text-sm font-bold uppercase tracking-widest block mb-3">⚡ Protocol Found</span>
+                  <h2 style={{ fontFamily: 'League Gothic, sans-serif' }} className="text-4xl md:text-6xl lg:text-7xl uppercase font-black leading-none mb-4">
+                    {selectedTool.keyword}
+                  </h2>
+                  <p className="text-black/80 text-lg md:text-xl mb-2">{selectedTool.solution}</p>
+                  <div className="flex items-center gap-4 mt-4">
+                    <span className="bg-black text-[#FFC107] px-3 py-1 rounded-full text-xs font-bold">{selectedTool.branch}</span>
+                    <span className="text-black/50 text-xs">Sign up free to receive it on WhatsApp</span>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-4 min-w-fit">
+                  <Link href="/signup"
+                    className="bg-black text-[#FFC107] px-8 py-4 rounded-xl font-black text-lg uppercase tracking-wide hover:scale-105 transition-all text-center shadow-lg">
+                    Get This Protocol Free →
+                  </Link>
+                  <Link href="/blog"
+                    className="border-2 border-black text-black px-8 py-4 rounded-xl font-bold text-center hover:bg-black hover:text-[#FFC107] transition-all">
+                    Read the Article
+                  </Link>
+                </div>
               </div>
-            ))}
-          </div>
-
-          <div style={{ marginTop: '3rem' }}>
-            <Link href="/signup" className="btn-yellow">Start now →</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 7 BRANCHES ───────────────────────────────────── */}
-      <section className="h-dvh snap-start flex flex-col justify-center relative overflow-hidden" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <span className="section-number">03</span>
-        <div className="page-wrap" style={{ maxWidth: '900px' }}>
-          <span className="kicker" style={{ marginBottom: '1rem' }}>The 7 branches</span>
-          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', marginBottom: '2rem' }}>A framework for neurodivergent flourishing.</h2>
-
-          <p style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.1rem)', lineHeight: 1.8, opacity: 0.75, maxWidth: '70ch' }}>
-            Everything starts with your biological baseline —{' '}
-            <strong style={{ color: '#ffc107', fontWeight: 700 }}>Feel Good</strong>{' '}
-            covers sleep, sensory load, and nervous system regulation.{' '}
-            <strong style={{ color: '#ffc107', fontWeight: 700 }}>Keep Going</strong>{' '}
-            builds the momentum engine: resilience and burnout recovery.{' '}
-            <strong style={{ color: '#ffc107', fontWeight: 700 }}>Plan Ahead</strong>{' '}
-            and{' '}
-            <strong style={{ color: '#ffc107', fontWeight: 700 }}>Spend Smart</strong>{' '}
-            act as structural guardrails — time, admin, and the ADHD tax.{' '}
-            <strong style={{ color: '#ffc107', fontWeight: 700 }}>Be Connected</strong>{' '}
-            addresses relationships and the intimacy complications nobody names.{' '}
-            <strong style={{ color: '#ffc107', fontWeight: 700 }}>Be Yourself</strong>{' '}
-            covers identity, late diagnosis, and masking. And{' '}
-            <strong style={{ color: '#ffc107', fontWeight: 700 }}>Level Up</strong>{' '}
-            is where all of it compounds — building a life that actually fits your brain.
-          </p>
-
-          <div style={{ marginTop: '2.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link href="/blog" className="btn-outline">Read the blog →</Link>
-            <Link href="/tools" className="btn-outline">Try the tools →</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FEATURED TOOL ────────────────────────────────── */}
-      {featuredTool && (
-        <section className="h-dvh snap-start flex flex-col justify-center relative overflow-hidden" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', background: '#0d0d0d' }}>
-          <span className="section-number">04</span>
-          <div className="page-wrap">
-            <span className="kicker" style={{ marginBottom: '1rem' }}>Featured tool</span>
-            <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', marginBottom: '1rem', color: '#ffc107' }}>{featuredTool.name}</h2>
-            <p style={{ fontSize: 'clamp(1rem, 1.4vw, 1.15rem)', maxWidth: '48ch', opacity: 0.65, marginBottom: '2.5rem', lineHeight: 1.7 }}>{featuredTool.tagline}</p>
-
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
-              <Link href={'/tools/' + featuredTool.slug} className="btn-yellow">Try it now →</Link>
-              <Link href="/tools" className="btn-outline">All tools</Link>
             </div>
+          )}
 
-            {/* Terminal preview */}
-            <div style={{ maxWidth: '380px', background: '#111', border: '1px solid rgba(255,255,255,0.1)', padding: '1.25rem 1.5rem' }}>
-              <div style={{ display: 'flex', gap: '6px', marginBottom: '1rem' }}>
-                <span style={{ width: 10, height: 10, borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'block' }} />
-                <span style={{ width: 10, height: 10, borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'block' }} />
-                <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#ffc107', display: 'block' }} />
+          {/* Fallback CTA */}
+          {!showResult && (
+            <div className="text-center">
+              <p className="text-white/40 mb-6">Or jump straight in</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/tools" className="bg-white/10 border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:border-[#FFC107] hover:text-[#FFC107] transition-all">
+                  Browse All Tools
+                </Link>
+                <Link href="/signup" className="border-2 border-[#FFC107] text-[#FFC107] px-8 py-4 rounded-xl font-bold hover:bg-[#FFC107] hover:text-black transition-all">
+                  Create Free Account
+                </Link>
               </div>
-              <p className="mono" style={{ color: 'rgba(255,193,7,0.7)', fontSize: '0.8rem' }}>{'>'} You: {featuredTool.keyword}</p>
-              <p className="mono" style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.8rem', marginTop: '0.4rem' }}>{'>'} SOR7ED: Sign up to unlock your protocol…</p>
             </div>
-          </div>
-        </section>
-      )}
+          )}
+        </div>
+      </section>
 
-      {/* ── RECENT BLOG ──────────────────────────────────── */}
-      <section className="h-dvh snap-start flex flex-col justify-center relative overflow-hidden" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <span className="section-number">05</span>
-        <div className="page-wrap">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
-            <div>
-              <span className="kicker" style={{ marginBottom: '0.5rem' }}>From the blog</span>
-              <h2 style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>Real talk. Real protocols.</h2>
-            </div>
-            <Link href="/blog" className="btn-outline" style={{ fontSize: '0.95rem', padding: '0.7rem 1.5rem' }}>All articles →</Link>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1px', background: 'rgba(255,255,255,0.06)' }}>
-            {recent.map((article, i) => (
-              <Link key={article.slug} href={'/blog/' + article.slug} style={{ background: '#0a0a0a', padding: '1.75rem', display: 'block', transition: 'background 0.2s' }}
-                onMouseEnter={e => (e.currentTarget.style.background = '#141414')}
-                onMouseLeave={e => (e.currentTarget.style.background = '#0a0a0a')}
-              >
-                <span className="branch-pill" style={{ marginBottom: '1rem' }}>{article.branch}</span>
-                <p style={{ fontFamily: 'League Gothic, sans-serif', fontSize: 'clamp(1.3rem, 2vw, 1.6rem)', textTransform: 'uppercase', lineHeight: 0.95, marginBottom: '0.85rem', transition: 'color 0.15s' }}>{article.title}</p>
-                <p style={{ fontSize: '0.85rem', opacity: 0.5, lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{article.tldr}</p>
-                <p style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.85rem', letterSpacing: '0.1em', color: '#ffc107', marginTop: '1.25rem', textTransform: 'uppercase' }}>{article.readMinutes} min read →</p>
-              </Link>
+      {/* Sticky bottom bar */}
+      <section className="sticky bottom-0 z-50 bg-black/90 backdrop-blur border-t border-white/10 p-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="text-white/50 text-sm hidden sm:block">Quick:</span>
+            {['TRIAGE', 'BURNOUT', 'FEELINGS'].map(kw => (
+              <button key={kw}
+                onClick={() => handlePainSelect(painPoints.find(p => p.keyword === kw)?.id ?? '')}
+                className="bg-white/5 hover:bg-[#FFC107] hover:text-black text-[#FFC107] px-3 py-2 rounded-lg text-sm font-mono transition-all">
+                {kw}
+              </button>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── SAFETY ───────────────────────────────────────── */}
-      <section className="h-dvh snap-start flex flex-col justify-center relative overflow-hidden" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', background: '#0d0d0d' }}>
-        <span className="section-number">06</span>
-        <div className="page-wrap" style={{ maxWidth: '640px' }}>
-          <span className="kicker" style={{ marginBottom: '1rem' }}>Important</span>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', marginBottom: '2rem' }}>Safety &amp; consent.</h2>
-          <p style={{ fontSize: '1rem', opacity: 0.6, lineHeight: 1.8, marginBottom: '1rem' }}>
-            SOR7ED is not therapy, medical advice, or a crisis service. If you are in crisis — call 999 or text SHOUT to 85258.
-          </p>
-          <p style={{ fontSize: '1rem', opacity: 0.6, lineHeight: 1.8 }}>
-            We are GDPR and PECR compliant. No pre-ticked boxes. No spam. Text STOP at any time to unsubscribe. All WhatsApp messages are end-to-end encrypted.
-          </p>
-        </div>
-      </section>
-
-      {/* ── FINAL CTA ────────────────────────────────────── */}
-      <section className="h-dvh snap-start flex flex-col justify-center relative overflow-hidden">
-        <span className="section-number">07</span>
-        {/* Yellow accent background block */}
-        <div style={{ position: 'absolute', top: 0, right: 0, width: '40%', height: '100%', background: 'rgba(255,193,7,0.03)', borderLeft: '1px solid rgba(255,193,7,0.08)' }} />
-
-        <div className="page-wrap">
-          <span className="accent-line" style={{ width: '4rem' }} />
-          <h2 style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', maxWidth: '12ch', lineHeight: 0.9, marginBottom: '2rem' }}>
-            Ready to get <span style={{ color: '#ffc107' }}>sorted?</span>
-          </h2>
-          <p style={{ fontSize: '1.1rem', opacity: 0.55, maxWidth: '44ch', lineHeight: 1.7, marginBottom: '2.5rem' }}>
-            Practical tools. Straight to your WhatsApp. No app download. No monthly subscription to start.
-          </p>
-          <Link href="/signup" className="btn-yellow" style={{ fontSize: '1.3rem', padding: '1.1rem 2.5rem' }}>
-            Create free account →
+          <Link href="/signup" className="bg-[#FFC107] text-black px-6 py-2 rounded-full font-bold text-sm hover:scale-105 transition-all">
+            Get Started Free
           </Link>
         </div>
       </section>
 
     </div>
-  );
+  )
 }
