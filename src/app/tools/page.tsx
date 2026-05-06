@@ -5,7 +5,7 @@ import Link from 'next/link'
 const tools = [
   { id: 'executive-function-triage', emoji: '🧩', name: 'Executive Function Triage', desc: 'Sort overwhelming tasks into now, later, never', keyword: 'TRIAGE', category: 'Keep Going', difficulty: 'Easy' },
   { id: 'dopamine-menu', emoji: '🎯', name: 'Dopamine Menu Generator', desc: 'Fix decision fatigue with a personalised activity menu', keyword: 'DOPAMINE', category: 'Keep Going', difficulty: 'Easy' },
-  { id: 'difficult-message', emoji: '💬', name: 'Difficult Message', desc: 'Write the message you've been avoiding', keyword: 'TALK', category: 'Be Connected', difficulty: 'Medium' },
+  { id: 'difficult-message', emoji: '💬', name: 'Difficult Message', desc: 'Write the message you have been avoiding', keyword: 'TALK', category: 'Be Connected', difficulty: 'Medium' },
   { id: 'decision-clarity', emoji: '🔮', name: 'Decision Clarity', desc: 'Cut through decision paralysis fast', keyword: 'PATTERN', category: 'Keep Going', difficulty: 'Medium' },
   { id: 'burnout-reset', emoji: '🔥', name: 'Burnout Reset', desc: 'Assess your burnout level and get a recovery plan', keyword: 'BURNOUT', category: 'Feel Good', difficulty: 'Medium' },
   { id: 'sleep-reset', emoji: '😴', name: 'Sleep Reset', desc: 'Step-by-step protocol to fix your sleep', keyword: 'SLEEP', category: 'Feel Good', difficulty: 'Hard' },
