@@ -43,8 +43,6 @@ export default async function BlogPage() {
                   key={article.slug}
                   href={'/blog/' + article.slug}
                   style={{ background: '#0a0a0a', display: 'block', overflow: 'hidden', transition: 'background 0.2s' }}
-                  onMouseEnter={e => (e.currentTarget.style.background = '#131313')}
-                  onMouseLeave={e => (e.currentTarget.style.background = '#0a0a0a')}
                 >
                   {/* Cover image */}
                   {article.coverImage ? (
