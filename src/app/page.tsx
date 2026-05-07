@@ -80,13 +80,13 @@ export default async function HomePage() {
         </div>
         <div className="w-1/2 flex items-center justify-center p-16" style={{ background: 'rgba(255,255,255,0.02)' }}>
           <p className="text-base leading-[1.9] opacity-70 max-w-md">
-            <strong style={{ color: '#ffc107' }}>Feel Good</strong> — sleep, sensory load, nervous system.<br />
-            <strong style={{ color: '#ffc107' }}>Keep Going</strong> — resilience, burnout, momentum.<br />
-            <strong style={{ color: '#ffc107' }}>Plan Ahead</strong> — time, admin, systems.<br />
-            <strong style={{ color: '#ffc107' }}>Spend Smart</strong> — money, debt, ADHD tax.<br />
-            <strong style={{ color: '#ffc107' }}>Be Connected</strong> — relationships, communication.<br />
-            <strong style={{ color: '#ffc107' }}>Be Yourself</strong> — identity, masking, late diagnosis.<br />
-            <strong style={{ color: '#ffc107' }}>Level Up</strong> — career, skills, building a life that fits.
+            <strong style={{ color: '#ffc107' }}>Mind</strong> — focus, burnout, executive function.<br />
+            <strong style={{ color: '#ffc107' }}>Body</strong> — sleep, sensory load, nervous system.<br />
+            <strong style={{ color: '#ffc107' }}>Tech</strong> — time, admin, productivity systems.<br />
+            <strong style={{ color: '#ffc107' }}>Wealth</strong> — money, debt, ADHD tax.<br />
+            <strong style={{ color: '#ffc107' }}>Connection</strong> — relationships, communication.<br />
+            <strong style={{ color: '#ffc107' }}>Identity</strong> — masking, late diagnosis, authenticity.<br />
+            <strong style={{ color: '#ffc107' }}>Growth</strong> — career, skills, building a life that fits.
           </p>
         </div>
       </section>
