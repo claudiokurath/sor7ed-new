@@ -1,109 +1,73 @@
-'use client'
-import { useState, useMemo } from 'react'
-import Link from 'next/link'
+import Link from 'next/link';
+import SEOJsonLd from '@/components/SEOHead';
+import { getTools } from '@/lib/notion-content';
 
-const tools = [
-  { id: 'executive-function-triage', emoji: '🧩', name: 'Executive Function Triage', desc: 'Sort overwhelming tasks into now, later, never', keyword: 'TRIAGE', category: 'Keep Going', difficulty: 'Easy' },
-  { id: 'dopamine-menu', emoji: '🎯', name: 'Dopamine Menu Generator', desc: 'Fix decision fatigue with a personalised activity menu', keyword: 'DOPAMINE', category: 'Keep Going', difficulty: 'Easy' },
-  { id: 'difficult-message', emoji: '💬', name: 'Difficult Message', desc: 'Write the message you have been avoiding', keyword: 'TALK', category: 'Be Connected', difficulty: 'Medium' },
-  { id: 'decision-clarity', emoji: '🔮', name: 'Decision Clarity', desc: 'Cut through decision paralysis fast', keyword: 'PATTERN', category: 'Keep Going', difficulty: 'Medium' },
-  { id: 'burnout-reset', emoji: '🔥', name: 'Burnout Reset', desc: 'Assess your burnout level and get a recovery plan', keyword: 'BURNOUT', category: 'Feel Good', difficulty: 'Medium' },
-  { id: 'sleep-reset', emoji: '😴', name: 'Sleep Reset', desc: 'Step-by-step protocol to fix your sleep', keyword: 'SLEEP', category: 'Feel Good', difficulty: 'Hard' },
-]
+export const metadata = {
+  title: 'Tools',
+  description: 'Interactive tools built for neurodivergent brains.',
+};
 
-const categories = ['All', 'Keep Going', 'Feel Good', 'Spend Smart', 'Be Connected']
+export const revalidate = 60;
 
-export default function ToolsPage() {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('All')
-  const [hoveredTool, setHoveredTool] = useState<string | null>(null)
-
-  const filteredTools = useMemo(() => tools.filter(tool => {
-    const matchesSearch = tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          tool.desc.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          tool.keyword.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory === 'All' || tool.category === selectedCategory
-    return matchesSearch && matchesCategory
-  }), [searchTerm, selectedCategory])
+export default async function ToolsPage() {
+  const tools = await getTools();
+  const live = tools.filter(t => t.status === 'live');
+  const soon = tools.filter(t => t.status === 'coming-soon');
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <>
+      <SEOJsonLd title="Tools" description="Interactive tools built for neurodivergent brains." slug="tools" />
 
-      <div className="border-b border-white/10 py-16 px-6 pt-28">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-3 h-3 bg-[#FFC107] rounded-full animate-pulse" />
-            <span className="text-[#FFC107] text-sm font-bold uppercase tracking-widest">SOR7ED · Tool Library</span>
-          </div>
-          <h1 style={{ fontFamily: 'League Gothic, sans-serif' }} className="text-6xl md:text-8xl uppercase text-white mb-6">
-            The <span className="text-[#FFC107]">Arsenal.</span>
-          </h1>
-          <p className="text-white/60 text-xl max-w-3xl">
-            Practical tools for ADHD, autism, and dyslexia. Sign up free to unlock your full results on WhatsApp.
+      <section className="border-b-2 border-white">
+        <div className="page-wrap py-16 md:py-24">
+          <h1 className="text-5xl md:text-8xl leading-none mb-4">The Toolkit.</h1>
+          <p className="text-base max-w-xl opacity-70">
+            Each tool starts with an interactive triage. You do the work on-page.
+            Sign up to unlock your full result.
           </p>
         </div>
-      </div>
+      </section>
 
-      <div className="sticky top-16 z-40 bg-black/95 backdrop-blur border-b border-white/10 py-6 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1 relative">
-              <input type="text" placeholder="Search tools or keywords..."
-                value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-white/5 border border-white/20 rounded-xl px-6 py-4 text-white placeholder-white/40 focus:border-[#FFC107] focus:outline-none transition-all" />
-              {searchTerm && (
-                <button onClick={() => setSearchTerm('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white">✕</button>
-              )}
-            </div>
-            <div className="flex gap-2 overflow-x-auto">
-              {categories.map(cat => (
-                <button key={cat} onClick={() => setSelectedCategory(cat)}
-                  className={`px-6 py-3 rounded-full text-sm font-bold whitespace-nowrap transition-all ${
-                    selectedCategory === cat ? 'bg-[#FFC107] text-black' : 'bg-white/5 text-white/60 hover:text-white border border-white/20'
-                  }`}>
-                  {cat}
-                </button>
+      <section className="max-w-6xl mx-auto px-5 py-16">
+        {live.length > 0 && (
+          <>
+            <p className="kicker mb-6">Live tools</p>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-16">
+              {live.map((tool) => (
+                <Link key={tool.slug} href={`/tools/${tool.slug}`} className="dark-card block group">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="kicker text-xs">{tool.branch}</p>
+                    {(tool.slug === 'executive-function-triage' || tool.slug === 'difficult-message') && (
+                      <span className="mono text-xs border border-[#ffc107] text-[#ffc107] px-2 py-0.5">INTERACTIVE</span>
+                    )}
+                  </div>
+                  <p className="display text-2xl md:text-3xl mb-2 group-hover:text-[#ffc107] transition-colors">{tool.name}</p>
+                  <p className="text-sm opacity-70 mb-5 leading-relaxed">{tool.tagline}</p>
+                  <p className="text-sm mono text-[#ffc107]">
+                    {(tool.slug === 'executive-function-triage' || tool.slug === 'difficult-message') ? 'Start →' : 'Open tool →'}
+                  </p>
+                </Link>
               ))}
             </div>
-          </div>
-          <p className="text-white/40 text-sm mt-4">{filteredTools.length} tools available</p>
-        </div>
-      </div>
+          </>
+        )}
 
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredTools.map(tool => (
-            <div key={tool.id}
-              onMouseEnter={() => setHoveredTool(tool.id)}
-              onMouseLeave={() => setHoveredTool(null)}
-              className="group bg-black border-2 border-white/10 rounded-2xl p-6 hover:border-[#FFC107] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(255,193,7,0.15)] transition-all duration-300">
-              <div className="flex items-start justify-between mb-4">
-                <div className={`text-5xl transition-transform duration-300 ${hoveredTool === tool.id ? 'scale-110 rotate-12' : ''}`}>{tool.emoji}</div>
-                <div className="text-right">
-                  <span className="font-mono text-xs bg-[#FFC107]/10 text-[#FFC107] px-3 py-1 rounded-full border border-[#FFC107]/30">{tool.keyword}</span>
-                  <div className={`text-xs mt-2 px-2 py-1 rounded-full ${
-                    tool.difficulty === 'Easy' ? 'bg-green-500/20 text-green-400' :
-                    tool.difficulty === 'Medium' ? 'bg-yellow-500/20 text-yellow-400' :
-                    'bg-red-500/20 text-red-400'
-                  }`}>{tool.difficulty}</div>
+        {soon.length > 0 && (
+          <>
+            <p className="kicker mb-6">Coming soon</p>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {soon.map((tool) => (
+                <div key={tool.slug} className="dark-card opacity-50">
+                  <p className="kicker text-xs mb-3">{tool.branch}</p>
+                  <p className="display text-2xl md:text-3xl mb-2">{tool.name}</p>
+                  <p className="text-sm mb-4 leading-relaxed">{tool.tagline}</p>
+                  <span className="mono text-xs border border-white/30 px-2 py-0.5">SOON</span>
                 </div>
-              </div>
-              <h3 className="font-bold text-white text-xl mb-2 group-hover:text-[#FFC107] transition-colors">{tool.name}</h3>
-              <p className="text-white/60 text-sm mb-6 leading-relaxed">{tool.desc}</p>
-              <div className="flex gap-3">
-                <Link href={`/tools/${tool.id}`}
-                  className="flex-1 bg-[#FFC107] text-black py-3 rounded-xl font-black text-sm uppercase text-center hover:scale-105 transition-all">
-                  Try It →
-                </Link>
-                <Link href={`/tools/${tool.id}`}
-                  className="border border-white/20 text-white/60 px-4 py-3 rounded-xl text-sm hover:border-white hover:text-white transition-all">
-                  Info
-                </Link>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
+          </>
+        )}
+      </section>
+    </>
+  );
 }
