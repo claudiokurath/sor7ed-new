@@ -18,10 +18,10 @@ export default async function HomePage() {
 
       {/* 1. HERO — text right */}
       <section className="h-dvh snap-start flex" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <div className="w-1/2 flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.02)', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="w-1/2 h-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.02)', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
           <p className="display select-none leading-none" style={{ fontSize: 'clamp(8rem,16vw,14rem)', color: 'rgba(255,193,7,0.06)' }}>SOR<br />7ED</p>
         </div>
-        <div className="w-1/2 flex items-center justify-center p-16">
+        <div className="w-1/2 h-full flex items-center justify-center p-16">
           <div className="max-w-lg">
             <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
             <h1 className="text-5xl md:text-7xl leading-[0.9] mb-8">
@@ -41,10 +41,10 @@ export default async function HomePage() {
 
       {/* 2. HOW IT WORKS — text right */}
       <section className="h-dvh snap-start flex" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <div className="w-1/2 flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.02)', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="w-1/2 h-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.02)', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
           <p className="display select-none leading-none" style={{ fontSize: 'clamp(8rem,16vw,14rem)', color: 'rgba(255,255,255,0.03)' }}>3</p>
         </div>
-        <div className="w-1/2 flex items-center justify-center p-16">
+        <div className="w-1/2 h-full flex items-center justify-center p-16">
           <div className="max-w-sm">
             <p className="kicker mb-4">How it works</p>
             <h2 className="text-4xl md:text-5xl leading-[0.92] mb-10">Three steps.<br />That is it.</h2>
@@ -69,10 +69,10 @@ export default async function HomePage() {
 
       {/* 3. 7 BRANCHES — text right */}
       <section className="h-dvh snap-start flex" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <div className="w-1/2 flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.02)', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="w-1/2 h-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.02)', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
           <p className="display select-none leading-none" style={{ fontSize: 'clamp(8rem,16vw,14rem)', color: 'rgba(255,193,7,0.06)' }}>7</p>
         </div>
-        <div className="w-1/2 flex items-center justify-center p-16">
+        <div className="w-1/2 h-full flex items-center justify-center p-16">
           <div className="max-w-md">
             <p className="kicker mb-4">The 7 Branches</p>
             <h2 className="text-4xl md:text-5xl mb-8 leading-[0.92]">A framework for neurodivergent flourishing.</h2>
@@ -95,7 +95,7 @@ export default async function HomePage() {
       {/* 4. FEATURED TOOL — text right */}
       {featuredTool && (
         <section className="h-dvh snap-start flex" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-          <div className="w-1/2 flex items-center justify-center p-16" style={{ background: 'rgba(255,255,255,0.02)', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+          <div className="w-1/2 h-full flex items-center justify-center p-16" style={{ background: 'rgba(255,255,255,0.02)', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
             <div style={{ background: '#111', border: '1px solid rgba(255,255,255,0.1)', padding: '2rem', width: '100%', maxWidth: '320px' }}>
               <div style={{ display: 'flex', gap: '6px', marginBottom: '1.25rem' }}>
                 <span style={{ width: 10, height: 10, borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'block' }} />
@@ -106,7 +106,7 @@ export default async function HomePage() {
               <p className="mono text-sm" style={{ color: 'rgba(255,255,255,0.3)' }}>{'>'} SOR7ED: Sign up to unlock…</p>
             </div>
           </div>
-          <div className="w-1/2 flex items-center justify-center p-16">
+          <div className="w-1/2 h-full flex items-center justify-center p-16">
             <div className="max-w-md">
               <p className="kicker mb-4">Featured tool</p>
               <h2 className="text-4xl md:text-5xl mb-4 leading-[0.92]">{featuredTool.name}</h2>
@@ -145,10 +145,10 @@ export default async function HomePage() {
 
       {/* 6. SAFETY — text right */}
       <section className="h-dvh snap-start flex" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <div className="w-1/2 flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.02)', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="w-1/2 h-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.02)', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
           <h2 className="display select-none text-center leading-none" style={{ fontSize: 'clamp(4rem,8vw,7rem)', color: 'rgba(255,255,255,0.04)' }}>SAFE<br />GDPR<br />PECR</h2>
         </div>
-        <div className="w-1/2 flex items-center justify-center p-16">
+        <div className="w-1/2 h-full flex items-center justify-center p-16">
           <div className="max-w-md">
             <p className="kicker mb-4">Important</p>
             <h2 className="text-4xl md:text-5xl leading-[0.92] mb-8">Safety &amp; Consent.</h2>
@@ -164,10 +164,10 @@ export default async function HomePage() {
 
       {/* 7. CTA — text right */}
       <section className="h-dvh snap-start flex">
-        <div className="w-1/2 flex items-center justify-center" style={{ background: '#ffc107' }}>
+        <div className="w-1/2 h-full flex items-center justify-center" style={{ background: '#ffc107' }}>
           <p className="display select-none leading-none" style={{ fontSize: 'clamp(8rem,18vw,16rem)', color: 'rgba(0,0,0,0.1)' }}>→</p>
         </div>
-        <div className="w-1/2 flex items-center justify-center p-16">
+        <div className="w-1/2 h-full flex items-center justify-center p-16">
           <div className="max-w-md">
             <p className="display text-sm mb-4" style={{ letterSpacing: '0.18em' }}>READY TO GET SORTED</p>
             <h2 className="text-5xl md:text-6xl leading-[0.92] mb-8">
