@@ -1,156 +1,154 @@
-'use client'
+import Link from 'next/link';
+import SEOJsonLd from '@/components/SEOHead';
+import { getArticles, getTools } from '@/lib/notion-content';
 
-import { useState } from 'react'
-import Link from 'next/link'
+export const revalidate = 60;
 
-const painPoints = [
-  { id: 'paralyzed', emoji: '🧠', text: "I can't start anything", keyword: 'TRIAGE', solution: "We'll sort your chaos into 'now, later, never'", branch: 'Keep Going' },
-  { id: 'overwhelmed', emoji: '📋', text: "Everything is too much", keyword: 'OVERWHELM', solution: "Emergency protocol for meltdown moments", branch: 'Keep Going' },
-  { id: 'money', emoji: '💸', text: "Money keeps disappearing", keyword: 'MONEY', solution: "See the hidden cost of ADHD and stop the bleed", branch: 'Spend Smart' },
-  { id: 'rejection', emoji: '💬', text: "Someone is mad at me", keyword: 'FEELINGS', solution: "Scripts for when your brain screams 'they hate me'", branch: 'Be Connected' },
-  { id: 'burnout', emoji: '🔥', text: "I'm completely exhausted", keyword: 'BURNOUT', solution: "Check your burnout level and get a recovery plan", branch: 'Feel Good' },
-  { id: 'focus', emoji: '😵', text: "My brain won't focus", keyword: 'FOCUS', solution: "Target the exact executive function that's struggling", branch: 'Keep Going' },
-]
-
-export default function ActionHomepage() {
-  const [selectedPain, setSelectedPain] = useState<string | null>(null)
-  const [showResult, setShowResult] = useState(false)
-  const selectedTool = painPoints.find(p => p.id === selectedPain)
-
-  const handlePainSelect = (painId: string) => {
-    if (selectedPain === painId) return
-    setShowResult(false)
-    setTimeout(() => { setSelectedPain(painId); setShowResult(true) }, 200)
-  }
+export default async function HomePage() {
+  const [tools, articles] = await Promise.all([getTools(), getArticles()]);
+  const featuredTool = tools.find((tool) => tool.status === 'live') ?? tools[0];
+  const recent = articles.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
+      <SEOJsonLd
+        title="SOR7ED — Templates, not inspiration"
+        description="Practical templates and micro-tools for neurodivergent adults. Delivered via WhatsApp."
+      />
 
-      {/* Floating Keywords Background */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-5">
-        {['TRIAGE', 'BURNOUT', 'DOPAMINE', 'FEELINGS', 'SLEEP', 'OVERWHELM'].map((kw, i) => (
-          <span key={kw} className="absolute text-6xl text-[#FFC107] font-black"
-            style={{ fontFamily: 'League Gothic, sans-serif', left: `${(i * 17) % 85}%`, top: `${(i * 23) % 70}%`, animationDelay: `${i * 0.5}s`, transform: `rotate(${(i % 2 === 0 ? -1 : 1) * (i * 5)}deg)` }}>
-            {kw}
-          </span>
-        ))}
-      </div>
-
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center px-6 pt-24">
-        <div className="relative z-10 max-w-6xl mx-auto w-full">
-
-          {/* Status Indicator */}
-          <div className="inline-flex items-center gap-3 bg-[#FFC107]/10 border border-[#FFC107]/30 rounded-full px-6 py-3 mb-8">
-            <div className="w-3 h-3 bg-[#FFC107] rounded-full animate-pulse" />
-            <span className="text-[#FFC107] font-bold text-sm uppercase tracking-widest">
-              System Online · 25+ Protocols Ready
-            </span>
-          </div>
-
-          {/* Main Headline */}
-          <h1 style={{ fontFamily: 'League Gothic, sans-serif' }} className="text-6xl md:text-[8rem] lg:text-[10rem] uppercase leading-[0.8] tracking-tighter mb-8">
-            <span className="text-white">WHAT</span>
-            <span className="text-[#FFC107] block">HURTS</span>
-            <span className="text-white block">TODAY?</span>
+      {/* HERO */}
+      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center">
+        <div className="page-wrap">
+          <p className="kicker mb-6">SOR7ED — pronounced sorted</p>
+          <h1 className="text-6xl md:text-8xl leading-[0.9]">
+            Your brain is not broken. <br />
+            <span style={{ color: '#ffc107' }}>Your tools are.</span>
           </h1>
-
-          <p className="text-white/60 text-xl md:text-2xl mb-4 max-w-3xl">
-            Click the thing that's screaming loudest in your brain right now.
+          <p className="text-lg md:text-xl mt-8 opacity-80 leading-relaxed max-w-2xl">
+            SOR7ED delivers practical templates and micro-tools for ADHD, autism, dyslexia, and
+            related needs — straight to your WhatsApp. No app. No fluff. No inspiration.
           </p>
-          <p className="text-[#FFC107] font-bold text-lg mb-12">
-            We'll give you the exact tool you need in under 10 seconds.
-          </p>
-
-          {/* Interactive Pain Point Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
-            {painPoints.map((pain) => (
-              <button key={pain.id} onClick={() => handlePainSelect(pain.id)}
-                className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 hover:-translate-y-2 active:scale-95 text-left ${
-                  selectedPain === pain.id
-                    ? 'bg-[#FFC107] border-[#FFC107] text-black shadow-[0_20px_40px_rgba(255,193,7,0.3)]'
-                    : 'bg-black/40 border-white/20 text-white hover:border-[#FFC107]/60 hover:shadow-[0_10px_30px_rgba(255,193,7,0.1)]'
-                }`}>
-                <div className={`text-4xl mb-3 transition-transform duration-300 ${selectedPain === pain.id ? 'scale-110' : 'group-hover:scale-110'}`}>
-                  {pain.emoji}
-                </div>
-                <div className={`font-bold text-sm leading-tight ${selectedPain === pain.id ? 'text-black' : 'text-white'}`}>
-                  {pain.text}
-                </div>
-                <div className={`absolute -top-2 -right-2 px-2 py-1 rounded-full text-xs font-mono font-bold transition-all ${
-                  selectedPain === pain.id ? 'bg-black text-[#FFC107]' : 'bg-[#FFC107]/20 text-[#FFC107] opacity-0 group-hover:opacity-100'
-                }`}>
-                  {pain.keyword}
-                </div>
-              </button>
-            ))}
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Link href="/signup" className="btn-yellow">Join free</Link>
+            <Link href="/tools" className="btn-outline">Browse tools</Link>
           </div>
-
-          {/* Dynamic Result Panel */}
-          {showResult && selectedTool && (
-            <div className="bg-gradient-to-r from-[#FFC107] to-yellow-400 rounded-3xl p-8 md:p-12 text-black animate-sor7ed-in">
-              <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
-                <div className="flex-1">
-                  <span className="text-black/60 text-sm font-bold uppercase tracking-widest block mb-3">⚡ Protocol Found</span>
-                  <h2 style={{ fontFamily: 'League Gothic, sans-serif' }} className="text-4xl md:text-6xl lg:text-7xl uppercase font-black leading-none mb-4">
-                    {selectedTool.keyword}
-                  </h2>
-                  <p className="text-black/80 text-lg md:text-xl mb-2">{selectedTool.solution}</p>
-                  <div className="flex items-center gap-4 mt-4">
-                    <span className="bg-black text-[#FFC107] px-3 py-1 rounded-full text-xs font-bold">{selectedTool.branch}</span>
-                    <span className="text-black/50 text-xs">Sign up free to receive it on WhatsApp</span>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-4 min-w-fit">
-                  <Link href="/signup"
-                    className="bg-black text-[#FFC107] px-8 py-4 rounded-xl font-black text-lg uppercase tracking-wide hover:scale-105 active:scale-95 transition-all text-center shadow-lg">
-                    Get This Protocol Free →
-                  </Link>
-                  <Link href="/blog"
-                    className="border-2 border-black text-black px-8 py-4 rounded-xl font-bold text-center hover:bg-black hover:text-[#FFC107] transition-all">
-                    Read the Article
-                  </Link>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Fallback CTA */}
-          {!showResult && (
-            <div className="text-center">
-              <p className="text-white/40 mb-6">Or jump straight to the tool library</p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/tools" className="bg-white/10 border border-white/20 text-white px-8 py-4 rounded-xl font-bold hover:border-[#FFC107] hover:text-[#FFC107] transition-all">
-                  Browse All Tools
-                </Link>
-                <Link href="/signup" className="border-2 border-[#FFC107] text-[#FFC107] px-8 py-4 rounded-xl font-bold hover:bg-[#FFC107] hover:text-black transition-all">
-                  Create Free Account
-                </Link>
-              </div>
-            </div>
-          )}
         </div>
       </section>
 
-      {/* Quick Action Bar */}
-      <section className="sticky bottom-0 z-50 bg-black/90 backdrop-blur border-t border-white/10 p-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <span className="text-white/50 text-sm">Quick:</span>
-            {['TRIAGE', 'BURNOUT', 'FEELINGS'].map(kw => (
-              <button key={kw}
-                onClick={() => handlePainSelect(painPoints.find(p => p.keyword === kw)?.id ?? '')}
-                className="bg-white/5 hover:bg-[#FFC107] hover:text-black text-[#FFC107] px-3 py-2 rounded-lg text-sm font-mono transition-all">
-                {kw}
-              </button>
+      {/* HOW IT WORKS */}
+      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center">
+        <div className="page-wrap">
+          <p className="kicker mb-4">How it works</p>
+          <h2 className="text-5xl md:text-6xl mb-12">Three steps. That is it.</h2>
+          <div className="space-y-10 max-w-lg">
+            {[
+              { n: '01', t: 'Sign up', d: 'Create a free account. Confirm GDPR consent. Add your WhatsApp number.' },
+              { n: '02', t: 'Send a keyword', d: 'Like TRIAGE, MENU, or BURNOUT — straight to our WhatsApp.' },
+              { n: '03', t: 'Get a result', d: 'A structured protocol lands in WhatsApp. Take one action.' },
+            ].map((step) => (
+              <div key={step.n} className="flex gap-8 items-start">
+                <p className="display text-5xl text-[#ffc107] leading-none shrink-0">{step.n}</p>
+                <div>
+                  <p className="display text-2xl">{step.t}</p>
+                  <p className="text-base opacity-70 mt-2 leading-relaxed">{step.d}</p>
+                </div>
+              </div>
             ))}
           </div>
-          <Link href="/signup" className="bg-[#FFC107] text-black px-6 py-2 rounded-full font-bold text-sm hover:scale-105 transition-all">
-            Get Started Free
-          </Link>
+        </div>
+      </section>
+
+      {/* 7 BRANCHES */}
+      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center">
+        <div className="page-wrap max-w-3xl">
+          <p className="kicker mb-4">The 7 Branches</p>
+          <h2 className="text-4xl md:text-5xl mb-8">A framework for neurodivergent flourishing.</h2>
+          <p className="text-base md:text-lg leading-relaxed opacity-80">
+            Everything starts with your biological baseline —{' '}
+            <strong style={{ color: '#ffc107' }}>Feel Good</strong> covers sleep, sensory load, medication, and nervous system regulation. From there,{' '}
+            <strong style={{ color: '#ffc107' }}>Keep Going</strong> builds momentum: resilience, burnout recovery, and the habits that stop you stalling.{' '}
+            <strong style={{ color: '#ffc107' }}>Plan Ahead</strong> and{' '}
+            <strong style={{ color: '#ffc107' }}>Spend Smart</strong> act as structural guardrails — time, admin, money, and the ADHD tax.{' '}
+            <strong style={{ color: '#ffc107' }}>Be Connected</strong> addresses relationships, communication, and the intimacy complications nobody talks about.{' '}
+            <strong style={{ color: '#ffc107' }}>Be Yourself</strong> covers identity, late diagnosis, masking, and living authentically in a neurotypical world. And{' '}
+            <strong style={{ color: '#ffc107' }}>Level Up</strong> is where all of it compounds — skills, career, and building a life that fits your brain.
+          </p>
+          <div className="mt-8">
+            <Link href="/blog" className="btn-outline">Read the blog</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED TOOL */}
+      {featuredTool && (
+        <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center">
+          <div className="page-wrap">
+            <p className="kicker mb-4">Featured tool</p>
+            <h2 className="text-5xl md:text-6xl mb-4">{featuredTool.name}</h2>
+            <p className="text-lg mb-8 opacity-80 leading-relaxed max-w-lg">{featuredTool.tagline}</p>
+            <div className="flex flex-wrap gap-3 mb-10">
+              <Link href={'/tools/' + featuredTool.slug} className="btn-yellow">Try it now</Link>
+              <Link href="/tools" className="btn-outline">All tools</Link>
+            </div>
+            <div className="border-t border-white/20 pt-6 max-w-sm">
+              <p className="mono text-sm opacity-60">{'>'} You: {featuredTool.keyword}</p>
+              <p className="mono text-sm mt-2 opacity-60">{'>'} SOR7ED: Sign up to unlock the full protocol…</p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* RECENT BLOG */}
+      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center">
+        <div className="page-wrap">
+          <div className="flex flex-wrap items-end gap-4 mb-10">
+            <div>
+              <p className="kicker mb-2">From the blog</p>
+              <h2 className="text-5xl md:text-6xl">Recent reads.</h2>
+            </div>
+            <Link href="/blog" className="btn-outline !text-base">All articles</Link>
+          </div>
+          <div className="grid gap-8 md:grid-cols-3">
+            {recent.map((article) => (
+              <Link key={article.slug} href={'/blog/' + article.slug} className="block border-l-2 border-[#ffc107] pl-5 py-1 hover:border-l-4 transition-all">
+                <p className="kicker text-xs mb-2">{article.branch} · {article.readMinutes} min</p>
+                <p className="display text-2xl mt-1 leading-tight">{article.title}</p>
+                <p className="text-sm mt-3 opacity-60 leading-relaxed line-clamp-2">{article.tldr}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SAFETY */}
+      <section className="h-dvh snap-start border-b-2 border-white/10 flex flex-col justify-center">
+        <div className="page-wrap max-w-lg">
+          <p className="kicker mb-4">Important</p>
+          <h2 className="text-5xl md:text-6xl mb-8">Safety &amp; Consent.</h2>
+          <p className="opacity-70 leading-relaxed mb-6">
+            SOR7ED is not therapy or medical advice. It is not a crisis service. Data is collected only with explicit GDPR consent.
+          </p>
+          <p className="opacity-80 leading-relaxed">
+            Not a crisis line — call 999 or text SHOUT to 85258. GDPR and PECR compliant, no pre-ticked boxes. Text STOP any time to unsubscribe. End-to-end encrypted WhatsApp delivery.
+          </p>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="h-dvh snap-start flex flex-col justify-center">
+        <div className="page-wrap">
+          <p className="display text-sm" style={{ letterSpacing: '0.18em' }}>READY TO GET SORTED</p>
+          <p className="display text-5xl md:text-7xl mt-2 leading-tight">
+            Practical tools. <br />Straight to your WhatsApp.
+          </p>
+          <div className="mt-10">
+            <Link href="/signup" className="inline-block border-4 border-black px-10 py-5 display text-3xl uppercase bg-[#ffc107] text-black hover:bg-black hover:text-[#ffc107] hover:border-[#ffc107] transition-all">
+              Create free account
+            </Link>
+          </div>
         </div>
       </section>
 
     </div>
-  )
+  );
 }
