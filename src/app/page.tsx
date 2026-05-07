@@ -45,13 +45,15 @@ export default async function HomePage() {
       {/* HOW IT WORKS */}
       <section className="h-dvh snap-start flex" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
         <div className="w-1/2 flex items-center justify-center p-16" style={{ background: 'rgba(255,255,255,0.02)', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
-          <div className="max-w-xs text-center">
-            <p className="kicker mb-4">How it works</p>
-            <h2 className="text-4xl md:text-5xl leading-[0.92]">Three steps.<br />That is it.</h2>
+          <div className="max-w-xs text-center opacity-10 select-none">
+            <p className="display" style={{ fontSize: 'clamp(6rem,12vw,10rem)', lineHeight: 1 }}>3</p>
           </div>
         </div>
         <div className="w-1/2 flex items-center justify-center p-16">
-          <div className="max-w-sm space-y-10">
+          <div className="max-w-sm">
+            <p className="kicker mb-4">How it works</p>
+            <h2 className="text-4xl md:text-5xl leading-[0.92] mb-10">Three steps.<br />That is it.</h2>
+            <div className="space-y-10">
             {[
               { n: '01', t: 'Sign up', d: 'Free account. GDPR consent. WhatsApp number. Done.' },
               { n: '02', t: 'Send a keyword', d: 'TRIAGE, BURNOUT, SLEEP — text it straight to us.' },
@@ -65,6 +67,7 @@ export default async function HomePage() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
