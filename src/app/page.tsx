@@ -4,8 +4,8 @@ import { getArticles, getTools } from '@/lib/notion-content';
 
 export const revalidate = 60;
 
-const L = 'w-1/2 h-full flex items-center justify-center p-16';
-const R = 'w-1/2 h-full flex items-center justify-center p-16';
+const L = 'w-1/2 flex-1 flex items-center justify-center p-16';
+const R = 'w-1/2 flex-1 flex items-center justify-center p-16';
 const ghost = { color: 'rgba(255,193,7,0.06)', fontFamily: 'League Gothic, sans-serif', fontSize: 'clamp(8rem,14vw,13rem)', lineHeight: 1, userSelect: 'none' as const };
 
 export default async function HomePage() {
@@ -17,8 +17,8 @@ export default async function HomePage() {
     <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
       <SEOJsonLd title="SOR7ED — Templates, not inspiration" description="Practical templates and micro-tools for neurodivergent adults. Delivered via WhatsApp." />
 
-      {/* 1. HERO */}
-      <section className="h-dvh snap-start flex" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+      {/* 1. HERO — first section needs pt for fixed header */}
+      <section className="h-dvh snap-start flex" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingTop: '4rem' }}>
         <div className={L} style={{ background: 'rgba(255,255,255,0.02)', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
           <p style={ghost}>SOR<br />7ED</p>
         </div>
