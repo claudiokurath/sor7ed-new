@@ -41,7 +41,7 @@ export default async function HomePage() {
       {/* 1. HERO — image natural size, text overlaid in empty right space */}
       <section className="h-dvh snap-start" style={{ position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
         <img src="/images/hero-robot.png" alt="" aria-hidden="true"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center', objectFitPosition: 'left' }} />
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'left center' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(0,0,0,0.95) 40%, transparent 70%)' }} />
         <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '6%' }}>
           <div style={{ maxWidth: 460 }}>
