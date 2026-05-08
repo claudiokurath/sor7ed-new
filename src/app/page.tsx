@@ -17,17 +17,17 @@ export default async function HomePage() {
 
   const Left = ({ image }: { image?: boolean }) => (
     image ? (
-      <div style={{ width: '50%', position: 'relative', overflow: 'hidden', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+      <div style={{ width: '35%', position: 'relative', overflow: 'hidden', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
         <img src='/images/hero-robot.png' alt='' aria-hidden='true'
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center' }} />
       </div>
     ) : (
-      <div style={{ width: '50%', background: '#0a0a0a', borderRight: '1px solid rgba(255,255,255,0.06)' }} />
+      <div style={{ width: '35%', background: '#0a0a0a', borderRight: '1px solid rgba(255,255,255,0.06)' }} />
     )
   );
 
   const Right = ({ children }: { children: React.ReactNode }) => (
-    <div style={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 3rem' }}>
+    <div style={{ width: '65%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 3rem' }}>
       <div style={{ maxWidth: 900, width: '100%' }}>
         {children}
       </div>
@@ -174,7 +174,7 @@ export default async function HomePage() {
 
       {/* 7. CTA */}
       <Section border={false}>
-        <div style={{ width: '50%', background: '#ffc107', display: 'flex', alignItems: 'center', justifyContent: 'center' }} />
+        <div style={{ width: '35%', background: '#ffc107', display: 'flex', alignItems: 'center', justifyContent: 'center' }} />
         <Right>
           <p className="display" style={{ fontSize: '1.5rem', letterSpacing: '0.18em', marginBottom: '1rem' }}>READY TO GET SORTED</p>
           <h2 style={{ fontSize: 'clamp(5rem,9vw,8rem)', lineHeight: 0.92, marginBottom: '2.5rem' }}>
