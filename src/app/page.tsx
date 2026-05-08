@@ -46,8 +46,8 @@ export default async function HomePage() {
         <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4rem' }}>
           <div style={{ maxWidth: 460 }}>
             <p className="kicker" style={{ marginBottom: '1.5rem' }}>SOR7ED — pronounced sorted</p>
-            <h1 style={{ fontSize: 'clamp(3.5rem,5vw,5rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>
-              Your brain is not broken.<br /><span style={{ color: '#ffc107' }}>Your tools are.</span>
+            <h1 style={{ fontSize: 'clamp(2rem,3.5vw,3.5rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>
+              <span style={{ display: "block", whiteSpace: "nowrap" }}>Your brain is not broken.</span><span style={{ display: "block", whiteSpace: "nowrap", color: "#ffc107" }}>Your tools are.</span>
             </h1>
             <p style={{ fontSize: '1rem', opacity: 0.75, lineHeight: 1.75, marginBottom: '2.5rem' }}>
               Practical protocols for ADHD, autism, dyslexia — straight to your WhatsApp. No app. No fluff.
