@@ -46,7 +46,7 @@ export default async function HomePage() {
         <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '6%' }}>
           <div style={{ maxWidth: 460 }}>
             <p className="kicker" style={{ marginBottom: '1.5rem' }}>SOR7ED — pronounced sorted</p>
-            <h1 style={{ fontSize: 'clamp(2.5rem,4.5vw,4rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>
+            <h1 style={{ fontSize: 'clamp(5rem,9vw,8rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>
               Your brain is not broken.<br />
               <span style={{ color: '#ffc107' }}>Your tools are.</span>
             </h1>
