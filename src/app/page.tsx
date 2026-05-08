@@ -38,24 +38,28 @@ export default async function HomePage() {
     <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
       <SEOJsonLd title="SOR7ED — Templates, not inspiration" description="Practical templates and micro-tools for neurodivergent adults. Delivered via WhatsApp." />
 
-      {/* 1. HERO */}
-      <Section>
-        <Left image />
-        <Right>
-          <p className="kicker" style={{ marginBottom: '1.5rem' }}>SOR7ED — pronounced sorted</p>
-          <h1 style={{ fontSize: 'clamp(2.5rem,4.5vw,4rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>
-            Your brain is not broken.<br />
-            <span style={{ color: '#ffc107' }}>Your tools are.</span>
-          </h1>
-          <p style={{ fontSize: '1rem', opacity: 0.6, lineHeight: 1.75, marginBottom: '2.5rem' }}>
-            Practical protocols for ADHD, autism, dyslexia — straight to your WhatsApp. No app. No fluff.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link href="/signup" className="btn-yellow">Join free</Link>
-            <Link href="/tools" className="btn-outline">Browse tools</Link>
+      {/* 1. HERO — full screen image */}
+      <section className="h-dvh snap-start" style={{ position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <img src="/images/hero-robot.png" alt="" aria-hidden="true"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.75) 55%, rgba(0,0,0,0.92) 100%)' }} />
+        <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '4rem' }}>
+          <div style={{ maxWidth: 480 }}>
+            <p className="kicker" style={{ marginBottom: '1.5rem' }}>SOR7ED — pronounced sorted</p>
+            <h1 style={{ fontSize: 'clamp(2.5rem,4.5vw,4rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>
+              Your brain is not broken.<br />
+              <span style={{ color: '#ffc107' }}>Your tools are.</span>
+            </h1>
+            <p style={{ fontSize: '1rem', opacity: 0.75, lineHeight: 1.75, marginBottom: '2.5rem' }}>
+              Practical protocols for ADHD, autism, dyslexia — straight to your WhatsApp. No app. No fluff.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <Link href="/signup" className="btn-yellow">Join free</Link>
+              <Link href="/tools" className="btn-outline">Browse tools</Link>
+            </div>
           </div>
-        </Right>
-      </Section>
+        </div>
+      </section>
 
       {/* 2. HOW IT WORKS */}
       <Section>
