@@ -28,7 +28,7 @@ export default async function HomePage() {
 
   const Right = ({ children }: { children: React.ReactNode }) => (
     <div style={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4rem' }}>
-      <div style={{ maxWidth: 440, width: '100%' }}>
+      <div style={{ maxWidth: 700, width: '100%' }}>
         {children}
       </div>
     </div>
@@ -46,7 +46,7 @@ export default async function HomePage() {
         <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4rem' }}>
           <div style={{ maxWidth: 460 }}>
             <p className="kicker" style={{ marginBottom: '1.5rem' }}>SOR7ED — pronounced sorted</p>
-            <h1 style={{ fontSize: 'clamp(5rem,9vw,8rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>
+            <h1 style={{ fontSize: 'clamp(3.5rem,5vw,5rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>
               Your brain is not broken.<br /><span style={{ color: '#ffc107' }}>Your tools are.</span>
             </h1>
             <p style={{ fontSize: '1rem', opacity: 0.75, lineHeight: 1.75, marginBottom: '2.5rem' }}>
