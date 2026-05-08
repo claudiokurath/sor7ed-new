@@ -43,7 +43,7 @@ export default async function HomePage() {
         <img src="/images/hero-robot.png" alt="" aria-hidden="true"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'left center' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(0,0,0,0.95) 40%, transparent 70%)' }} />
-        <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '6%' }}>
+        <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4rem' }}>
           <div style={{ maxWidth: 460 }}>
             <p className="kicker" style={{ marginBottom: '1.5rem' }}>SOR7ED — pronounced sorted</p>
             <h1 style={{ fontSize: 'clamp(5rem,9vw,8rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>
