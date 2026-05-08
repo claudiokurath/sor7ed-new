@@ -15,8 +15,15 @@ export default async function HomePage() {
     </section>
   );
 
-  const Left = () => (
-    <div style={{ width: '50%', background: '#0a0a0a', borderRight: '1px solid rgba(255,255,255,0.06)' }} />
+  const Left = ({ image }: { image?: boolean }) => (
+    image ? (
+      <div style={{ width: '50%', position: 'relative', overflow: 'hidden', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+        <img src='/images/hero-robot.png' alt='' aria-hidden='true'
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center' }} />
+      </div>
+    ) : (
+      <div style={{ width: '50%', background: '#0a0a0a', borderRight: '1px solid rgba(255,255,255,0.06)' }} />
+    )
   );
 
   const Right = ({ children }: { children: React.ReactNode }) => (
@@ -33,7 +40,7 @@ export default async function HomePage() {
 
       {/* 1. HERO */}
       <Section>
-        <Left />
+        <Left image />
         <Right>
           <p className="kicker" style={{ marginBottom: '1.5rem' }}>SOR7ED — pronounced sorted</p>
           <h1 style={{ fontSize: 'clamp(2.5rem,4.5vw,4rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>
