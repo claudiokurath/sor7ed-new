@@ -23,7 +23,7 @@ export default async function BlogPage() {
         <div className="page-wrap">
           <span className="accent-line" />
           <h1 style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', lineHeight: 0.88, marginBottom: '1.25rem' }}>
-            Plain words.<br /><span style={{ color: '#ffc107' }}>Real situations.</span>
+            Plain words.<br /><span style={{ color: '#888888' }}>Real situations.</span>
           </h1>
           <p style={{ fontSize: '1rem', opacity: 0.55, maxWidth: '52ch', lineHeight: 1.7 }}>
             Three reads a week. Every article ends with a WhatsApp keyword that sends you the protocol straight to your phone.
@@ -77,7 +77,7 @@ export default async function BlogPage() {
                     </p>
 
                     {/* CTA */}
-                    <p style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.8rem', letterSpacing: '0.12em', color: '#ffc107', textTransform: 'uppercase', marginTop: '1.25rem' }}>
+                    <p style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.8rem', letterSpacing: '0.12em', color: '#888888', textTransform: 'uppercase', marginTop: '1.25rem' }}>
                       Read →
                     </p>
                   </div>
