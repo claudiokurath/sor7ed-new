@@ -1,53 +1,92 @@
-'use client';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import SEOJsonLd from '@/components/SEOHead';
+import { getArticles } from '@/lib/notion-content';
 
-export default function BlogPage() {
-  const [articles, setArticles] = useState([]);
+export const metadata = {
+  title: 'Blog — SOR7ED',
+  description: 'Honest, practical reads on ADHD, autism, overwhelm, money, sex, substances, and everything in between.',
+};
 
-  useEffect(() => {
-    fetch('/api/articles').then(r => r.json()).then(setArticles).catch(() => {});
-  }, []);
+export const revalidate = 60;
+
+const BRANCHES = ['All', 'Keep Going', 'Feel Good', 'Plan Ahead', 'Spend Smart', 'Be Connected', 'Be Yourself', 'Level Up'];
+
+export default async function BlogPage() {
+  const articles = await getArticles();
 
   return (
-    <div style={{ minHeight: '100vh', background: '#08080A' }}>
-      <section style={{ padding: '8rem 6% 4rem', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-        <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '1.5rem' }}>The Blog</p>
-        <h1 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(3rem,8vw,7rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '1rem' }}>
-          Plain words.<br /><span style={{ color: '#ffc107' }}>Real situations.</span>
-        </h1>
-        <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '1.1rem', maxWidth: 480, lineHeight: 1.7 }}>
-          Every article ends with a WhatsApp keyword. Sign up and send it to receive the full protocol.
-        </p>
+    <>
+      <SEOJsonLd title="Blog" description="Plain words. Real situations." slug="blog" />
+
+      {/* HEADER */}
+      <section style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingTop: '7rem', paddingBottom: '3rem' }}>
+        <div className="page-wrap">
+          <span className="accent-line" />
+          <h1 style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', lineHeight: 0.88, marginBottom: '1.25rem' }}>
+            Plain words.<br /><span style={{ color: '#ffc107' }}>Real situations.</span>
+          </h1>
+          <p style={{ fontSize: '1rem', opacity: 0.55, maxWidth: '52ch', lineHeight: 1.7 }}>
+            Three reads a week. Every article ends with a WhatsApp keyword that sends you the protocol straight to your phone.
+          </p>
+        </div>
       </section>
-      <section style={{ padding: '4rem 6%' }}>
-        {articles.length === 0 ? (
-          <p style={{ color: 'rgba(255,255,255,0.2)' }}>Loading articles...</p>
-        ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(300px,1fr))', gap: '1px', background: 'rgba(255,255,255,0.04)' }}>
-            {articles.map((article) => (
-              <Link key={article.slug} href={'/blog/' + article.slug} style={{ background: '#08080A', display: 'block', textDecoration: 'none' }}>
-                {article.coverImage ? (
-                  <img src={article.coverImage} alt={article.title} style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }} />
-                ) : (
-                  <div style={{ width: '100%', aspectRatio: '16/9', background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <span style={{ fontFamily: 'League Gothic,sans-serif', fontSize: '2rem', color: 'rgba(255,193,7,0.15)', textTransform: 'uppercase' }}>{article.branch}</span>
+
+      {/* ARTICLES GRID */}
+      <section style={{ paddingTop: '3rem', paddingBottom: '5rem' }}>
+        <div className="page-wrap">
+          {articles.length === 0 ? (
+            <p style={{ opacity: 0.4, fontSize: '1rem' }}>No articles yet. Check back soon.</p>
+          ) : (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1px', background: 'rgba(255,255,255,0.06)' }}>
+              {articles.map((article) => (
+                <Link
+                  key={article.slug}
+                  href={'/blog/' + article.slug}
+                  className="card-hover" style={{ background: '#0a0a0a', display: 'block', overflow: 'hidden' }}
+                >
+                  {/* Cover image */}
+                  {article.coverImage ? (
+                    <img
+                      src={article.coverImage}
+                      alt={article.title}
+                      style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }}
+                    />
+                  ) : (
+                    <div style={{ width: '100%', aspectRatio: '16/9', background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '3rem', color: 'rgba(255,193,7,0.15)', textTransform: 'uppercase' }}>
+                        {article.branch?.split(' ')[0] || 'SOR7ED'}
+                      </span>
+                    </div>
+                  )}
+
+                  <div style={{ padding: '1.5rem' }}>
+                    {/* Meta */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.85rem' }}>
+                      <span className="branch-pill">{article.branch}</span>
+                      <span style={{ fontSize: '0.75rem', opacity: 0.35, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{article.readMinutes} min</span>
+                    </div>
+
+                    {/* Title */}
+                    <p style={{ fontFamily: 'League Gothic, sans-serif', fontSize: 'clamp(1.2rem, 2vw, 1.5rem)', textTransform: 'uppercase', lineHeight: 0.95, marginBottom: '0.75rem', letterSpacing: '0.02em' }}>
+                      {article.title}
+                    </p>
+
+                    {/* Excerpt */}
+                    <p style={{ fontSize: '0.85rem', opacity: 0.5, lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      {article.tldr}
+                    </p>
+
+                    {/* CTA */}
+                    <p style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.8rem', letterSpacing: '0.12em', color: '#ffc107', textTransform: 'uppercase', marginTop: '1.25rem' }}>
+                      Read →
+                    </p>
                   </div>
-                )}
-                <div style={{ padding: '1.5rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                    <span style={{ fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#ffc107', fontFamily: 'League Gothic,sans-serif' }}>{article.branch}</span>
-                    <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.2)' }}>{article.readMinutes} min</span>
-                  </div>
-                  <p style={{ fontFamily: 'League Gothic,Arial Narrow,sans-serif', fontSize: '1.4rem', textTransform: 'uppercase', lineHeight: 0.95, color: '#fff', marginBottom: '0.75rem' }}>{article.title}</p>
-                  <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{article.tldr}</p>
-                  <p style={{ fontSize: '0.75rem', fontFamily: 'League Gothic,sans-serif', letterSpacing: '0.1em', color: '#ffc107', textTransform: 'uppercase', marginTop: '1rem' }}>Read →</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
       </section>
-    </div>
+    </>
   );
 }
