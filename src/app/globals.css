@@ -9,7 +9,7 @@
 @theme {
   --color-bg: #0a0a0a;
   --color-fg: #ffffff;
-  --color-accent: #ffc107;
+  --color-accent: #888888;
   --color-accent-dim: rgba(255, 193, 7, 0.12);
   --color-border: rgba(255, 255, 255, 0.12);
   --color-border-strong: rgba(255, 255, 255, 0.25);
@@ -64,14 +64,14 @@ p, li, label, input, textarea, button {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #ffc107;
+  background: #888888;
   color: #000000;
   font-family: 'League Gothic', sans-serif;
   font-size: 1.1rem;
   letter-spacing: 0.06em;
   padding: 0.9rem 2rem;
   text-transform: uppercase;
-  border: 2px solid #ffc107;
+  border: 2px solid #888888;
   cursor: pointer;
   transition: background 0.15s, color 0.15s, transform 0.15s;
   white-space: nowrap;
@@ -79,7 +79,7 @@ p, li, label, input, textarea, button {
 
 .btn-yellow:hover {
   background: #000;
-  color: #ffc107;
+  color: #888888;
   transform: translateY(-1px);
 }
 
@@ -102,9 +102,9 @@ p, li, label, input, textarea, button {
 }
 
 .btn-outline:hover {
-  background: #ffc107;
+  background: #888888;
   color: #000;
-  border-color: #ffc107;
+  border-color: #888888;
   transform: translateY(-1px);
 }
 
@@ -114,7 +114,7 @@ p, li, label, input, textarea, button {
   font-family: 'League Gothic', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.22em;
-  color: #ffc107;
+  color: #888888;
   text-transform: uppercase;
   display: block;
 }
@@ -135,7 +135,7 @@ p, li, label, input, textarea, button {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 2px;
-  background: #ffc107;
+  background: #888888;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.25s ease;
@@ -200,7 +200,7 @@ p, li, label, input, textarea, button {
 }
 
 .blog-card:hover .blog-card-title {
-  color: #ffc107;
+  color: #888888;
 }
 
 .blog-card-excerpt {
@@ -257,12 +257,12 @@ body::after {
 }
 
 :focus-visible {
-  outline: 2px solid #ffc107;
+  outline: 2px solid #888888;
   outline-offset: 3px;
 }
 
 ::selection {
-  background: #ffc107;
+  background: #888888;
   color: #000000;
 }
 
@@ -298,14 +298,14 @@ body::after {
   display: block;
   width: 3rem;
   height: 3px;
-  background: #ffc107;
+  background: #888888;
   margin-bottom: 1.5rem;
 }
 
 /* ── STAT / NUMBER BLOCK ────────────────────────────────── */
 
 .stat-block {
-  border-left: 3px solid #ffc107;
+  border-left: 3px solid #888888;
   padding-left: 1.25rem;
 }
 
@@ -313,7 +313,7 @@ body::after {
   font-family: 'League Gothic', sans-serif;
   font-size: 3.5rem;
   line-height: 1;
-  color: #ffc107;
+  color: #888888;
 }
 
 .stat-label {
@@ -334,7 +334,7 @@ body::after {
   text-transform: uppercase;
   padding: 0.2rem 0.65rem;
   border: 1px solid rgba(255,193,7,0.4);
-  color: #ffc107;
+  color: #888888;
 }
 
 /* ── SECTION LABEL (large vertical text feel) ───────────── */
