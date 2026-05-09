@@ -92,21 +92,21 @@ export default function HomePage() {
 
       {/* BRANCH CARDS */}
       <section style={{ paddingBottom: '5rem' }}>
-        <div style={{ display: 'flex', gap: '1rem', padding: '1.5rem 6%', overflowX: 'auto', scrollSnapType: 'x mandatory', msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+        <div style={{ display: 'flex', gap: 0, overflowX: 'auto', scrollSnapType: 'x mandatory', msOverflowStyle: 'none', scrollbarWidth: 'none', scrollBehavior: 'smooth' }}>
           {branches.map((branch, i) => (
             <Link key={branch.slug} href={`/${branch.slug}`} style={{
-              flexShrink: 0, width: 260, scrollSnapAlign: 'start',
-              background: '#111', border: '1px solid rgba(255,255,255,0.06)',
-              padding: '2rem', textDecoration: 'none', display: 'block', position: 'relative', overflow: 'hidden',
+              flexShrink: 0, width: '100vw', scrollSnapAlign: 'start',
+              background: '#0d0d0d', borderRight: '1px solid rgba(255,255,255,0.06)',
+              padding: '4rem 6%', textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '70vh', position: 'relative', overflow: 'hidden',
             }}>
               <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: branch.color }} />
-              <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: branch.color, display: 'block', marginBottom: '1.5rem' }}>
+              <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.8rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: branch.color, display: 'block', marginBottom: '2rem' }}>
                 0{i + 1}
               </span>
-              <h3 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: '2.5rem', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.75rem' }}>
+              <h3 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(4rem,12vw,10rem)', textTransform: 'uppercase', lineHeight: 0.88, color: '#fff', marginBottom: '1.5rem' }}>
                 {branch.name}
               </h3>
-              <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.65, marginBottom: '1.5rem' }}>
+              <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.65, marginBottom: '2rem', maxWidth: 480 }}>
                 {branch.desc}
               </p>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
