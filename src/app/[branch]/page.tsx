@@ -17,7 +17,7 @@ const BRANCHES: Record<string, {
     color: '#6366F1',
     desc: 'Focus, burnout, executive function, emotional regulation.',
     detail: 'Your brain is not broken. It runs differently. This branch covers everything happening inside your head — the executive function gaps, the emotional storms, the burnout cycles, and the tools to navigate all of it without shame.',
-    notionBranch: 'Feel Good',
+    notionBranch: 'Keep Going',
     keywords: ['TRIAGE', 'BURNOUT', 'OVERWHELM', 'SHAME', 'FEELINGS', 'INITIATION', 'WILLPOWER', 'FOCUS'],
   },
   body: {
@@ -25,7 +25,7 @@ const BRANCHES: Record<string, {
     color: '#EF4444',
     desc: 'Sleep, sensory load, medication, energy, fatigue.',
     detail: 'Your nervous system is the foundation. Sleep deprivation, sensory overwhelm, medication management, and chronic fatigue affect every other area of your life. This branch stabilises the baseline.',
-    notionBranch: 'Keep Going',
+    notionBranch: 'Feel Good',
     keywords: ['SLEEP', 'SENSORY', 'MEDS', 'ENERGY', 'TIRED', 'MOVE', 'DOPAMINE', 'CALM'],
   },
   tech: {
