@@ -23,7 +23,7 @@ export default async function ToolsPage() {
         <div className="page-wrap">
           <span className="accent-line" />
           <h1 style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', lineHeight: 0.88, marginBottom: '1.25rem' }}>
-            The toolkit.<br /><span style={{ color: '#ffc107' }}>Use it.</span>
+            The toolkit.<br /><span style={{ color: '#888888' }}>Use it.</span>
           </h1>
           <p style={{ fontSize: '1rem', opacity: 0.55, maxWidth: '52ch', lineHeight: 1.7 }}>
             Interactive tools that work on the page. Sign up to unlock your full result and get it delivered to WhatsApp.
@@ -44,7 +44,7 @@ export default async function ToolsPage() {
                   style={{ background: '#0a0a0a', padding: '2rem', display: 'block', transition: 'background 0.2s', position: 'relative', overflow: 'hidden' }}
                 >
                   {/* Top accent line on hover via CSS */}
-                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: '#ffc107' }} />
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: '#888888' }} />
 
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
                     <span className="branch-pill">{tool.branch}</span>
@@ -62,8 +62,8 @@ export default async function ToolsPage() {
                   </p>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ display: 'block', width: '0.5rem', height: '0.5rem', borderRadius: '50%', background: '#ffc107' }} />
-                    <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.85rem', letterSpacing: '0.12em', color: '#ffc107', textTransform: 'uppercase' }}>
+                    <span style={{ display: 'block', width: '0.5rem', height: '0.5rem', borderRadius: '50%', background: '#888888' }} />
+                    <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.85rem', letterSpacing: '0.12em', color: '#888888', textTransform: 'uppercase' }}>
                       Start tool →
                     </span>
                   </div>
