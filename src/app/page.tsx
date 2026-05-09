@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const taglines = [
-  { word: 'Overwhelmed', color: '#ffc107' },
+  { word: 'Overwhelmed', color: '#888' },
   { word: 'Scattered', color: '#a78bfa' },
   { word: 'Exhausted', color: '#fb7185' },
   { word: 'Stuck', color: '#34d399' },
@@ -65,7 +65,7 @@ export default function HomePage() {
             SOR7ED gives neurodivergent adults a structured operating system for life — broken into 7 branches. Text a keyword. Get a protocol. No app needed.
           </p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link href="#branches" style={{ display: 'inline-block', background: '#ffc107', color: '#000', fontFamily: 'League Gothic, sans-serif', fontSize: '1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.9rem 2rem', textDecoration: 'none' }}>
+            <Link href="#branches" style={{ display: 'inline-block', background: '#888', color: '#000', fontFamily: 'League Gothic, sans-serif', fontSize: '1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.9rem 2rem', textDecoration: 'none' }}>
               Explore the branches
             </Link>
             <Link href="/signup" style={{ display: 'inline-block', background: 'transparent', color: 'rgba(255,255,255,0.5)', fontFamily: 'League Gothic, sans-serif', fontSize: '1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.9rem 2rem', border: '1px solid rgba(255,255,255,0.15)', textDecoration: 'none' }}>
@@ -124,12 +124,12 @@ export default function HomePage() {
           <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '1.5rem' }}>The mission</p>
           <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem,6vw,5rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '2rem' }}>
             The world wasn't built for your brain.<br />
-            <span style={{ color: '#ffc107' }}>We build systems that are.</span>
+            <span style={{ color: '#888' }}>We build systems that are.</span>
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '1.1rem', maxWidth: 560, lineHeight: 1.7, marginBottom: '2.5rem' }}>
             ADHD, neurodivergence, and a busy mind aren't flaws. They're operating systems that need the right software. SOR7ED is that software — delivered to your WhatsApp.
           </p>
-          <Link href="/signup" style={{ display: 'inline-block', background: '#ffc107', color: '#000', fontFamily: 'League Gothic, sans-serif', fontSize: '1.1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '1rem 2.5rem', textDecoration: 'none' }}>
+          <Link href="/signup" style={{ display: 'inline-block', background: '#888', color: '#000', fontFamily: 'League Gothic, sans-serif', fontSize: '1.1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '1rem 2.5rem', textDecoration: 'none' }}>
             Create free account →
           </Link>
         </div>
