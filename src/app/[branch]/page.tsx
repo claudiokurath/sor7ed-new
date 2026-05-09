@@ -17,7 +17,7 @@ const BRANCHES: Record<string, {
     color: '#6366F1',
     desc: 'Focus, burnout, executive function, emotional regulation.',
     detail: 'Your brain is not broken. It runs differently. This branch covers everything happening inside your head — the executive function gaps, the emotional storms, the burnout cycles, and the tools to navigate all of it without shame.',
-    notionBranch: 'Keep Going',
+    notionBranch: 'Mind',
     keywords: ['TRIAGE', 'BURNOUT', 'OVERWHELM', 'SHAME', 'FEELINGS', 'INITIATION', 'WILLPOWER', 'FOCUS'],
   },
   body: {
@@ -25,7 +25,7 @@ const BRANCHES: Record<string, {
     color: '#EF4444',
     desc: 'Sleep, sensory load, medication, energy, fatigue.',
     detail: 'Your nervous system is the foundation. Sleep deprivation, sensory overwhelm, medication management, and chronic fatigue affect every other area of your life. This branch stabilises the baseline.',
-    notionBranch: 'Feel Good',
+    notionBranch: 'Body',
     keywords: ['SLEEP', 'SENSORY', 'MEDS', 'ENERGY', 'TIRED', 'MOVE', 'DOPAMINE', 'CALM'],
   },
   tech: {
@@ -33,7 +33,7 @@ const BRANCHES: Record<string, {
     color: '#06B6D4',
     desc: 'Productivity, time management, digital systems, clutter.',
     detail: 'Standard productivity advice was not built for your brain. This branch covers the systems, tools, and workarounds that actually work — from time blindness fixes to inbox zero without the spiral.',
-    notionBranch: 'Plan Ahead',
+    notionBranch: 'Tech',
     keywords: ['TIME', 'PLAN', 'HOME', 'INBOX', 'SCREEN', 'FOCUS'],
   },
   wealth: {
@@ -41,7 +41,7 @@ const BRANCHES: Record<string, {
     color: '#10B981',
     desc: 'Money, debt, budgeting, benefits, financial admin.',
     detail: 'The financial cost of neurodivergence is real and measurable. Late fees, impulsive decisions, missed deadlines, unclaimed benefits — this branch helps you stop the bleed.',
-    notionBranch: 'Spend Smart',
+    notionBranch: 'Wealth',
     keywords: ['MONEY', 'DEBT2', 'FEES', 'BENEFITS', 'TAX', 'FOOD'],
   },
   connection: {
@@ -49,7 +49,7 @@ const BRANCHES: Record<string, {
     color: '#F59E0B',
     desc: 'Relationships, communication, loneliness, intimacy.',
     detail: 'Neurodivergent adults experience connection differently. This branch covers relationships, intimacy, communication, and the specific loneliness that comes from a lifetime of feeling slightly out of sync.',
-    notionBranch: 'Be Connected',
+    notionBranch: 'Connection',
     keywords: ['RELATE', 'CONNECT', 'TALK', 'BREAKUP', 'ISOLATED', 'EMAIL'],
   },
   identity: {
@@ -57,7 +57,7 @@ const BRANCHES: Record<string, {
     color: '#FB7185',
     desc: 'Masking, late diagnosis, authenticity, self-narrative.',
     detail: 'Who are you when you stop performing? This branch covers the deep work of late diagnosis, unmasking, and rebuilding your self-narrative after years of being told you were the problem.',
-    notionBranch: 'Be Yourself',
+    notionBranch: 'Identity',
     keywords: ['MASK', 'NEWME', 'GRIEF', 'RECOVERY', 'PATTERN'],
   },
   growth: {
@@ -65,7 +65,7 @@ const BRANCHES: Record<string, {
     color: '#A855F7',
     desc: 'Career, skills, self-sabotage, levelling up.',
     detail: 'This is where everything compounds. Career, skills, purpose, and a life genuinely designed for the way your brain works. Not a neurotypical life badly adapted. A neurodivergent life built right.',
-    notionBranch: 'Level Up',
+    notionBranch: 'Growth',
     keywords: ['PATTERN', 'RETURN', 'TOXIC', 'JOBLOSS2', 'IMMIGRATION', 'HOUSING'],
   },
 };
