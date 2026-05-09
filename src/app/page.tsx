@@ -3,11 +3,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const taglines = [
-  { word: 'Overwhelmed', color: '#888' },
-  { word: 'Scattered', color: '#a78bfa' },
-  { word: 'Exhausted', color: '#fb7185' },
-  { word: 'Stuck', color: '#34d399' },
-  { word: 'Wired differently', color: '#38bdf8' },
+  { word: 'Overwhelmed', color: '#6366F1' },
+  { word: 'Scattered',   color: '#EF4444' },
+  { word: 'Exhausted',   color: '#06B6D4' },
+  { word: 'Stuck',       color: '#10B981' },
+  { word: 'Disconnected',color: '#F59E0B' },
+  { word: 'Lost',        color: '#FB7185' },
+  { word: 'Held back',   color: '#A855F7' },
 ];
 
 const branches = [
