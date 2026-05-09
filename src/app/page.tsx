@@ -1,191 +1,223 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import SEOJsonLd from '@/components/SEOHead';
-import { getArticles, getTools } from '@/lib/notion-content';
 
-export const revalidate = 60;
+const taglines = [
+  { word: 'Overwhelmed', color: '#ffc107' },
+  { word: 'Scattered', color: '#a78bfa' },
+  { word: 'Exhausted', color: '#fb7185' },
+  { word: 'Stuck', color: '#34d399' },
+  { word: 'Wired differently', color: '#38bdf8' },
+];
 
-export default async function HomePage() {
-  const [tools, articles] = await Promise.all([getTools(), getArticles()]);
-  const featuredTool = tools.find((t: any) => t.status === 'live') ?? tools[0];
-  const recent = articles.slice(0, 3);
+const branches = [
+  { name: 'Mind', color: '#6366f1', desc: 'Focus, burnout, executive function, emotional regulation', keyword: 'TRIAGE', slug: 'mind' },
+  { name: 'Body', color: '#10b981', desc: 'Sleep, sensory load, medication, energy, fatigue', keyword: 'SLEEP', slug: 'body' },
+  { name: 'Tech', color: '#f59e0b', desc: 'Productivity, time blindness, digital systems, clutter', keyword: 'PLAN', slug: 'tech' },
+  { name: 'Wealth', color: '#ef4444', desc: 'Money, debt, budgeting, benefits, financial admin', keyword: 'MONEY', slug: 'wealth' },
+  { name: 'Connection', color: '#ec4899', desc: 'Relationships, communication, loneliness, intimacy', keyword: 'CONNECT', slug: 'connection' },
+  { name: 'Identity', color: '#8b5cf6', desc: 'Masking, late diagnosis, authenticity, self-narrative', keyword: 'MASK', slug: 'identity' },
+  { name: 'Growth', color: '#0ea5e9', desc: 'Career, skills, self-sabotage, levelling up', keyword: 'PATTERN', slug: 'growth' },
+];
 
-  const Section = ({ children, border = true }: { children: React.ReactNode; border?: boolean }) => (
-    <section className="h-dvh snap-start flex" style={{ borderBottom: border ? '1px solid rgba(255,255,255,0.08)' : 'none' }}>
-      {children}
-    </section>
-  );
+export default function HomePage() {
+  const [taglineIndex, setTaglineIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
 
-  const Left = ({ image }: { image?: boolean }) => (
-    image ? (
-      <div style={{ width: '35%', position: 'relative', overflow: 'hidden', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
-        <img src='/images/hero-robot.png' alt='' aria-hidden='true'
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'left center' }} />
-      </div>
-    ) : (
-      <div style={{ width: '35%', background: '#0a0a0a', borderRight: '1px solid rgba(255,255,255,0.06)' }} />
-    )
-  );
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setTaglineIndex(i => (i + 1) % taglines.length);
+        setVisible(true);
+      }, 300);
+    }, 2200);
+    return () => clearInterval(interval);
+  }, []);
 
-  const Right = ({ children }: { children: React.ReactNode }) => (
-    <div style={{ width: '65%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 3rem' }}>
-      <div style={{ maxWidth: 900, width: '100%' }}>
-        {children}
-      </div>
-    </div>
-  );
+  const current = taglines[taglineIndex];
 
   return (
-    <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth">
-      <SEOJsonLd title="SOR7ED — Templates, not inspiration" description="Practical templates and micro-tools for neurodivergent adults. Delivered via WhatsApp." />
+    <div style={{ minHeight: '100vh', background: '#080808', overflowX: 'hidden' }}>
 
-      {/* 1. HERO — image natural size, text overlaid in empty right space */}
-      <section className="h-dvh snap-start" style={{ position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <img src="/images/hero-robot.png" alt="" aria-hidden="true"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'left center' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(0,0,0,0.95) 40%, transparent 70%)' }} />
-        <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 3rem' }}>
-          <div style={{ maxWidth: 460 }}>
-            <p className="kicker" style={{ marginBottom: '1.5rem' }}>SOR7ED — pronounced sorted</p>
-            <h1 style={{ fontSize: 'clamp(2rem,3.5vw,3.5rem)', lineHeight: 0.92, marginBottom: '1.5rem' }}>
-              <span style={{ display: "block", whiteSpace: "nowrap" }}>Your brain is not broken.</span><span style={{ display: "block", whiteSpace: "nowrap", color: "#ffc107" }}>Your tools are.</span>
-            </h1>
-            <p style={{ fontSize: '1rem', opacity: 0.75, lineHeight: 1.75, marginBottom: '2.5rem' }}>
-              Practical protocols for ADHD, autism, dyslexia — straight to your WhatsApp. No app. No fluff.
-            </p>
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <Link href="/signup" className="btn-yellow">Join free</Link>
-              <Link href="/tools" className="btn-outline">Browse tools</Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ── HERO ── */}
+      <section style={{ minHeight: '92vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '6rem 6% 4rem' }}>
 
-      {/* 2. HOW IT WORKS */}
-      <Section>
-        <Left />
-        <Right>
-          <p className="kicker" style={{ marginBottom: '1rem' }}>How it works</p>
-          <h2 style={{ fontSize: 'clamp(4rem,7vw,6rem)', lineHeight: 0.92, marginBottom: '2.5rem' }}>Three steps.<br />That is it.</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-            {[
-              { n: '01', t: 'Sign up', d: 'Free account. GDPR consent. WhatsApp number. Done.' },
-              { n: '02', t: 'Send a keyword', d: 'TRIAGE, BURNOUT, SLEEP — text it straight to us.' },
-              { n: '03', t: 'Get sorted', d: 'A structured protocol lands in your WhatsApp.' },
-            ].map(s => (
-              <div key={s.n} style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}>
-                <span className="display" style={{ color: '#ffc107', fontSize: '5rem', lineHeight: 1, flexShrink: 0 }}>{s.n}</span>
-                <div>
-                  <p className="display" style={{ fontSize: '2.4rem', marginBottom: '0.25rem' }}>{s.t}</p>
-                  <p style={{ fontSize: '1.2rem', opacity: 0.55, lineHeight: 1.65 }}>{s.d}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Right>
-      </Section>
-
-      {/* 3. 7 BRANCHES */}
-      <Section>
-        <Left />
-        <Right>
-          <p className="kicker" style={{ marginBottom: '1rem' }}>The 7 Branches</p>
-          <h2 style={{ fontSize: 'clamp(3.6rem,6vw,5rem)', lineHeight: 0.92, marginBottom: '2rem' }}>A framework for neurodivergent flourishing.</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-            {[
-              ['Mind', 'focus, burnout, executive function'],
-              ['Body', 'sleep, sensory load, nervous system'],
-              ['Tech', 'time, admin, productivity systems'],
-              ['Wealth', 'money, debt, ADHD tax'],
-              ['Connection', 'relationships, communication'],
-              ['Identity', 'masking, late diagnosis, authenticity'],
-              ['Growth', 'career, skills, building a life that fits'],
-            ].map(([name, desc]) => (
-              <p key={name} style={{ fontSize: '1.6rem', lineHeight: 1.6, opacity: 0.75 }}>
-                <strong style={{ color: '#ffc107' }}>{name}</strong> — {desc}
-              </p>
-            ))}
-          </div>
-          <div style={{ marginTop: '2rem' }}>
-            <Link href="/blog" className="btn-outline">Read the blog</Link>
-          </div>
-        </Right>
-      </Section>
-
-      {/* 4. FEATURED TOOL */}
-      {featuredTool && (
-        <Section>
-          <Left />
-          <Right>
-            <p className="kicker" style={{ marginBottom: '1rem' }}>Featured tool</p>
-            <h2 style={{ fontSize: 'clamp(4rem,7vw,6rem)', lineHeight: 0.92, marginBottom: '1rem' }}>{featuredTool.name}</h2>
-            <p style={{ fontSize: '1.6rem', opacity: 0.6, lineHeight: 1.7, marginBottom: '2rem' }}>{featuredTool.tagline}</p>
-            <div style={{ background: '#111', border: '1px solid rgba(255,255,255,0.1)', padding: '1.5rem', marginBottom: '2rem' }}>
-              <div style={{ display: 'flex', gap: 6, marginBottom: '1rem' }}>
-                {[0.15, 0.15, 1].map((o, i) => <span key={i} style={{ width: 9, height: 9, borderRadius: '50%', background: i === 2 ? '#ffc107' : `rgba(255,255,255,${o})`, display: 'block' }} />)}
-              </div>
-              <p className="mono" style={{ fontSize: '1.6rem', color: 'rgba(255,193,7,0.7)', marginBottom: '0.4rem' }}>{'>'} You: {featuredTool.keyword}</p>
-              <p className="mono" style={{ fontSize: '1.6rem', color: 'rgba(255,255,255,0.3)' }}>{'>'} SOR7ED: Sign up to unlock…</p>
-            </div>
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <Link href={'/tools/' + featuredTool.slug} className="btn-yellow">Try it now</Link>
-              <Link href="/tools" className="btn-outline">All tools</Link>
-            </div>
-          </Right>
-        </Section>
-      )}
-
-      {/* 5. RECENT BLOG — full width */}
-      <section className="h-dvh snap-start flex flex-col justify-center" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <div className="page-wrap" style={{ width: '100%' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
-            <div>
-              <p className="kicker" style={{ marginBottom: '0.5rem' }}>From the blog</p>
-              <h2 style={{ fontSize: 'clamp(5rem,10vw,8rem)', lineHeight: 0.92 }}>Recent reads.</h2>
-            </div>
-            <Link href="/blog" className="btn-outline" style={{ fontSize: '0.9rem', padding: '0.65rem 1.4rem' }}>All articles</Link>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: 'rgba(255,255,255,0.06)' }}>
-            {recent.map((a: any) => (
-              <Link key={a.slug} href={'/blog/' + a.slug} style={{ background: '#0a0a0a', padding: '1.75rem', display: 'block' }}>
-                <p className="kicker" style={{ fontSize: '1.4rem', marginBottom: '0.75rem' }}>{a.branch} · {a.readMinutes} min</p>
-                <p className="display" style={{ fontSize: '2.4rem', lineHeight: 0.95, marginBottom: '0.75rem' }}>{a.title}</p>
-                <p style={{ fontSize: '1.4rem', opacity: 0.5, lineHeight: 1.6, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{a.tldr}</p>
-                <p className="kicker" style={{ fontSize: '1.4rem', marginTop: '1.25rem', color: '#ffc107' }}>Read →</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. SAFETY */}
-      <Section>
-        <Left />
-        <Right>
-          <p className="kicker" style={{ marginBottom: '1rem' }}>Important</p>
-          <h2 style={{ fontSize: 'clamp(4rem,7vw,6rem)', lineHeight: 0.92, marginBottom: '2rem' }}>Safety &amp; Consent.</h2>
-          <p style={{ fontSize: '1.6rem', opacity: 0.55, lineHeight: 1.8, marginBottom: '1rem' }}>
-            SOR7ED is not therapy or medical advice. It is not a crisis service. Data is collected only with explicit GDPR consent.
-          </p>
-          <p style={{ fontSize: '1.6rem', opacity: 0.55, lineHeight: 1.8 }}>
-            Not a crisis line — call 999 or text SHOUT to 85258. GDPR and PECR compliant. Text STOP any time to unsubscribe.
-          </p>
-        </Right>
-      </Section>
-
-      {/* 7. CTA */}
-      <Section border={false}>
-        <div style={{ width: '35%', background: '#ffc107', display: 'flex', alignItems: 'center', justifyContent: 'center' }} />
-        <Right>
-          <p className="display" style={{ fontSize: '1.5rem', letterSpacing: '0.18em', marginBottom: '1rem' }}>READY TO GET SORTED</p>
-          <h2 style={{ fontSize: 'clamp(5rem,9vw,8rem)', lineHeight: 0.92, marginBottom: '2.5rem' }}>
-            Practical tools.<br />Your WhatsApp.
-          </h2>
-          <Link href="/signup" className="inline-block display text-2xl uppercase transition-all"
-            style={{ background: '#ffc107', color: '#000', border: '4px solid #ffc107', padding: '1.1rem 2.5rem', fontSize: '1.3rem' }}>
-            Create free account
+        {/* Top bar */}
+        <div style={{ position: 'absolute', top: '5rem', left: 0, right: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 6%' }}>
+          <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem', letterSpacing: '0.3em', textTransform: 'uppercase' }}>
+            WhatsApp protocols · No app
+          </span>
+          <Link href="/signup" style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', textDecoration: 'none' }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.3)')}>
+            Get started →
           </Link>
-        </Right>
-      </Section>
+        </div>
+
+        {/* Headline */}
+        <div style={{ maxWidth: 800 }}>
+          <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '1.5rem' }}>
+            A system built for minds like yours
+          </p>
+
+          <h1 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(3.5rem, 8vw, 7rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#ffffff', marginBottom: '0.5rem' }}>
+            If you're feeling
+          </h1>
+
+          <div style={{ height: 'clamp(4rem, 9vw, 8rem)', overflow: 'hidden', marginBottom: '2rem' }}>
+            <span style={{
+              fontFamily: 'League Gothic, Arial Narrow, sans-serif',
+              fontSize: 'clamp(3.5rem, 8vw, 7rem)',
+              textTransform: 'uppercase',
+              lineHeight: 0.92,
+              color: current.color,
+              display: 'block',
+              transition: 'opacity 0.3s, transform 0.3s',
+              opacity: visible ? 1 : 0,
+              transform: visible ? 'translateY(0)' : 'translateY(20px)',
+            }}>
+              {current.word}
+            </span>
+          </div>
+
+          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '1.1rem', maxWidth: 480, lineHeight: 1.7, marginBottom: '2.5rem' }}>
+            SOR7ED gives neurodivergent adults a structured operating system for life — broken into 7 branches. Text a keyword. Get a protocol. No app needed.
+          </p>
+
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <Link href="#branches" style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '0.9rem 2rem', background: '#ffc107', color: '#000',
+              fontFamily: 'League Gothic, sans-serif', fontSize: '1rem',
+              letterSpacing: '0.08em', textTransform: 'uppercase',
+              textDecoration: 'none', transition: 'transform 0.2s',
+            }}
+              onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.03)')}
+              onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}>
+              Explore the branches
+            </Link>
+            <Link href="/signup" style={{
+              display: 'inline-flex', alignItems: 'center',
+              padding: '0.9rem 2rem', background: 'transparent',
+              color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.15)',
+              fontFamily: 'League Gothic, sans-serif', fontSize: '1rem',
+              letterSpacing: '0.08em', textTransform: 'uppercase', textDecoration: 'none',
+              transition: 'border-color 0.2s, color 0.2s',
+            }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'; e.currentTarget.style.color = '#fff'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; }}>
+              Sign up free
+            </Link>
+          </div>
+        </div>
+
+        {/* Scroll hint */}
+        <div style={{ position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+          <div style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.15))' }} />
+        </div>
+      </section>
+
+      {/* ── BRANCHES INTRO ── */}
+      <section style={{ padding: '2rem 6% 1.5rem' }} id="branches">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+          <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
+          <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem', letterSpacing: '0.3em', textTransform: 'uppercase' }}>7 Branches of Life</span>
+          <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
+        </div>
+        <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2rem, 5vw, 4rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.75rem' }}>
+          Every part of your life,<br />sorted.
+        </h2>
+        <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '1rem', maxWidth: 480, lineHeight: 1.7 }}>
+          Each branch contains practical protocols — structured micro-actions designed for busy, distracted, and neurodivergent minds.
+        </p>
+      </section>
+
+      {/* ── BRANCH CARDS — horizontal scroll ── */}
+      <section style={{ paddingBottom: '5rem' }}>
+        <div style={{
+          display: 'flex', gap: '1rem', padding: '1.5rem 6% 1.5rem',
+          overflowX: 'auto', scrollSnapType: 'x mandatory',
+          msOverflowStyle: 'none', scrollbarWidth: 'none',
+        }}>
+          {branches.map((branch, i) => (
+            <Link key={branch.slug} href={`/${branch.slug}`}
+              style={{
+                flexShrink: 0, width: 260, scrollSnapAlign: 'start',
+                background: '#111', border: '1px solid rgba(255,255,255,0.06)',
+                padding: '2rem', textDecoration: 'none', display: 'block',
+                transition: 'border-color 0.2s, transform 0.2s',
+                position: 'relative', overflow: 'hidden',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = branch.color; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+            >
+              {/* Accent top line */}
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: branch.color }} />
+
+              <div style={{ marginBottom: '1.5rem' }}>
+                <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: branch.color }}>
+                  0{i + 1}
+                </span>
+              </div>
+
+              <h3 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: '2.5rem', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.75rem' }}>
+                {branch.name}
+              </h3>
+
+              <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.65, marginBottom: '1.5rem' }}>
+                {branch.desc}
+              </p>
+
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontFamily: 'ui-monospace, monospace', fontSize: '0.7rem', color: branch.color, letterSpacing: '0.1em' }}>
+                  {branch.keyword}
+                </span>
+                <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.85rem' }}>→</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ── MISSION ── */}
+      <section style={{ padding: '5rem 6%', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ maxWidth: 800 }}>
+          <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '1.5rem' }}>
+            The mission
+          </p>
+          <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem, 6vw, 5rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '2rem' }}>
+            The world wasn't built for your brain.<br />
+            <span style={{ color: '#ffc107' }}>We build systems that are.</span>
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '1.1rem', maxWidth: 560, lineHeight: 1.7, marginBottom: '2.5rem' }}>
+            ADHD, neurodivergence, and a busy mind aren't flaws to be fixed. They're operating systems that need the right software. SOR7ED is that software — delivered where you already are, on WhatsApp.
+          </p>
+          <Link href="/signup" style={{
+            display: 'inline-block', background: '#ffc107', color: '#000',
+            fontFamily: 'League Gothic, sans-serif', fontSize: '1.1rem',
+            letterSpacing: '0.08em', textTransform: 'uppercase',
+            padding: '1rem 2.5rem', textDecoration: 'none',
+            transition: 'background 0.2s',
+          }}
+            onMouseEnter={e => (e.currentTarget.style.background = '#e6ac00')}
+            onMouseLeave={e => (e.currentTarget.style.background = '#ffc107')}>
+            Create free account →
+          </Link>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer style={{ padding: '2rem 6%', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+        <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '1.5rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)' }}>SOR7ED</span>
+        <div style={{ display: 'flex', gap: '2rem' }}>
+          <Link href="/blog" style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', textDecoration: 'none' }}>Blog</Link>
+          <Link href="/tools" style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', textDecoration: 'none' }}>Tools</Link>
+          <Link href="/signup" style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', textDecoration: 'none' }}>Sign up</Link>
+        </div>
+        <span style={{ color: 'rgba(255,255,255,0.1)', fontSize: '0.7rem' }}>SOR7ED LIMITED · Company No: 16398701</span>
+      </footer>
 
     </div>
   );
