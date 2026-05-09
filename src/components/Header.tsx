@@ -29,8 +29,8 @@ export default function Header() {
           &nbsp;
         </Link>
         <nav className="hidden md:flex items-center gap-6 display text-xl">
-          <Link href="/tools" className="hover:text-[#888888]">Tools</Link>
-          <Link href="/blog" className="hover:text-[#888888]">Blog</Link>
+          <Link href="/tools" className="hover:text-[#ffffff]">Tools</Link>
+          <Link href="/blog" className="hover:text-[#ffffff]">Blog</Link>
           <Link href="/signup" className="btn-yellow !text-base !py-2 !px-4">Join free</Link>
         </nav>
         <Link href="/signup" className="md:hidden btn-yellow !text-sm !py-2 !px-3">Join</Link>
