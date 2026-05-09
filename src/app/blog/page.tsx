@@ -42,7 +42,7 @@ export default async function BlogPage() {
                 <Link
                   key={article.slug}
                   href={'/blog/' + article.slug}
-                  className="card-hover" style={{ background: '#0a0a0a', display: 'block', overflow: 'hidden' }}
+                  style={{ background: '#0a0a0a', display: 'block', overflow: 'hidden', transition: 'background 0.2s' }}
                 >
                   {/* Cover image */}
                   {article.coverImage ? (
