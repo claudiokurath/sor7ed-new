@@ -1,0 +1,418 @@
+/* SOR7ED Homepage Styles */
+/* Brand: Black, White, Yellow (#FFC107) */
+/* Typography: League Gothic + Roboto Light */
+
+/* ============================================
+   ROOT & BASE STYLES
+   ============================================ */
+
+.container {
+  background-color: #ffffff;
+  color: #000000;
+  min-height: 100vh;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.hero {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem 5% 4rem;
+  text-align: center;
+}
+
+.heroTitle {
+  font-family: 'League Gothic', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  color: #000000;
+}
+
+.heroSubtitle {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: #666666;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  max-width: 800px;
+  margin: 0;
+  margin-bottom: 2rem;
+}
+
+.heroCta {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  padding: 0.6rem 1.5rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: 1px solid #000000;
+  transition: all 0.3s ease;
+  margin-bottom: 6rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.heroCta:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #000000;
+}
+
+/* ============================================
+   BRANCHES GRID
+   ============================================ */
+
+.branchesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-bottom: 6rem;
+}
+
+.branchLink {
+  font-family: 'League Gothic', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #000000;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  padding: 1rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+
+.branchLink:hover {
+  color: #FFC107;
+  border-color: #FFC107;
+  transform: scale(1.05);
+}
+
+/* ============================================
+   STEPS SECTION
+   ============================================ */
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.step {
+  text-align: left;
+}
+
+.stepIcon {
+  background-color: #f5f5f5;
+  border-radius: 16px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  height: 200px;
+}
+
+.stepIconSquare {
+  width: 30%;
+  height: 30%;
+  background-color: #ffffff;
+}
+
+.stepIconCircle {
+  width: 30%;
+  height: 30%;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+.stepIconTriangle {
+  width: 0;
+  height: 0;
+  border-left: 3vw solid transparent;
+  border-right: 3vw solid transparent;
+  border-bottom: 5vw solid #ffffff;
+}
+
+.stepTitle {
+  font-family: 'League Gothic', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  color: #000000;
+}
+
+.stepDescription {
+  font-family: 'Roboto', sans-serif;
+  color: #666666;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ============================================
+   CTA SECTION
+   ============================================ */
+
+.ctaSection {
+  padding: 6rem 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  margin: 0 5%;
+}
+
+.ctaTitle {
+  font-family: 'League Gothic', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  color: #000000;
+}
+
+.ctaSubtitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  color: #666666;
+  margin: 0;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+
+.ctaCta {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  padding: 0.6rem 1.5rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: 1px solid #000000;
+  transition: all 0.3s ease;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.ctaCta:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #000000;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  padding: 4rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.logoShapes {
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.logoShape {
+  width: 12px;
+  height: 12px;
+  background-color: #e0e0e0;
+}
+
+.logoShapeCircle {
+  width: 12px;
+  height: 12px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+}
+
+.logoShapeTriangle {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 12px solid #e0e0e0;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 4rem;
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerColumnTitle {
+  font-family: 'League Gothic', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  color: #000000;
+  letter-spacing: 0.05em;
+}
+
+.footerColumnLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footerLink {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.75rem;
+  color: #666666;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footerLink:hover {
+  color: #FFC107;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 5% 2rem;
+  }
+
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1.2rem;
+  }
+
+  .branchesContainer {
+    gap: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  .branchLink {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .stepsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .ctaSection {
+    padding: 4rem 5%;
+  }
+
+  .ctaTitle {
+    font-size: 1.5rem;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footerLinks {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 2rem 5% 1rem;
+  }
+
+  .heroTitle {
+    font-size: 1.5rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+
+  .branchesContainer {
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .branchLink {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .stepsGrid {
+    gap: 1rem;
+  }
+
+  .stepIcon {
+    height: 150px;
+  }
+
+  .stepTitle {
+    font-size: 0.9rem;
+  }
+
+  .stepDescription {
+    font-size: 0.8rem;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .heroCta,
+  .branchLink,
+  .ctaCta,
+  .footerLink {
+    transition: none;
+  }
+}
+
+/* ============================================
+   DARK MODE (Future)
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  /* Keep brand colors consistent - no changes for now */
+}
