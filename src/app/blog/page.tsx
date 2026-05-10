@@ -47,7 +47,7 @@ export default async function BlogPage() {
                   {/* Cover image */}
                   {article.coverImage ? (
                     <img
-                      src={article.coverImage}
+                      src={article.coverImage} loading="lazy"
                       alt={article.title}
                       style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }}
                     />
