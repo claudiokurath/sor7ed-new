@@ -13,13 +13,13 @@ const taglines = [
 ];
 
 const branches = [
-  { name: 'Mind', color: '#6366F1', desc: 'Focus, burnout, executive function, emotional regulation', keyword: 'TRIAGE', slug: 'mind' },
-  { name: 'Body', color: '#EF4444', desc: 'Sleep, sensory load, medication, energy, fatigue', keyword: 'SLEEP', slug: 'body' },
-  { name: 'Tech', color: '#06B6D4', desc: 'Productivity, time blindness, digital systems, clutter', keyword: 'PLAN', slug: 'tech' },
-  { name: 'Wealth', color: '#10B981', desc: 'Money, debt, budgeting, benefits, financial admin', keyword: 'MONEY', slug: 'wealth' },
-  { name: 'Connection', color: '#F59E0B', desc: 'Relationships, communication, loneliness, intimacy', keyword: 'CONNECT', slug: 'connection' },
-  { name: 'Identity', color: '#FB7185', desc: 'Masking, late diagnosis, authenticity, self-narrative', keyword: 'MASK', slug: 'identity' },
-  { name: 'Growth', color: '#A855F7', desc: 'Career, skills, self-sabotage, levelling up', keyword: 'PATTERN', slug: 'growth' },
+  { name: 'Mind',       color: '#6366F1', desc: 'Focus, burnout, executive function, emotional regulation', keyword: 'TRIAGE',  slug: 'mind',       col: 3, row: 1 },
+  { name: 'Body',       color: '#EF4444', desc: 'Sleep, sensory load, medication, energy, fatigue',         keyword: 'SLEEP',   slug: 'body',       col: 2, row: 1 },
+  { name: 'Tech',       color: '#06B6D4', desc: 'Productivity, time blindness, digital systems, clutter',   keyword: 'PLAN',    slug: 'tech',       col: 4, row: 1 },
+  { name: 'Wealth',     color: '#10B981', desc: 'Money, debt, budgeting, benefits, financial admin',        keyword: 'MONEY',   slug: 'wealth',     col: 3, row: 1 },
+  { name: 'Connection', color: '#F59E0B', desc: 'Relationships, communication, loneliness, intimacy',       keyword: 'CONNECT', slug: 'connection', col: 4, row: 1 },
+  { name: 'Identity',   color: '#FB7185', desc: 'Masking, late diagnosis, authenticity, self-narrative',    keyword: 'MASK',    slug: 'identity',   col: 4, row: 1 },
+  { name: 'Growth',     color: '#A855F7', desc: 'Career, skills, self-sabotage, levelling up',              keyword: 'PATTERN', slug: 'growth',     col: 4, row: 1 },
 ];
 
 export default function HomePage() {
@@ -99,7 +99,7 @@ export default function HomePage() {
         <div style={{ display: 'grid', width: '100%', gridTemplateColumns: 'repeat(12, 1fr)', gridAutoRows: '1fr', gap: '1px', flex: 1 }}>
           {branches.map((branch, i) => (
             <Link key={branch.slug} href={`/${branch.slug}`} style={{
-              gridColumn: `span ${(branch as any).col}`, gridRow: `span ${(branch as any).row}`,
+              gridColumn: `span ${branch.col}`, gridRow: `span ${branch.row}`,
               background: '#111', border: '1px solid rgba(255,255,255,0.06)',
               padding: '2rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', position: 'relative', overflow: 'hidden', minHeight: 0,
             }}>
