@@ -42,7 +42,7 @@ export default function HomePage() {
       {/* HERO */}
       <section style={{ height: '100vh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '8rem 6% 4rem', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/hero-robot2.png)', backgroundSize: 'cover', backgroundPosition: 'center center' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(8,8,10,0.97) 40%, rgba(8,8,10,0.5) 70%, rgba(8,8,10,0.05) 100%)' }} />
+
         <div style={{ maxWidth: 860, position: 'relative', zIndex: 1 }}>
           <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '1.5rem' }}>
             A system built for minds like yours
