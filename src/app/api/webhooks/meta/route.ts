@@ -2,10 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { adminClient } from '@/lib/supabase';
 
 const VERIFY_TOKEN = process.env.META_WEBHOOK_VERIFY_TOKEN ?? 'sor7ed_meta_webhook_2026';
-console.log('[webhook] PHONE_NUMBER_ID:', process.env.META_PHONE_NUMBER_ID ? 'SET' : 'MISSING');
-console.log('[webhook] WHATSAPP_TOKEN:', process.env.META_WHATSAPP_TOKEN ? 'SET' : 'MISSING');
-const WHATSAPP_TOKEN = process.env.META_WHATSAPP_TOKEN!;
-const PHONE_NUMBER_ID = process.env.META_PHONE_NUMBER_ID!;
+const WHATSAPP_TOKEN = process.env.META_WHATSAPP_TOKEN ?? '';
+const PHONE_NUMBER_ID = process.env.META_PHONE_NUMBER_ID ?? '1122994547560560';
+console.log('[webhook] TOKEN:', WHATSAPP_TOKEN ? 'SET' : 'MISSING', '| PHONE_ID:', PHONE_NUMBER_ID);
 
 async function isRegisteredUser(number: string): Promise<boolean> {
   try {
