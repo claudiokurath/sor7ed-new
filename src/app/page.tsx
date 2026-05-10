@@ -79,21 +79,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* BRANCHES (COMBINED INTRO + CAROUSEL) */}
-      <section id="branches" style={{ height: '100vh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: '4rem' }}>
-        <div style={{ padding: '0 6%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-            <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
-            <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem', letterSpacing: '0.3em', textTransform: 'uppercase' }}>7 Branches of Life</span>
-            <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
-          </div>
-          <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2rem,5vw,4rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.75rem' }}>
-            Every part of your life,<br />SOR7ED.
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '1rem', maxWidth: 480, lineHeight: 1.7, marginBottom: '2rem' }}>
-            Each branch has practical protocols — structured actions designed for neurodivergent minds.
-          </p>
-        </div>
+      {/* BRANCHES */}
+      <section id="branches" style={{ height: '100vh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column' }}>
 
         {/* MOSAIC GRID */}
         <div style={{ display: 'grid', width: '100%', gridTemplateColumns: 'repeat(12, 1fr)', gridAutoRows: '1fr', gap: '1px', flex: 1 }}>
