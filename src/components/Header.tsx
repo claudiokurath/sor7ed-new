@@ -25,28 +25,50 @@ export default function Header() {
   return (
     <header style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-      background: scrolled ? 'rgba(8,8,10,0.97)' : 'transparent',
-      backdropFilter: scrolled ? 'blur(12px)' : 'none',
-      borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
-      transition: 'all 0.3s',
-      padding: '0 4%',
-      height: '4rem',
+      background: scrolled ? 'rgba(8,8,10,0.97)' : 'rgba(8,8,10,0.8)',
+      backdropFilter: 'blur(12px)',
+      borderBottom: '1px solid rgba(255,255,255,0.06)',
+      transition: 'background 0.3s',
+      padding: '0 3%',
+      height: '3.5rem',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
+      gap: '1rem',
     }}>
-      <Link href="/" style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#fff', textDecoration: 'none' }}>
+      {/* Logo */}
+      <Link href="/" style={{
+        fontFamily: 'League Gothic, sans-serif',
+        fontSize: '1.2rem',
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em',
+        color: '#fff',
+        textDecoration: 'none',
+        flexShrink: 0,
+      }}>
         SOR7ED
       </Link>
 
-      <nav style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+      {/* Branch nav — all 7, small text, colour on hover */}
+      <nav style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 0,
+        flex: 1,
+        justifyContent: 'center',
+        overflow: 'hidden',
+      }}>
         {branches.map(b => (
           <Link key={b.slug} href={'/' + b.slug}
             style={{
-              fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase',
-              color: hovered === b.slug ? b.color : 'rgba(255,255,255,0.5)',
-              textDecoration: 'none', transition: 'color 0.2s',
-              padding: '0.4rem 0.6rem',
+              fontSize: '0.68rem',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              color: hovered === b.slug ? b.color : 'rgba(255,255,255,0.45)',
+              textDecoration: 'none',
+              transition: 'color 0.2s',
+              padding: '0.35rem 0.65rem',
+              whiteSpace: 'nowrap',
             }}
             onMouseEnter={() => setHovered(b.slug)}
             onMouseLeave={() => setHovered('')}>
@@ -55,12 +77,18 @@ export default function Header() {
         ))}
       </nav>
 
+      {/* CTA */}
       <Link href="/signup" style={{
-        background: '#ffffff', color: '#000',
-        fontFamily: 'League Gothic, sans-serif', fontSize: '0.85rem',
-        letterSpacing: '0.08em', textTransform: 'uppercase',
-        padding: '0.5rem 1.25rem', textDecoration: 'none',
-        transition: 'opacity 0.2s',
+        background: '#ffffff',
+        color: '#000',
+        fontFamily: 'League Gothic, sans-serif',
+        fontSize: '0.8rem',
+        letterSpacing: '0.08em',
+        textTransform: 'uppercase',
+        padding: '0.45rem 1rem',
+        textDecoration: 'none',
+        flexShrink: 0,
+        whiteSpace: 'nowrap',
       }}>
         Join free
       </Link>
