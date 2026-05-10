@@ -85,7 +85,7 @@ export default function HomePage() {
           <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
         </div>
         <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2rem,5vw,4rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.75rem' }}>
-          Every part of your life,<br />sorted.
+          Every part of your life,<br />SOR7ED.
         </h2>
         <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '1rem', maxWidth: 480, lineHeight: 1.7 }}>
           Each branch has practical protocols — structured actions designed for neurodivergent minds.
