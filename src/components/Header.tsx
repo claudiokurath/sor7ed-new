@@ -35,7 +35,7 @@ export default function Header() {
       alignItems: 'center',
       justifyContent: 'space-between',
     }}>
-      <Link href=/ style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#fff', textDecoration: 'none' }}>
+      <Link href="/" style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#fff', textDecoration: 'none' }}>
         SOR7ED
       </Link>
 
