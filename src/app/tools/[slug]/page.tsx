@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const tool = await getToolBySlug(slug);
   if (!tool) return { title: 'Tool not found' };
-  return { title: tool.name, description: tool.tagline };
+  return { title: tool.name + ' — SOR7ED', description: tool.tagline };
 }
 
 const INTERACTIVE_SLUGS = ['executive-function-triage', 'difficult-message', 'decision-clarity'];
@@ -40,74 +40,63 @@ export default async function ToolDetailPage({
   const isInteractive = INTERACTIVE_SLUGS.includes(tool.slug);
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: '#08080A' }}>
       <SEOJsonLd title={tool.name} description={tool.tagline} slug={`tools/${tool.slug}`} type="article" />
 
-      <section className="border-b-2 border-white">
-        <div className="max-w-4xl mx-auto px-5 py-20">
-          <p className="kicker mb-4">
-            <Link href="/tools" className="hover:text-[#ffc107]">← Tools</Link>
-            {' '}· {tool.branch}
-          </p>
-          <h1 className="text-5xl md:text-7xl leading-none mb-4">{tool.name}</h1>
-          <p className="text-lg max-w-2xl opacity-80">{tool.tagline}</p>
-          <div className="flex flex-wrap gap-3 mt-5">
-            {isInteractive && (
-              <span className="mono text-xs border border-[#ffc107] text-[#ffc107] px-2 py-1">INTERACTIVE</span>
-            )}
-            {tool.status === 'coming-soon' && (
-              <span className="mono text-xs border border-white/40 text-white/40 px-2 py-1">COMING SOON</span>
-            )}
-          </div>
+      {tool.coverImage && (
+        <div style={{ width: '100%', height: '45vh', position: 'relative', overflow: 'hidden' }}>
+          <img src={tool.coverImage} alt={tool.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 30%, #08080A 100%)' }} />
         </div>
-      </section>
+      )}
 
-      <article className="max-w-4xl mx-auto px-5 py-16">
-        {tool.coverImage && (
-          <img src={tool.coverImage} alt={tool.name} className="w-full mb-10 object-cover max-h-[420px]" />
-        )}
+      <div style={{ maxWidth: 920, margin: '0 auto', padding: tool.coverImage ? '0 2rem 2rem' : '8rem 2rem 2rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+          <Link href="/tools" style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>← Tools</Link>
+          <span style={{ fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', padding: '0.2rem 0.6rem' }}>{tool.branch}</span>
+          {isInteractive && <span style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', border: '1px solid rgba(255,255,255,0.15)', padding: '0.2rem 0.6rem', color: 'rgba(255,255,255,0.4)' }}>Interactive</span>}
+        </div>
 
-        {tool.slug === 'executive-function-triage' && (
-          <ExecutiveFunctionTriage signupHref={signupHref} initiallyUnlocked={unlocked} />
-        )}
-        {tool.slug === 'difficult-message' && (
-          <DifficultMessage signupHref={signupHref} initiallyUnlocked={unlocked} />
-        )}
-        {tool.slug === 'decision-clarity' && (
-          <DecisionClarity signupHref={signupHref} initiallyUnlocked={unlocked} />
-        )}
+        <h1 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem,7vw,6rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '1rem' }}>
+          {tool.name}
+        </h1>
+        <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, maxWidth: 560, marginBottom: '3rem' }}>{tool.tagline}</p>
+      </div>
 
-        {tool.status === 'coming-soon' && !isInteractive && (
-          <div className="border-2 border-white/20 p-6 mb-10 text-center">
-            <p className="display text-2xl mb-2">Coming soon.</p>
-            <p className="text-sm opacity-60 mb-4">This tool is in development. Sign up to be notified when it goes live.</p>
-            <Link href="/signup" className="btn-yellow inline-block">Join the waitlist</Link>
+      <div style={{ maxWidth: 920, margin: '0 auto', padding: '0 2rem 5rem' }}>
+        {tool.slug === 'executive-function-triage' && <ExecutiveFunctionTriage signupHref={signupHref} initiallyUnlocked={unlocked} />}
+        {tool.slug === 'difficult-message' && <DifficultMessage signupHref={signupHref} initiallyUnlocked={unlocked} />}
+        {tool.slug === 'decision-clarity' && <DecisionClarity signupHref={signupHref} initiallyUnlocked={unlocked} />}
+
+        <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          {tool.description && (
+            <div style={{ marginBottom: '2.5rem' }}>
+              <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: '2rem', textTransform: 'uppercase', color: '#fff', marginBottom: '0.75rem' }}>What it does</h2>
+              <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.8 }}>{tool.description}</p>
+            </div>
+          )}
+
+          {tool.example && (
+            <div style={{ marginBottom: '2.5rem' }}>
+              <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: '2rem', textTransform: 'uppercase', color: '#fff', marginBottom: '0.75rem' }}>Example output</h2>
+              <pre style={{ fontFamily: 'ui-monospace, monospace', fontSize: '0.85rem', border: '1px solid rgba(255,255,255,0.08)', padding: '1.25rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, background: '#111', whiteSpace: 'pre-wrap' }}>{tool.example}</pre>
+            </div>
+          )}
+
+          <div style={{ marginBottom: '2.5rem' }}>
+            <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: '2rem', textTransform: 'uppercase', color: '#fff', marginBottom: '0.75rem' }}>Who it is for</h2>
+            {['Adults with ADHD, autism, dyslexia, and related needs', 'People stuck mid-task, mid-decision, or mid-conversation', 'Anyone who wants structure, not advice'].map(item => (
+              <p key={item} style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, marginBottom: '0.5rem' }}>— {item}</p>
+            ))}
           </div>
-        )}
 
-        <h2 className="text-4xl mb-3">What it does</h2>
-        <p className="text-base mb-10 opacity-80">{tool.description}</p>
+          <WhatsappCTA keyword={tool.keyword} />
+        </div>
 
-        {tool.example && (
-          <>
-            <h2 className="text-4xl mb-3">Example output</h2>
-            <p className="mono text-sm border-2 border-white p-4 mb-10">{tool.example}</p>
-          </>
-        )}
-
-        <h2 className="text-4xl mb-3">Who it is for</h2>
-        <ul className="space-y-2 text-sm mb-10 opacity-80">
-          <li>▸ Adults with ADHD, autism, dyslexia, and related needs</li>
-          <li>▸ People stuck mid-task, mid-decision, or mid-conversation</li>
-          <li>▸ Anyone who wants structure, not advice</li>
-        </ul>
-
-        <WhatsappCTA keyword={tool.keyword} />
-
-        <p className="text-xs opacity-50 mt-6">
+        <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.2)', marginTop: '2rem', lineHeight: 1.6 }}>
           Not medical or therapeutic advice. For emergencies call 999 or text SHOUT to 85258.
         </p>
-      </article>
-    </>
+      </div>
+    </div>
   );
 }
