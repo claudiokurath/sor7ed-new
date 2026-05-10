@@ -43,7 +43,11 @@ export default async function ToolsPage() {
                   href={'/tools/' + tool.slug}
                   style={{ background: '#0a0a0a', padding: '2rem', display: 'block', transition: 'background 0.2s', position: 'relative', overflow: 'hidden' }}
                 >
-                  {/* Top accent line on hover via CSS */}
+                  {tool.coverImage && (
+                    <img src={tool.coverImage} alt={tool.name}
+                      style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block', marginBottom: '1.5rem' }} />
+                  )}
+                  {/* Top accent line */}
                   <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: '#ffc107' }} />
 
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
