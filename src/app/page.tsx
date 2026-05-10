@@ -70,7 +70,7 @@ export default function HomePage() {
             <Link href="#branches" style={{ display: 'inline-block', background: '#ffffff', color: '#000', fontFamily: 'League Gothic, sans-serif', fontSize: '1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.9rem 2rem', textDecoration: 'none' }}>
               Explore the branches
             </Link>
-            <Link href="/signup" style={{ display: 'inline-block', background: 'transparent', color: 'rgba(255,255,255,0.5)', fontFamily: 'League Gothic, sans-serif', fontSize: '1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.9rem 2rem', border: '1px solid rgba(255,255,255,0.3)', textDecoration: 'none' }}>
+            <Link href="/signup" style={{ display: 'inline-block', background: 'transparent', color: '#ffffff', fontFamily: 'League Gothic, sans-serif', fontSize: '1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.9rem 2rem', border: '1px solid rgba(255,255,255,0.3)', textDecoration: 'none' }}>
               Sign up free
             </Link>
           </div>
