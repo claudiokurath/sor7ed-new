@@ -7,7 +7,7 @@ export const metadata = {
   description: 'Interactive tools built for neurodivergent brains. No fluff. Just the fix.',
 };
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default async function ToolsPage() {
   const tools = await getTools();

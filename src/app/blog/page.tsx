@@ -7,7 +7,7 @@ export const metadata = {
   description: 'Honest, practical reads on ADHD, autism, overwhelm, money, sex, substances, and everything in between.',
 };
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 const BRANCHES = ['All', 'Keep Going', 'Feel Good', 'Plan Ahead', 'Spend Smart', 'Be Connected', 'Be Yourself', 'Level Up'];
 
