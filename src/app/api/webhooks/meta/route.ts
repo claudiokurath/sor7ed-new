@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { adminClient } from '@/lib/supabase';
 
 const VERIFY_TOKEN = process.env.META_WEBHOOK_VERIFY_TOKEN ?? 'sor7ed_meta_webhook_2026';
+console.log('[webhook] PHONE_NUMBER_ID:', process.env.META_PHONE_NUMBER_ID ? 'SET' : 'MISSING');
+console.log('[webhook] WHATSAPP_TOKEN:', process.env.META_WHATSAPP_TOKEN ? 'SET' : 'MISSING');
 const WHATSAPP_TOKEN = process.env.META_WHATSAPP_TOKEN!;
 const PHONE_NUMBER_ID = process.env.META_PHONE_NUMBER_ID!;
 
