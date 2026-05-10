@@ -94,7 +94,7 @@ export default function HomePage() {
               <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: branch.color, display: 'block', marginBottom: '1.5rem' }}>
                 0{i + 1}
               </span>
-              <h3 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(3.5rem,8vw,7rem)', textTransform: 'uppercase', lineHeight: 0.88, color: '#fff', marginBottom: '0.5rem' }}>
+              <h3 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(1.5rem,2.2vw,2.2rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.5rem' }}>
                 {branch.name}
               </h3>
               <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.55, marginBottom: '1rem' }}>
@@ -113,7 +113,7 @@ export default function HomePage() {
       <section style={{ height: '100vh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '5rem 6%', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
         <div style={{ maxWidth: 800 }}>
           <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '1.5rem' }}>The mission</p>
-          <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem,6vw,5rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '2rem' }}>
+          <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(3.5rem,8vw,7rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '2rem' }}>
             The world wasn't built for your brain.<br />
             <span style={{ color: '#ffffff' }}>We build systems that are.</span>
           </h2>
