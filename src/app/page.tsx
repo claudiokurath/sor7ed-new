@@ -123,8 +123,8 @@ export default function HomePage() {
         <div style={{ maxWidth: 800 }}>
           <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '1.5rem' }}>The mission</p>
           <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem,6vw,5rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '2rem' }}>
-            The world wasn't built for your brain.<br />
-            <span style={{ color: '#ffc107' }}>We build systems that are.</span>
+            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>The world wasn't built for your brain.</span>
+            <span style={{ display: 'block', color: '#ffc107', whiteSpace: 'nowrap' }}>We build systems that are.</span>
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '1.1rem', maxWidth: 560, lineHeight: 1.7, marginBottom: '2.5rem' }}>
             ADHD, neurodivergence, and a busy mind aren't flaws. They're operating systems that need the right software. SOR7ED is that software — delivered to your WhatsApp.
