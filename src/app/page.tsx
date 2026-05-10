@@ -107,7 +107,7 @@ export default function HomePage() {
               <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: branch.color, display: 'block', marginBottom: '1.5rem' }}>
                 0{i + 1}
               </span>
-              <h3 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem,5vw,6rem)', textTransform: 'uppercase', lineHeight: 0.88, color: '#fff', marginBottom: '0.5rem' }}>
+              <h3 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(3.5rem,8vw,7rem)', textTransform: 'uppercase', lineHeight: 0.88, color: '#fff', marginBottom: '0.5rem' }}>
                 {branch.name}
               </h3>
               <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.55, marginBottom: '1rem' }}>
