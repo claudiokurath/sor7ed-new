@@ -95,19 +95,19 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* HORIZONTAL CAROUSEL */}
-        <div style={{ display: 'flex', gap: '1px', padding: '0', overflowX: 'visible', width: '100%' }}>
+        {/* MOSAIC GRID */}
+        <div style={{ display: 'grid', width: '100%', gridTemplateColumns: 'repeat(12, 1fr)', gridAutoRows: '1fr', gap: '1px', flex: 1 }}>
           {branches.map((branch, i) => (
             <Link key={branch.slug} href={`/${branch.slug}`} style={{
-              flex: 1, minWidth: 0, scrollSnapAlign: 'start',
-              background: '#111', borderRight: '1px solid rgba(255,255,255,0.06)',
-              padding: '1.5rem 1.25rem', textDecoration: 'none', display: 'block', position: 'relative', overflow: 'hidden',
+              gridColumn: `span ${(branch as any).col}`, gridRow: `span ${(branch as any).row}`,
+              background: '#111', border: '1px solid rgba(255,255,255,0.06)',
+              padding: '2rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', position: 'relative', overflow: 'hidden', minHeight: 0,
             }}>
               <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: branch.color }} />
               <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: branch.color, display: 'block', marginBottom: '1.5rem' }}>
                 0{i + 1}
               </span>
-              <h3 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(1.5rem,2.2vw,2.2rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.5rem' }}>
+              <h3 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem,5vw,6rem)', textTransform: 'uppercase', lineHeight: 0.88, color: '#fff', marginBottom: '0.5rem' }}>
                 {branch.name}
               </h3>
               <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.55, marginBottom: '1rem' }}>
