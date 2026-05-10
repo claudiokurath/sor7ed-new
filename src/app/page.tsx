@@ -3,13 +3,11 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const taglines = [
-  { word: 'Overwhelmed', color: '#6366F1' },
-  { word: 'Scattered',   color: '#EF4444' },
-  { word: 'Exhausted',   color: '#06B6D4' },
-  { word: 'Stuck',       color: '#10B981' },
-  { word: 'Disconnected',color: '#F59E0B' },
-  { word: 'Lost',        color: '#FB7185' },
-  { word: 'Held back',   color: '#A855F7' },
+  { word: 'Overwhelmed', color: '#ffc107' },
+  { word: 'Scattered', color: '#a78bfa' },
+  { word: 'Exhausted', color: '#fb7185' },
+  { word: 'Stuck', color: '#34d399' },
+  { word: 'Wired differently', color: '#38bdf8' },
 ];
 
 const branches = [
@@ -37,13 +35,11 @@ export default function HomePage() {
   const current = taglines[taglineIndex];
 
   return (
-    <div style={{ height: '100vh', overflowY: 'scroll', scrollSnapType: 'y mandatory', scrollBehavior: 'smooth', background: '#08080A', overflowX: 'hidden' }}>
+    <div style={{ minHeight: '100vh', background: '#08080A', overflowX: 'hidden' }}>
 
       {/* HERO */}
-      <section style={{ height: '100vh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '8rem 6% 4rem', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/hero-robot2.png)', backgroundSize: 'cover', backgroundPosition: 'center center' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(8,8,10,0.97) 40%, rgba(8,8,10,0.5) 70%, rgba(8,8,10,0.05) 100%)' }} />
-        <div style={{ maxWidth: 860, position: 'relative', zIndex: 1 }}>
+      <section style={{ minHeight: '92vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '8rem 6% 4rem' }}>
+        <div style={{ maxWidth: 860 }}>
           <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '1.5rem' }}>
             A system built for minds like yours
           </p>
@@ -69,48 +65,48 @@ export default function HomePage() {
             SOR7ED gives neurodivergent adults a structured operating system for life — broken into 7 branches. Text a keyword. Get a protocol. No app needed.
           </p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link href="#branches" style={{ display: 'inline-block', background: '#ffffff', color: '#000', fontFamily: 'League Gothic, sans-serif', fontSize: '1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.9rem 2rem', textDecoration: 'none' }}>
+            <Link href="#branches" style={{ display: 'inline-block', background: '#ffc107', color: '#000', fontFamily: 'League Gothic, sans-serif', fontSize: '1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.9rem 2rem', textDecoration: 'none' }}>
               Explore the branches
             </Link>
-            <Link href="/signup" style={{ display: 'inline-block', background: 'transparent', color: '#ffffff', fontFamily: 'League Gothic, sans-serif', fontSize: '1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.9rem 2rem', border: '1px solid rgba(255,255,255,0.3)', textDecoration: 'none' }}>
+            <Link href="/signup" style={{ display: 'inline-block', background: 'transparent', color: 'rgba(255,255,255,0.5)', fontFamily: 'League Gothic, sans-serif', fontSize: '1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.9rem 2rem', border: '1px solid rgba(255,255,255,0.15)', textDecoration: 'none' }}>
               Sign up free
             </Link>
           </div>
         </div>
       </section>
 
-      {/* BRANCHES (COMBINED INTRO + CAROUSEL) */}
-      <section id="branches" style={{ height: '100vh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: '4rem' }}>
-        <div style={{ padding: '0 6%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-            <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
-            <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem', letterSpacing: '0.3em', textTransform: 'uppercase' }}>7 Branches of Life</span>
-            <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
-          </div>
-          <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2rem,5vw,4rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.75rem' }}>
-            Every part of your life,<br />SOR7ED.
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '1rem', maxWidth: 480, lineHeight: 1.7, marginBottom: '2rem' }}>
-            Each branch has practical protocols — structured actions designed for neurodivergent minds.
-          </p>
+      {/* BRANCHES INTRO */}
+      <section style={{ padding: '2rem 6% 1.5rem' }} id="branches">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+          <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
+          <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem', letterSpacing: '0.3em', textTransform: 'uppercase' }}>7 Branches of Life</span>
+          <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
         </div>
+        <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2rem,5vw,4rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.75rem' }}>
+          Every part of your life,<br />sorted.
+        </h2>
+        <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '1rem', maxWidth: 480, lineHeight: 1.7 }}>
+          Each branch has practical protocols — structured actions designed for neurodivergent minds.
+        </p>
+      </section>
 
-        {/* HORIZONTAL CAROUSEL */}
-        <div style={{ display: 'flex', gap: '1px', padding: '0', overflowX: 'visible', width: '100%' }}>
+      {/* BRANCH CARDS */}
+      <section style={{ paddingBottom: '5rem' }}>
+        <div style={{ display: 'flex', gap: '1rem', padding: '1.5rem 6%', overflowX: 'auto', scrollSnapType: 'x mandatory', msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
           {branches.map((branch, i) => (
             <Link key={branch.slug} href={`/${branch.slug}`} style={{
-              flex: 1, minWidth: 0, scrollSnapAlign: 'start',
-              background: '#111', borderRight: '1px solid rgba(255,255,255,0.06)',
-              padding: '1.5rem 1.25rem', textDecoration: 'none', display: 'block', position: 'relative', overflow: 'hidden',
+              flexShrink: 0, width: 260, scrollSnapAlign: 'start',
+              background: '#111', border: '1px solid rgba(255,255,255,0.06)',
+              padding: '2rem', textDecoration: 'none', display: 'block', position: 'relative', overflow: 'hidden',
             }}>
               <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: branch.color }} />
               <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: branch.color, display: 'block', marginBottom: '1.5rem' }}>
                 0{i + 1}
               </span>
-              <h3 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(1.5rem,2.2vw,2.2rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.5rem' }}>
+              <h3 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: '2.5rem', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.75rem' }}>
                 {branch.name}
               </h3>
-              <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.55, marginBottom: '1rem' }}>
+              <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.65, marginBottom: '1.5rem' }}>
                 {branch.desc}
               </p>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -123,24 +119,24 @@ export default function HomePage() {
       </section>
 
       {/* MISSION */}
-      <section style={{ height: '100vh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '5rem 6%', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <section style={{ padding: '5rem 6%', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
         <div style={{ maxWidth: 800 }}>
           <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '1.5rem' }}>The mission</p>
           <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem,6vw,5rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '2rem' }}>
             The world wasn't built for your brain.<br />
-            <span style={{ color: '#ffffff' }}>We build systems that are.</span>
+            <span style={{ color: '#ffc107' }}>We build systems that are.</span>
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '1.1rem', maxWidth: 560, lineHeight: 1.7, marginBottom: '2.5rem' }}>
             ADHD, neurodivergence, and a busy mind aren't flaws. They're operating systems that need the right software. SOR7ED is that software — delivered to your WhatsApp.
           </p>
-          <Link href="/signup" style={{ display: 'inline-block', background: '#ffffff', color: '#000', fontFamily: 'League Gothic, sans-serif', fontSize: '1.1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '1rem 2.5rem', textDecoration: 'none' }}>
+          <Link href="/signup" style={{ display: 'inline-block', background: '#ffc107', color: '#000', fontFamily: 'League Gothic, sans-serif', fontSize: '1.1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '1rem 2.5rem', textDecoration: 'none' }}>
             Create free account →
           </Link>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer style={{ scrollSnapAlign: 'end', padding: '4rem 6%', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+      <footer style={{ padding: '2rem 6%', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '1.5rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.15)' }}>SOR7ED</span>
         <div style={{ display: 'flex', gap: '2rem' }}>
           {[['Blog', '/blog'], ['Tools', '/tools'], ['Sign up', '/signup']].map(([label, href]) => (

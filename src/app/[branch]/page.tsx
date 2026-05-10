@@ -17,7 +17,7 @@ const BRANCHES: Record<string, {
     color: '#6366F1',
     desc: 'Focus, burnout, executive function, emotional regulation.',
     detail: 'Your brain is not broken. It runs differently. This branch covers everything happening inside your head — the executive function gaps, the emotional storms, the burnout cycles, and the tools to navigate all of it without shame.',
-    notionBranch: 'Mind',
+    notionBranch: 'Keep Going',
     keywords: ['TRIAGE', 'BURNOUT', 'OVERWHELM', 'SHAME', 'FEELINGS', 'INITIATION', 'WILLPOWER', 'FOCUS'],
   },
   body: {
@@ -25,7 +25,7 @@ const BRANCHES: Record<string, {
     color: '#EF4444',
     desc: 'Sleep, sensory load, medication, energy, fatigue.',
     detail: 'Your nervous system is the foundation. Sleep deprivation, sensory overwhelm, medication management, and chronic fatigue affect every other area of your life. This branch stabilises the baseline.',
-    notionBranch: 'Body',
+    notionBranch: 'Feel Good',
     keywords: ['SLEEP', 'SENSORY', 'MEDS', 'ENERGY', 'TIRED', 'MOVE', 'DOPAMINE', 'CALM'],
   },
   tech: {
@@ -33,7 +33,7 @@ const BRANCHES: Record<string, {
     color: '#06B6D4',
     desc: 'Productivity, time management, digital systems, clutter.',
     detail: 'Standard productivity advice was not built for your brain. This branch covers the systems, tools, and workarounds that actually work — from time blindness fixes to inbox zero without the spiral.',
-    notionBranch: 'Tech',
+    notionBranch: 'Plan Ahead',
     keywords: ['TIME', 'PLAN', 'HOME', 'INBOX', 'SCREEN', 'FOCUS'],
   },
   wealth: {
@@ -41,7 +41,7 @@ const BRANCHES: Record<string, {
     color: '#10B981',
     desc: 'Money, debt, budgeting, benefits, financial admin.',
     detail: 'The financial cost of neurodivergence is real and measurable. Late fees, impulsive decisions, missed deadlines, unclaimed benefits — this branch helps you stop the bleed.',
-    notionBranch: 'Wealth',
+    notionBranch: 'Spend Smart',
     keywords: ['MONEY', 'DEBT2', 'FEES', 'BENEFITS', 'TAX', 'FOOD'],
   },
   connection: {
@@ -49,7 +49,7 @@ const BRANCHES: Record<string, {
     color: '#F59E0B',
     desc: 'Relationships, communication, loneliness, intimacy.',
     detail: 'Neurodivergent adults experience connection differently. This branch covers relationships, intimacy, communication, and the specific loneliness that comes from a lifetime of feeling slightly out of sync.',
-    notionBranch: 'Connection',
+    notionBranch: 'Be Connected',
     keywords: ['RELATE', 'CONNECT', 'TALK', 'BREAKUP', 'ISOLATED', 'EMAIL'],
   },
   identity: {
@@ -57,7 +57,7 @@ const BRANCHES: Record<string, {
     color: '#FB7185',
     desc: 'Masking, late diagnosis, authenticity, self-narrative.',
     detail: 'Who are you when you stop performing? This branch covers the deep work of late diagnosis, unmasking, and rebuilding your self-narrative after years of being told you were the problem.',
-    notionBranch: 'Identity',
+    notionBranch: 'Be Yourself',
     keywords: ['MASK', 'NEWME', 'GRIEF', 'RECOVERY', 'PATTERN'],
   },
   growth: {
@@ -65,13 +65,10 @@ const BRANCHES: Record<string, {
     color: '#A855F7',
     desc: 'Career, skills, self-sabotage, levelling up.',
     detail: 'This is where everything compounds. Career, skills, purpose, and a life genuinely designed for the way your brain works. Not a neurotypical life badly adapted. A neurodivergent life built right.',
-    notionBranch: 'Growth',
+    notionBranch: 'Level Up',
     keywords: ['PATTERN', 'RETURN', 'TOXIC', 'JOBLOSS2', 'IMMIGRATION', 'HOUSING'],
   },
 };
-
-// Prevent [branch] from catching real routes
-const RESERVED = ['blog', 'tools', 'signup', 'member', 'api', 'auth', 'about', 'admin', 'cookie-policy'];
 
 export async function generateStaticParams() {
   return Object.keys(BRANCHES).map(branch => ({ branch }));
@@ -79,10 +76,6 @@ export async function generateStaticParams() {
 
 export default async function BranchPage({ params }: { params: Promise<{ branch: string }> }) {
   const { branch } = await params;
-
-  // Don't catch reserved routes
-  if (RESERVED.includes(branch)) notFound();
-
   const config = BRANCHES[branch];
   if (!config) notFound();
 
@@ -98,21 +91,17 @@ export default async function BranchPage({ params }: { params: Promise<{ branch:
         <Link href="/" style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', textDecoration: 'none', display: 'inline-block', marginBottom: '3rem' }}>
           ← All branches
         </Link>
-        <p style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: config.color, marginBottom: '1rem' }}>
-          Branch 0{Object.keys(BRANCHES).indexOf(branch) + 1}
-        </p>
-        <h1 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(5rem,15vw,14rem)', textTransform: 'uppercase', lineHeight: 0.88, color: config.color, marginBottom: '2rem' }}>
+        <p style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: config.color, marginBottom: '1rem' }}>Branch 0{Object.keys(BRANCHES).indexOf(branch) + 1}</p>
+        <h1 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(5rem, 15vw, 14rem)', textTransform: 'uppercase', lineHeight: 0.88, color: config.color, marginBottom: '2rem' }}>
           {config.title}
         </h1>
-        <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.5)', maxWidth: 560, lineHeight: 1.7, marginBottom: '1rem' }}>{config.desc}</p>
-        <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.3)', maxWidth: 560, lineHeight: 1.8 }}>{config.detail}</p>
+        <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.5)', maxWidth: 560, lineHeight: 1.7, marginBottom: '1.5rem' }}>{config.desc}</p>
+        <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.35)', maxWidth: 560, lineHeight: 1.8 }}>{config.detail}</p>
       </section>
 
       {/* KEYWORDS */}
       <section style={{ padding: '3rem 6%', background: '#0d0d0d', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-        <p style={{ fontSize: '0.7rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '1.5rem' }}>
-          WhatsApp protocols — sign up and send any keyword
-        </p>
+        <p style={{ fontSize: '0.7rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '1.5rem' }}>WhatsApp protocols — sign up and send any keyword</p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '2rem' }}>
           {config.keywords.map(kw => (
             <span key={kw} style={{ fontFamily: 'ui-monospace, monospace', fontSize: '0.8rem', padding: '0.4rem 1rem', border: `1px solid ${config.color}40`, color: config.color, letterSpacing: '0.1em' }}>
@@ -132,7 +121,10 @@ export default async function BranchPage({ params }: { params: Promise<{ branch:
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1px', background: 'rgba(255,255,255,0.04)' }}>
             {tools.map((tool: any) => (
               <Link key={tool.slug} href={'/tools/' + tool.slug}
-                style={{ background: '#08080A', padding: '2rem', display: 'block', textDecoration: 'none', position: 'relative' }}>
+                style={{ background: '#08080A', padding: '2rem', display: 'block', textDecoration: 'none', position: 'relative', transition: 'background 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.background = '#111')}
+                onMouseLeave={e => (e.currentTarget.style.background = '#08080A')}
+              >
                 <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: config.color }} />
                 <p style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: '1.8rem', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.75rem' }}>{tool.name}</p>
                 <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.65, marginBottom: '1.25rem' }}>{tool.tagline}</p>
@@ -150,7 +142,10 @@ export default async function BranchPage({ params }: { params: Promise<{ branch:
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1px', background: 'rgba(255,255,255,0.04)' }}>
             {articles.map((article: any) => (
               <Link key={article.slug} href={'/blog/' + article.slug}
-                style={{ background: '#08080A', display: 'block', textDecoration: 'none' }}>
+                style={{ background: '#08080A', display: 'block', textDecoration: 'none', transition: 'background 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.background = '#111')}
+                onMouseLeave={e => (e.currentTarget.style.background = '#08080A')}
+              >
                 {article.coverImage ? (
                   <img src={article.coverImage} alt={article.title} style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }} />
                 ) : (
@@ -169,16 +164,9 @@ export default async function BranchPage({ params }: { params: Promise<{ branch:
         </section>
       )}
 
-      {/* No content fallback */}
-      {articles.length === 0 && tools.length === 0 && (
-        <section style={{ padding: '4rem 6%' }}>
-          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '1rem' }}>Content coming soon for this branch.</p>
-        </section>
-      )}
-
       {/* CTA */}
       <section style={{ padding: '5rem 6%' }}>
-        <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem,6vw,5rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '1.5rem' }}>
+        <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem, 6vw, 5rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '1.5rem' }}>
           Ready to sort your <span style={{ color: config.color }}>{config.title.toLowerCase()}?</span>
         </h2>
         <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '1rem', marginBottom: '2rem', maxWidth: 480, lineHeight: 1.7 }}>

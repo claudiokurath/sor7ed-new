@@ -23,7 +23,7 @@ export default async function BlogPage() {
         <div className="page-wrap">
           <span className="accent-line" />
           <h1 style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', lineHeight: 0.88, marginBottom: '1.25rem' }}>
-            Plain words.<br /><span style={{ color: '#ffffff' }}>Real situations.</span>
+            Plain words.<br /><span style={{ color: '#ffc107' }}>Real situations.</span>
           </h1>
           <p style={{ fontSize: '1rem', opacity: 0.55, maxWidth: '52ch', lineHeight: 1.7 }}>
             Three reads a week. Every article ends with a WhatsApp keyword that sends you the protocol straight to your phone.
@@ -42,12 +42,12 @@ export default async function BlogPage() {
                 <Link
                   key={article.slug}
                   href={'/blog/' + article.slug}
-                  style={{ background: '#0a0a0a', display: 'block', overflow: 'hidden', transition: 'background 0.2s' }}
+                  className="card-hover" style={{ background: '#0a0a0a', display: 'block', overflow: 'hidden' }}
                 >
                   {/* Cover image */}
                   {article.coverImage ? (
                     <img
-                      src={article.coverImage} loading="lazy"
+                      src={article.coverImage}
                       alt={article.title}
                       style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }}
                     />
@@ -77,7 +77,7 @@ export default async function BlogPage() {
                     </p>
 
                     {/* CTA */}
-                    <p style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.8rem', letterSpacing: '0.12em', color: '#ffffff', textTransform: 'uppercase', marginTop: '1.25rem' }}>
+                    <p style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.8rem', letterSpacing: '0.12em', color: '#ffc107', textTransform: 'uppercase', marginTop: '1.25rem' }}>
                       Read →
                     </p>
                   </div>
