@@ -23,11 +23,17 @@ async function isRegisteredUser(number: string): Promise<boolean> {
 }
 
 async function sendMessage(to: string, body: string) {
-  await fetch(`https://graph.facebook.com/v25.0/${PHONE_NUMBER_ID}/messages`, {
+  const res = await fetch(`https://graph.facebook.com/v25.0/${PHONE_NUMBER_ID}/messages`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${WHATSAPP_TOKEN}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ messaging_product: 'whatsapp', to, type: 'text', text: { body } }),
   });
+  if (!res.ok) {
+    const err = await res.text();
+    console.error('sendMessage failed:', res.status, err);
+  } else {
+    console.log('sendMessage OK to', to);
+  }
 }
 
 const PROTOCOLS: Record<string, string> = {
