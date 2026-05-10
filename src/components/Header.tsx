@@ -55,7 +55,7 @@ export default function Header() {
         ))}
       </nav>
 
-      <Link href=/signup style={{
+      <Link href="/signup" style={{
         background: '#ffffff', color: '#000',
         fontFamily: 'League Gothic, sans-serif', fontSize: '0.85rem',
         letterSpacing: '0.08em', textTransform: 'uppercase',
