@@ -62,20 +62,18 @@ p, li, label, input, textarea, button {
 .btn-yellow {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   background: #ffffff;
   color: #000000;
   font-family: 'League Gothic', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 0.06em;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
   padding: 0.9rem 2rem;
   text-transform: uppercase;
   border: 2px solid #ffffff;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, transform 0.15s;
-  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
 }
+.btn-yellow:hover { background: #000; color: #fff; }
 
 .btn-yellow:hover {
   background: #000;
@@ -86,20 +84,18 @@ p, li, label, input, textarea, button {
 .btn-outline {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   background: transparent;
   color: #ffffff;
   font-family: 'League Gothic', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 0.06em;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
   padding: 0.9rem 2rem;
   text-transform: uppercase;
-  border: 2px solid rgba(255,255,255,0.3);
+  border: 2px solid rgba(255,255,255,0.4);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
-  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
 }
+.btn-outline:hover { background: #fff; color: #000; }
 
 .btn-outline:hover {
   background: #ffffff;
