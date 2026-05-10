@@ -13,13 +13,13 @@ const taglines = [
 ];
 
 const branches = [
-  { name: 'Mind',       color: '#6366F1', desc: 'Focus, burnout, executive function, emotional regulation', keyword: 'TRIAGE',  slug: 'mind',       col: 3, row: 1 },
-  { name: 'Body',       color: '#EF4444', desc: 'Sleep, sensory load, medication, energy, fatigue',         keyword: 'SLEEP',   slug: 'body',       col: 2, row: 1 },
-  { name: 'Tech',       color: '#06B6D4', desc: 'Productivity, time blindness, digital systems, clutter',   keyword: 'PLAN',    slug: 'tech',       col: 4, row: 1 },
-  { name: 'Wealth',     color: '#10B981', desc: 'Money, debt, budgeting, benefits, financial admin',        keyword: 'MONEY',   slug: 'wealth',     col: 3, row: 1 },
-  { name: 'Connection', color: '#F59E0B', desc: 'Relationships, communication, loneliness, intimacy',       keyword: 'CONNECT', slug: 'connection', col: 4, row: 1 },
-  { name: 'Identity',   color: '#FB7185', desc: 'Masking, late diagnosis, authenticity, self-narrative',    keyword: 'MASK',    slug: 'identity',   col: 4, row: 1 },
-  { name: 'Growth',     color: '#A855F7', desc: 'Career, skills, self-sabotage, levelling up',              keyword: 'PATTERN', slug: 'growth',     col: 4, row: 1 },
+  { name: 'Mind', color: '#6366F1', desc: 'Focus, burnout, executive function, emotional regulation', keyword: 'TRIAGE', slug: 'mind' },
+  { name: 'Body', color: '#EF4444', desc: 'Sleep, sensory load, medication, energy, fatigue', keyword: 'SLEEP', slug: 'body' },
+  { name: 'Tech', color: '#06B6D4', desc: 'Productivity, time blindness, digital systems, clutter', keyword: 'PLAN', slug: 'tech' },
+  { name: 'Wealth', color: '#10B981', desc: 'Money, debt, budgeting, benefits, financial admin', keyword: 'MONEY', slug: 'wealth' },
+  { name: 'Connection', color: '#F59E0B', desc: 'Relationships, communication, loneliness, intimacy', keyword: 'CONNECT', slug: 'connection' },
+  { name: 'Identity', color: '#FB7185', desc: 'Masking, late diagnosis, authenticity, self-narrative', keyword: 'MASK', slug: 'identity' },
+  { name: 'Growth', color: '#A855F7', desc: 'Career, skills, self-sabotage, levelling up', keyword: 'PATTERN', slug: 'growth' },
 ];
 
 export default function HomePage() {
@@ -42,7 +42,7 @@ export default function HomePage() {
       {/* HERO */}
       <section style={{ height: '100vh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '8rem 6% 4rem', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/hero-robot2.png)', backgroundSize: 'cover', backgroundPosition: 'center center' }} />
-
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(8,8,10,0.97) 40%, rgba(8,8,10,0.5) 70%, rgba(8,8,10,0.05) 100%)' }} />
         <div style={{ maxWidth: 860, position: 'relative', zIndex: 1 }}>
           <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '1.5rem' }}>
             A system built for minds like yours
@@ -79,16 +79,29 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* BRANCHES */}
-      <section id="branches" style={{ height: '100vh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column' }}>
+      {/* BRANCHES (COMBINED INTRO + CAROUSEL) */}
+      <section id="branches" style={{ height: '100vh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: '4rem' }}>
+        <div style={{ padding: '0 6%' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+            <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
+            <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem', letterSpacing: '0.3em', textTransform: 'uppercase' }}>7 Branches of Life</span>
+            <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
+          </div>
+          <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2rem,5vw,4rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '0.75rem' }}>
+            Every part of your life,<br />SOR7ED.
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '1rem', maxWidth: 480, lineHeight: 1.7, marginBottom: '2rem' }}>
+            Each branch has practical protocols — structured actions designed for neurodivergent minds.
+          </p>
+        </div>
 
-        {/* MOSAIC GRID */}
-        <div style={{ display: 'grid', width: '100%', gridTemplateColumns: 'repeat(12, 1fr)', gridAutoRows: '1fr', gap: '1px', flex: 1 }}>
+        {/* HORIZONTAL CAROUSEL */}
+        <div style={{ display: 'flex', gap: '1px', padding: '0', overflowX: 'visible', width: '100%' }}>
           {branches.map((branch, i) => (
             <Link key={branch.slug} href={`/${branch.slug}`} style={{
-              gridColumn: `span ${branch.col}`, gridRow: `span ${branch.row}`,
-              background: '#111', border: '1px solid rgba(255,255,255,0.06)',
-              padding: '2rem', textDecoration: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', position: 'relative', overflow: 'hidden', minHeight: 0,
+              flex: 1, minWidth: 0, scrollSnapAlign: 'start',
+              background: '#111', borderRight: '1px solid rgba(255,255,255,0.06)',
+              padding: '1.5rem 1.25rem', textDecoration: 'none', display: 'block', position: 'relative', overflow: 'hidden',
             }}>
               <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: branch.color }} />
               <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: branch.color, display: 'block', marginBottom: '1.5rem' }}>
@@ -113,7 +126,7 @@ export default function HomePage() {
       <section style={{ height: '100vh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '5rem 6%', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
         <div style={{ maxWidth: 800 }}>
           <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '1.5rem' }}>The mission</p>
-          <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(3.5rem,8vw,7rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '2rem' }}>
+          <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem,6vw,5rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '2rem' }}>
             The world wasn't built for your brain.<br />
             <span style={{ color: '#ffffff' }}>We build systems that are.</span>
           </h2>
