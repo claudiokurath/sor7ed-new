@@ -351,7 +351,29 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
   const article = articles.find((item) => item.slug === slug);
   if (!article) return fallback;
 
-  const body = article.sourcePageId ? await fetchArticleBlocks(article.sourcePageId) : [];
+  const pageBlocks = article.sourcePageId ? await fetchArticleBlocks(article.sourcePageId) : [];
+
+  // If page has enough blocks, use them
+  // Otherwise fall back to the Blog Post rich text property
+  let body = pageBlocks;
+  if (pageBlocks.length < 5 && article.sourcePageId) {
+    try {
+      // Fetch the Blog Post rich text property directly
+      const notionClient = createClient();
+      if (!notionClient) throw new Error('no client');
+      const response = await notionClient.pages.retrieve({ page_id: article.sourcePageId }) as any;
+      const blogPostText = response.properties?.['Blog Post']?.rich_text?.map((r: any) => r.plain_text).join('') || '';
+      if (blogPostText.length > 200) {
+        // Convert the text into paragraph blocks
+        body = blogPostText.split('\n\n').filter(Boolean).map((text: string) => ({
+          type: 'paragraph' as const,
+          text: text.replace(/\s+/g, ' ').trim(),
+        }));
+      }
+    } catch (e) {
+      // keep pageBlocks
+    }
+  }
 
   return {
     ...article,
