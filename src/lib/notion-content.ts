@@ -154,12 +154,7 @@ async function queryAllPages(databaseId: string, publishedOnly = false): Promise
       database_id: databaseId,
       page_size: 100,
       start_cursor: cursor,
-      ...(publishedOnly ? {
-        filter: {
-          property: 'Status',
-          status: { equals: 'Published' },
-        }
-      } : {}),
+      // no server-side filter — filter by status in JS after fetching
     });
 
     pages.push(...response.results);
