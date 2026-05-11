@@ -136,7 +136,7 @@ export default function HomePage() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ height: '100dvh', scrollSnapAlign: 'start', display: 'flex', alignItems: 'center', padding: '0 6%', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+      <footer style={{ height: '100dvh', scrollSnapAlign: 'start', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 6%', borderTop: '1px solid rgba(255,255,255,0.05)', flexWrap: 'wrap', gap: '1rem' }}>
         <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '1.5rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.15)' }}>SOR7ED</span>
         <div style={{ display: 'flex', gap: '2rem' }}>
           {[['Blog', '/blog'], ['Tools', '/tools'], ['Sign up', '/signup']].map(([label, href]) => (
