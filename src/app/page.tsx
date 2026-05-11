@@ -35,10 +35,10 @@ export default function HomePage() {
   const current = taglines[taglineIndex];
 
   return (
-    <div style={{ minHeight: '100vh', background: '#08080A', overflowX: 'hidden' }}>
+    <div style={{ height: '100dvh', overflowY: 'scroll', overflowX: 'hidden', scrollSnapType: 'y mandatory', scrollBehavior: 'smooth', background: '#08080A' }}>
 
       {/* HERO */}
-      <section style={{ minHeight: '92vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '8rem 6% 4rem' }}>
+      <section style={{ height: '100dvh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '8rem 6% 4rem', flexShrink: 0 }}>
         <div style={{ maxWidth: 860 }}>
           <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '1.5rem' }}>
             A system built for minds like yours
@@ -76,7 +76,7 @@ export default function HomePage() {
       </section>
 
       {/* BRANCHES INTRO */}
-      <section style={{ padding: '2rem 6% 1.5rem' }} id="branches">
+      <div style={{ padding: '3rem 6% 1rem' }} id="branches">
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
           <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.05)' }} />
           <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem', letterSpacing: '0.3em', textTransform: 'uppercase' }}>7 Branches of Life</span>
@@ -88,10 +88,10 @@ export default function HomePage() {
         <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '1rem', maxWidth: 480, lineHeight: 1.7 }}>
           Each branch has practical protocols — structured actions designed for neurodivergent minds.
         </p>
-      </section>
+      </div>
 
       {/* BRANCH CARDS */}
-      <section style={{ paddingBottom: '5rem' }}>
+      <section style={{ height: '100dvh', scrollSnapAlign: 'start', display: 'flex', flexDirection: 'column', flexShrink: 0, overflow: 'hidden' }}>
         <div style={{ display: 'flex', gap: '1rem', padding: '1.5rem 6%', overflowX: 'auto', scrollSnapType: 'x mandatory', msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
           {branches.map((branch, i) => (
             <Link key={branch.slug} href={`/${branch.slug}`} style={{
@@ -119,7 +119,7 @@ export default function HomePage() {
       </section>
 
       {/* MISSION */}
-      <section style={{ padding: '5rem 6%', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <section style={{ height: '100dvh', scrollSnapAlign: 'start', display: 'flex', alignItems: 'center', padding: '0 6%', borderTop: '1px solid rgba(255,255,255,0.05)', flexShrink: 0 }}>
         <div style={{ maxWidth: 800 }}>
           <p style={{ fontSize: '0.7rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '1.5rem' }}>The mission</p>
           <h2 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem,6vw,5rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '2rem' }}>
@@ -136,7 +136,7 @@ export default function HomePage() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ padding: '2rem 6%', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+      <footer style={{ height: '100dvh', scrollSnapAlign: 'start', display: 'flex', alignItems: 'center', padding: '0 6%', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <span style={{ fontFamily: 'League Gothic, sans-serif', fontSize: '1.5rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.15)' }}>SOR7ED</span>
         <div style={{ display: 'flex', gap: '2rem' }}>
           {[['Blog', '/blog'], ['Tools', '/tools'], ['Sign up', '/signup']].map(([label, href]) => (
