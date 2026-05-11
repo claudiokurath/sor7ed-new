@@ -7,6 +7,7 @@ export const metadata = {
   description: 'Interactive tools built for neurodivergent brains. No fluff. Just the fix.',
 };
 
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function ToolsPage() {
