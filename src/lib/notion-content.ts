@@ -334,6 +334,7 @@ export async function getArticles(): Promise<Article[]> {
 
   try {
     const pages = await queryAllPages(ARTICLES_DB_ID, true);
+    console.log('[getArticles] pages returned:', pages.length);
     const articles = pages.map(mapArticlePage).filter(Boolean) as Article[];
 
     if (!articles.length) return sortByDateDesc(fallbackArticles());
