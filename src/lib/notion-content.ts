@@ -329,6 +329,7 @@ export async function getToolBySlug(slug: string): Promise<Tool | null> {
 }
 
 export async function getArticles(): Promise<Article[]> {
+  console.log('[getArticles] DB_ID:', process.env.NOTION_ARTICLES_DB_ID ? 'SET' : 'MISSING', '| SECRET:', process.env.NOTION_SECRET ? 'SET' : 'MISSING');
   if (!ARTICLES_DB_ID || !NOTION_SECRET) return sortByDateDesc(fallbackArticles());
 
   try {
