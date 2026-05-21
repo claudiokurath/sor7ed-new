@@ -5,7 +5,7 @@ import { TOOLS, type Tool, type ToolStatus } from '@/data/tools';
 const NOTION_SECRET = process.env.NOTION_SECRET || process.env.NOTION_API_KEY;
 
 const TOOLS_DB_ID = process.env.NOTION_TOOLS_DB_ID;
-const ARTICLES_DB_ID = process.env.NOTION_ARTICLES_DB_ID || process.env.NOTION_BLOG_DB_ID;
+const ARTICLES_DB_ID = process.env.NOTION_ARTICLES_DB_ID || process.env.NOTION_BLOG_DB_ID || 'db668e4687ed455498357b8d11d2c714';
 
 const TOOL_LIST_REVALIDATE_SECONDS = 60;
 const TOOL_DETAIL_REVALIDATE_SECONDS = 300;
@@ -154,12 +154,7 @@ async function queryAllPages(databaseId: string, publishedOnly = false): Promise
       database_id: databaseId,
       page_size: 100,
       start_cursor: cursor,
-      ...(publishedOnly ? {
-        filter: {
-          property: 'Status',
-          status: { equals: 'Published' },
-        }
-      } : {}),
+      // no server-side filter — filter by status in JS after fetching
     });
 
     pages.push(...response.results);
@@ -329,10 +324,12 @@ export async function getToolBySlug(slug: string): Promise<Tool | null> {
 }
 
 export async function getArticles(): Promise<Article[]> {
+  console.log('[getArticles] DB_ID:', ARTICLES_DB_ID, '| SECRET:', process.env.NOTION_SECRET ? 'SET' : 'MISSING');
   if (!ARTICLES_DB_ID || !NOTION_SECRET) return sortByDateDesc(fallbackArticles());
 
   try {
     const pages = await queryAllPages(ARTICLES_DB_ID, true);
+    console.log('[getArticles] pages returned:', pages.length);
     const articles = pages.map(mapArticlePage).filter(Boolean) as Article[];
 
     if (!articles.length) return sortByDateDesc(fallbackArticles());
@@ -351,7 +348,29 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
   const article = articles.find((item) => item.slug === slug);
   if (!article) return fallback;
 
-  const body = article.sourcePageId ? await fetchArticleBlocks(article.sourcePageId) : [];
+  const pageBlocks = article.sourcePageId ? await fetchArticleBlocks(article.sourcePageId) : [];
+
+  // If page has enough blocks, use them
+  // Otherwise fall back to the Blog Post rich text property
+  let body = pageBlocks;
+  if (pageBlocks.length < 5 && article.sourcePageId) {
+    try {
+      // Fetch the Blog Post rich text property directly
+      const notionClient = createClient();
+      if (!notionClient) throw new Error('no client');
+      const response = await notionClient.pages.retrieve({ page_id: article.sourcePageId }) as any;
+      const blogPostText = response.properties?.['Blog Post']?.rich_text?.map((r: any) => r.plain_text).join('') || '';
+      if (blogPostText.length > 200) {
+        // Convert the text into paragraph blocks
+        body = blogPostText.split('\n\n').filter(Boolean).map((text: string) => ({
+          type: 'paragraph' as const,
+          text: text.replace(/\s+/g, ' ').trim(),
+        }));
+      }
+    } catch (e) {
+      // keep pageBlocks
+    }
+  }
 
   return {
     ...article,

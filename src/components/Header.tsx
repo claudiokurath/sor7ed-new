@@ -1,39 +1,39 @@
+'use client';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 export default function Header() {
+  const [visible, setVisible] = useState(true);
+  const lastY = useRef(0);
+
+  useEffect(() => {
+    const container = document.querySelector('.snap-y') as HTMLElement | null;
+    const target = container || window;
+    const onScroll = () => {
+      const y = container ? container.scrollTop : window.scrollY;
+      if (Math.abs(y - lastY.current) < 5) return;
+      setVisible(y < lastY.current || y < 60);
+      lastY.current = y;
+    };
+    target.addEventListener('scroll', onScroll, { passive: true });
+    return () => target.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <header style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-      background: 'rgba(255,255,255,0.9)',
-      backdropFilter: 'blur(8px)',
-      padding: '1.5rem 4%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    }}>
-      <div style={{ flex: 1 }}>
-        <Link href="/" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: '1rem', fontWeight: 800, letterSpacing: '-0.02em', color: '#000', textDecoration: 'none' }}>
-          SOR7ED®
+    <header
+      className="fixed top-0 left-0 w-full z-50 bg-black border-b-2 border-white"
+      style={{ transform: visible ? 'translateY(0)' : 'translateY(-100%)', transition: 'transform 0.3s ease' }}
+    >
+      <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+        <Link href="/" aria-label="SOR7ED home" className="display text-2xl text-white">
+          &nbsp;
         </Link>
-      </div>
-
-      <nav style={{ display: 'flex', alignItems: 'center', gap: '3rem', flex: 1, justifyContent: 'center' }}>
-        <Link href="/" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: '0.85rem', color: '#888', textDecoration: 'none', fontWeight: 500 }}>
-          Home
-        </Link>
-        <Link href="/blog" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: '0.85rem', color: '#888', textDecoration: 'none', fontWeight: 500 }}>
-          Blog
-        </Link>
-        <Link href="/tools" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: '0.85rem', color: '#888', textDecoration: 'none', fontWeight: 500 }}>
-          Tools
-        </Link>
-        <Link href="/signup" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontSize: '0.85rem', color: '#888', textDecoration: 'none', fontWeight: 500 }}>
-          Sign Up
-        </Link>
-      </nav>
-
-      <div style={{ flex: 1 }}>
-        {/* Empty right side to balance */}
+        <nav className="hidden md:flex items-center gap-6 display text-xl">
+          <Link href="/tools" className="hover:text-[#ffc107]">Tools</Link>
+          <Link href="/blog" className="hover:text-[#ffc107]">Blog</Link>
+          <Link href="/signup" className="btn-yellow !text-base !py-2 !px-4">Join free</Link>
+        </nav>
+        <Link href="/signup" className="md:hidden btn-yellow !text-sm !py-2 !px-3">Join</Link>
       </div>
     </header>
   );

@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 
 export default function SignupPage() {
   const [state, setState] = useState<'idle' | 'submitting' | 'ok' | 'err'>('idle');
@@ -32,77 +31,97 @@ export default function SignupPage() {
       return;
     }
     try {
-      const res = await fetch('/api/signup', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
       if (!res.ok) throw new Error(await res.text());
       setState('ok');
+      e.currentTarget.reset();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Sign-up failed.');
       setState('err');
     }
   }
 
-  const inputStyle = { width: '100%', background: '#111', border: '1px solid rgba(255,255,255,0.12)', color: '#fff', padding: '0.85rem 1rem', fontSize: '1rem', outline: 'none', borderRadius: 0, fontFamily: 'inherit' } as React.CSSProperties;
-  const labelStyle = { fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.3)', display: 'block', marginBottom: '0.5rem' };
-
   return (
-    <div style={{ minHeight: '100vh', background: '#08080A', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6rem 6% 4rem' }}>
-      <div style={{ maxWidth: 520, width: '100%' }}>
-        <Link href="/" style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', textDecoration: 'none', display: 'block', marginBottom: '3rem' }}>← Back</Link>
+    <section className="max-w-3xl mx-auto px-5 py-20">
+      <p className="kicker">Sign up — free, forever</p>
+      <h1 className="text-6xl mb-3">Get sorted.</h1>
+      <p className="text-base mb-8 max-w-xl">
+        Magic link login. No password. We need your phone number so the WhatsApp delivery can find
+        you. Nothing is sent until you message us first.
+      </p>
 
-        {state === 'ok' ? (
-          <div>
-            <p style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '1rem' }}>You're in</p>
-            <h1 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem,6vw,4.5rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '1.5rem' }}>Check your inbox.</h1>
-            <p style={{ color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, marginBottom: '2rem' }}>We sent a magic link to your email. Open it to activate your account, then text any keyword to <strong style={{ color: '#fff' }}>+44 7591 922247</strong> on WhatsApp.</p>
-            <Link href="/tools" style={{ display: 'inline-block', background: '#ffffff', color: '#000', fontFamily: 'League Gothic, sans-serif', fontSize: '1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '0.9rem 2rem', textDecoration: 'none' }}>Browse tools →</Link>
-          </div>
-        ) : (
-          <>
-            <p style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '1rem' }}>Free account</p>
-            <h1 style={{ fontFamily: 'League Gothic, Arial Narrow, sans-serif', fontSize: 'clamp(2.5rem,6vw,4.5rem)', textTransform: 'uppercase', lineHeight: 0.92, color: '#fff', marginBottom: '1rem' }}>Get sorted.</h1>
-            <p style={{ color: 'rgba(255,255,255,0.4)', lineHeight: 1.7, marginBottom: '2.5rem', fontSize: '1rem' }}>
-              Magic link login. No password. We need your WhatsApp number so protocols can find you.
-            </p>
-            <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <input type="hidden" name="next" value={next} />
-              <div>
-                <label style={labelStyle}>First name</label>
-                <input required name="firstName" type="text" placeholder="Alex" style={inputStyle}
-                  onFocus={e => e.currentTarget.style.borderColor = '#ffffff'}
-                  onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'} />
-              </div>
-              <div>
-                <label style={labelStyle}>Email address</label>
-                <input required name="email" type="email" placeholder="alex@example.com" style={inputStyle}
-                  onFocus={e => e.currentTarget.style.borderColor = '#ffffff'}
-                  onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'} />
-              </div>
-              <div>
-                <label style={labelStyle}>WhatsApp number (with country code)</label>
-                <input required name="phone" type="tel" placeholder="+44 7xxx xxxxxx" style={inputStyle}
-                  onFocus={e => e.currentTarget.style.borderColor = '#ffffff'}
-                  onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'} />
-              </div>
-              <label style={{ display: 'flex', gap: '0.75rem', fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, cursor: 'pointer' }}>
-                <input type="checkbox" name="consentMessaging" style={{ marginTop: 3, accentColor: '#ffffff', flexShrink: 0 }} />
-                I consent to SOR7ED storing my email and phone number, and to receiving WhatsApp messages after I initiate contact (GDPR/PECR opt-in).
-              </label>
-              <label style={{ display: 'flex', gap: '0.75rem', fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, cursor: 'pointer' }}>
-                <input type="checkbox" name="consentDisclaimer" style={{ marginTop: 3, accentColor: '#ffffff', flexShrink: 0 }} />
-                I understand SOR7ED is not therapy, not medical advice, and not a crisis service. In an emergency I will call 999 or text SHOUT to 85258.
-              </label>
-              {error && <p style={{ color: '#fb7185', fontSize: '0.875rem', padding: '0.75rem', border: '1px solid #fb718540' }}>{error}</p>}
-              <button type="submit" disabled={state === 'submitting'}
-                style={{ background: '#ffffff', color: '#000', fontFamily: 'League Gothic, sans-serif', fontSize: '1.1rem', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '1rem', border: 'none', cursor: 'pointer', opacity: state === 'submitting' ? 0.7 : 1, marginTop: '0.5rem' }}>
-                {state === 'submitting' ? 'Sending…' : 'Create free account →'}
-              </button>
-            </form>
-            <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.2)', marginTop: '1.5rem', lineHeight: 1.6 }}>
-              GDPR compliant · No spam · Text STOP to unsubscribe at any time
-            </p>
-          </>
-        )}
-      </div>
-    </div>
+      {state === 'ok' ? (
+        <div className="border-2 border-[#ffc107] p-6">
+          <p className="display text-3xl text-[#ffc107]">Check your inbox.</p>
+          <p className="text-sm mt-2">
+            We sent a magic link to your email. Open it on the same device to come straight back to your tool.
+          </p>
+        </div>
+      ) : (
+        <form onSubmit={onSubmit} className="grid gap-5">
+          <input type="hidden" name="next" value={next} />
+          <label className="grid gap-2">
+            <span className="kicker">First name</span>
+            <input
+              required
+              name="firstName"
+              type="text"
+              className="bg-black text-white border-2 border-white px-4 py-3"
+              placeholder="Alex"
+            />
+          </label>
+          <label className="grid gap-2">
+            <span className="kicker">Email address</span>
+            <input
+              required
+              name="email"
+              type="email"
+              className="bg-black text-white border-2 border-white px-4 py-3"
+              placeholder="alex@example.com"
+            />
+          </label>
+          <label className="grid gap-2">
+            <span className="kicker">WhatsApp number (with country code)</span>
+            <input
+              required
+              name="phone"
+              type="tel"
+              className="bg-black text-white border-2 border-white px-4 py-3"
+              placeholder="+44 7xxx xxxxxx"
+            />
+          </label>
+
+          <label className="flex gap-3 text-sm">
+            <input type="checkbox" name="consentMessaging" className="mt-1 accent-[#ffc107]" />
+            <span>
+              I consent to SOR7ED storing my email and phone number, and to receiving WhatsApp
+              messages after I initiate contact (GDPR/PECR opt-in).
+            </span>
+          </label>
+          <label className="flex gap-3 text-sm">
+            <input type="checkbox" name="consentDisclaimer" className="mt-1 accent-[#ffc107]" />
+            <span>
+              I understand SOR7ED is not therapy, not medical advice, and not a crisis service. In
+              an emergency I will call 999 or text SHOUT to 85258.
+            </span>
+          </label>
+
+          {error && (
+            <p className="text-sm border-2 border-[#ffc107] text-[#ffc107] p-3">{error}</p>
+          )}
+
+          <button type="submit" className="btn-yellow self-start" disabled={state === 'submitting'}>
+            {state === 'submitting' ? 'Sending…' : 'Create free account'}
+          </button>
+          <p className="text-xs opacity-80">
+            Text STOP at any time on WhatsApp to unsubscribe completely.
+          </p>
+        </form>
+      )}
+    </section>
   );
 }
